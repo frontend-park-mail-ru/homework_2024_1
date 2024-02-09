@@ -33,4 +33,10 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], -5), [ 1, 2, 3, 4, 5 ]);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], -15), [ 1, 2, 3, 4, 5 ]);
 	});
+
+	QUnit.test('Дополнительные тесты', function (assert) {
+		assert.deepEqual(inverse([ 1, 1, 1, 1, 1 ], 1), [ 1, 1, 1, 1, 1 ]);
+		assert.deepEqual(inverse([ 'a', 5, null, false, 10 ], -2), [ null, 5, 'a', false, 10 ]);
+		assert.deepEqual(inverse([ [1, 2, 3], [], [1], [5, 10, 12], [10, 10, 10] ], 2), [ [1, 2, 3], [], [10, 10, 10], [5, 10, 12], [1] ]);
+	});
 });
