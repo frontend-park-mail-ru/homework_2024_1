@@ -8,6 +8,31 @@ QUnit.module('Тестируем функцию euclid', function () {
 		assert.strictEqual(euclid(6006), 6006, 'euclid(6006) === 6006');
 	});
 
+	QUnit.test('Функция должна правильно находить НОД двух натуральных чисел', function (assert) {
+		assert.strictEqual(euclid(1, 1), 1, 'euclid(1, 1) === 1');
+		assert.strictEqual(euclid(2, 2), 2, 'euclid(2, 2) === 2');
+		assert.strictEqual(euclid(13, 26), 13, 'euclid(13, 26) === 13');
+		assert.strictEqual(euclid(7, 1), 1, 'euclid(7, 1) === 1');
+		assert.strictEqual(euclid(7, 13), 1, 'euclid(7, 13) === 1');
+		assert.strictEqual(euclid(2, 16), 2, 'euclid(2, 16) === 2');
+		assert.strictEqual(euclid(7, 21), 7, 'euclid(7, 21) === 7');
+		assert.strictEqual(euclid(6006, 3738735), 3003, 'euclid(6006, 3738735) === 3003');
+	});
+
+	QUnit.test('Функция должна правильно находить НОД для отрицательных чисел', function (assert) {
+		assert.strictEqual(euclid(-10, -5), 5, 'euclid(-10, -5) === 5');
+		assert.strictEqual(euclid(-15, 20), 5, 'euclid(-15, 20) === 5');
+		assert.strictEqual(euclid(-30, -45, -15), 15, 'euclid(-30, -45, -15) === 15');
+		assert.strictEqual(euclid(-7, -14, -21), 7, 'euclid(-7, -14, -21) === 7');
+	});
+
+	QUnit.test('Функция должна корректно обрабатывать нулевые значения', function (assert) {
+		assert.strictEqual(euclid(0, 5), 5, 'euclid(0, 5) === 5');
+		assert.strictEqual(euclid(0, 0, 0), 0, 'euclid(0, 0, 0) === 0');
+		assert.strictEqual(euclid(10, 0, 30), 10, 'euclid(10, 0, 30) === 10');
+		assert.strictEqual(euclid(0), 0, 'euclid(0) === 0');
+	});
+
 	QUnit.test('Функция должна правильно находить НОД трёх натуральных чисел', function (assert) {
 		assert.strictEqual(euclid(1, 1, 1), 1, 'euclid(1, 1, 1) === 1');
 		assert.strictEqual(euclid(2, 2, 2), 2, 'euclid(2, 2, 2) === 2');
