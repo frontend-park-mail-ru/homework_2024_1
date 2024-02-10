@@ -20,3 +20,4 @@ const inverse = (array, position = 0) => {
 
     return partBeforePosition.concat(partAfterPosition);
 };
+
