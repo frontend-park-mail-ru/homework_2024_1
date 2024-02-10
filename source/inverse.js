@@ -1,7 +1,18 @@
 'use strict';
 
-const inverse = (numbers, pos=0) => {
-    let arr1 = numbers.slice(0, pos)
-    let arr2 = numbers.slice(pos, numbers.length)
-    return pos >= 0 ? [...arr1, ...arr2.reverse()] : [...arr1.reverse(), ...arr2]
+const inverse = (array, position = 0) => {
+    if (!Array.isArray(array)) {
+        return false;
+    }
+
+    if (position === 0) {
+        return array.reverse();
+    }
+
+    const array1 = array.slice(0, position);
+    const array2 = array.slice(position, array.length);
+
+    position >= 0 ? array2.reverse() : array1.reverse();
+
+    return array1.concat(array2);
 };
