@@ -35,10 +35,22 @@ QUnit.module('Тестируем функцию inverse', function () {
 	});
 
 	QUnit.test('В функцию передан не массив', function (assert) {
-		assert.deepEqual(inverse(123, 1), false);
-		assert.deepEqual(inverse("dfff", 1), false);
-		assert.deepEqual(inverse(true, 1), false);
-		assert.deepEqual(inverse(undefined, 1), false);
-		assert.deepEqual(inverse(Infinity, 1), false);
+		assert.deepEqual(inverse(123, 1), null);
+		assert.deepEqual(inverse("dfff", 1), null);
+		assert.deepEqual(inverse(true, 1), null);
+		assert.deepEqual(inverse(undefined, 1), null);
+		assert.deepEqual(inverse(Infinity, 1), null);
+	});
+
+	QUnit.test('Функция вызвана без аргументов', function (assert) {
+		assert.deepEqual(inverse(), null);
+	});
+
+	QUnit.test('Вторым аргументом в функцию передано не число', function (assert) {
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], "a"), null);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], true), null);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], []), null);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], undefined), [ 5, 4, 3, 2, 1 ]);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], Infinity), [ 1, 2, 3, 4, 5 ]);
 	});
 });
