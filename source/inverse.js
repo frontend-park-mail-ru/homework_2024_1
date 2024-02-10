@@ -13,10 +13,11 @@ const inverse = (array, position = 0) => {
         return array.reverse();
     }
 
-    const array1 = array.slice(0, position);
-    const array2 = array.slice(position, array.length);
+    const partBeforePosition = array.slice(0, position);
+    const partAfterPosition = array.slice(position, array.length);
 
-    position > 0 ? array2.reverse() : array1.reverse();
+    position > 0 ? partAfterPosition.reverse() : partBeforePosition.reverse();
 
-    return array1.concat(array2);
+    return partBeforePosition.concat(partAfterPosition);
 };
+

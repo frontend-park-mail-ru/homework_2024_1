@@ -54,3 +54,4 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], Infinity), [ 1, 2, 3, 4, 5 ]);
 	});
 });
+
