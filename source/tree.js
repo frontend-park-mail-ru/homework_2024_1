@@ -1,32 +1,31 @@
 'use strict';
 
+const ENDLINE_SYMBOL = '\n';
+const SPACE_SYMBOL = ' ';
+const TREE_SYMBOL = '*';
+const TRUNK_SYMBOL = '|';
+
 const buildLayer = (width, layerWidth, layerSymbol) => {
-    const endlineSymbol = '\n';
-    const spaceSymbol = ' ';
+    const emptySpace = SPACE_SYMBOL.repeat(Math.floor((width - layerWidth) / 2));
+    const nonEmptySpace = layerSymbol.repeat(layerWidth);
 
-    const emptySpace = spaceSymbol.repeat(Math.floor((width - layerWidth) / 2));
-
-    return emptySpace + layerSymbol.repeat(layerWidth) + emptySpace + endlineSymbol;
+    return emptySpace + nonEmptySpace + emptySpace + ENDLINE_SYMBOL;
 }
 
 const tree = (size) => {
-    if (typeof size != "number" && !(typeof size == "string" && parseInt(size)) || size < 3) {
+    if (!["number", "string"].includes(typeof size) || !parseInt(size) || size < 3) {
         return null;
     }
 
     const width = 2 * size - 3;
 
-    const treeSymbol = '*';
-    const trunkSymbol = '|';
-
     let result = '';
-    for (let layer = 0; layer < size - 1; ++layer) {
-        const treeLayerWidth = 2 * layer + 1;
-        result += buildLayer(width, treeLayerWidth, treeSymbol);
+    for (let layer = 1; layer < size; ++layer) {
+        const treeLayerWidth = 2 * layer - 1;
+        result += buildLayer(width, treeLayerWidth, TREE_SYMBOL);
     }
 
-    const trunkWidth = 1;
-    result += buildLayer(width, trunkWidth, trunkSymbol);
+    result += buildLayer(width, 1, TRUNK_SYMBOL);
 
     return result;
 }
