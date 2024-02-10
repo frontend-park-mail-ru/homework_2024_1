@@ -9,4 +9,9 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.strictEqual(solve('(5 - x) * (x + 5)', 3), 16);
 		assert.strictEqual(solve('((5 - x) * (x + 5)) * x * x', 3), 144);
 	});
+
+	QUnit.test('solve возвращает NaN при вводе некорректного выражения ', function (assert) {
+		assert.notOk(solve('x / 0', 1));
+		assert.notOk(solve('a * 1', 2));
+	});
 });
