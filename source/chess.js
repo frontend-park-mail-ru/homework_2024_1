@@ -1,22 +1,26 @@
 "use strict";
 
-const chess = (n) => {
-  if (n <= 1) {
+const chess = (boardSize) => {
+  boardSize = Number(boardSize);
+  if (boardSize <= 1) {
     return null;
   }
 
-  let result = "";
-
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n; j++) {
-      if ((i + j) % 2 == 0) {
-        result += "*";
+  return Array(boardSize)
+    .fill("")
+    .reduce((acc, _, idx) => {
+      let line = "";
+      if (idx % 2 === 0) {
+        line = "* ".repeat(boardSize / 2);
+        if (boardSize % 2 !== 0) {
+          line += "*";
+        }
       } else {
-        result += " ";
+        line = " *".repeat(boardSize / 2);
+        if (boardSize % 2 !== 0) {
+          line += " ";
+        }
       }
-    }
-    result += "\n";
-  }
-
-  return result;
+      return acc + line + "\n";
+    }, "");
 };
