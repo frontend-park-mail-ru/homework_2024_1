@@ -4,11 +4,7 @@ const inverse = (array, position = 0) => {
     if (!Array.isArray(array)) {
         return null;
     }
-
-    console.log(position)
-    console.log(typeof(position))
-    console.log("\n")
-
+    
     if (Number.isNaN(position) || typeof(position) !== 'number') {
         return null;
     }
