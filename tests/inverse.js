@@ -40,6 +40,8 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.deepEqual(inverse(true, 1), null);
 		assert.deepEqual(inverse(undefined, 1), null);
 		assert.deepEqual(inverse(Infinity, 1), null);
+		assert.deepEqual(inverse({}, 1), null);
+		assert.deepEqual(inverse(NaN, 1), null);
 	});
 
 	QUnit.test('Функция вызвана без аргументов', function (assert) {
@@ -50,6 +52,8 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], "a"), null);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], true), null);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], []), null);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], {}), null);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], NaN), null);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], undefined), [ 5, 4, 3, 2, 1 ]);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], Infinity), [ 1, 2, 3, 4, 5 ]);
 	});

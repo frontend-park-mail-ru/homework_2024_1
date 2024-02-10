@@ -5,7 +5,11 @@ const inverse = (array, position = 0) => {
         return null;
     }
 
-    if (typeof(position) !== 'number') {
+    console.log(position)
+    console.log(typeof(position))
+    console.log("\n")
+
+    if (Number.isNaN(position) || typeof(position) !== 'number') {
         return null;
     }
 
