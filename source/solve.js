@@ -4,12 +4,12 @@
 // Просто expression.split(' ') не подходит, так как есть случаи вида '(x + 1)', 
 // где в качестве операнда будет записан, например, '1)'.
 const parseOperandsFromExpression = (expression, x) => {
-    const filledExpression = expression.replaceAll('x', x.toString());
+    const stringX = x.toString()
     const result = [];
     let number = '';
 
-    for (let i = 0; i < filledExpression.length; ++i) {
-        switch(filledExpression[i]) {
+    for (let i = 0; i < expression.length; ++i) {
+        switch(expression[i]) {
             case '+':
             case '-':
             case '*':
@@ -17,14 +17,17 @@ const parseOperandsFromExpression = (expression, x) => {
             case ')':
                 if (number) result.push(number);
                 number = '';
-                result.push(filledExpression[i]);
+                result.push(expression[i]);
                 break;
             case ' ':
                 if (number) result.push(number);
                 number = '';
                 break;
+            case 'x':
+                result.push(stringX);
+                break;
             default:
-                number += filledExpression[i];
+                number += expression[i];
                 break;
         }
     }
