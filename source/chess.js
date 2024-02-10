@@ -1,10 +1,9 @@
 "use strict";
 
 const chess = (boardSize) => {
-  boardSize = Number(boardSize);
-  if (boardSize <= 1) {
-    return null;
-  }
+  boardSize = parseInt(boardSize);
+
+  if (boardSize && boardSize <= 1) return null;
 
   return Array(boardSize)
     .fill("")
