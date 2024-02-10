@@ -2,19 +2,25 @@
 
 'use strict';
 
-const nod = (...numbers) => {
-    const nod2 = (a, b) => (b === 0 ? a : nod2(b, a % b));
+const greatestCommonDivisor = (a, b) => (b === 0 ? a : greatestCommonDivisor(b, a % b));
+
+const euclid = (...numbers) => {
+    if (numbers.some(isNaN)) {
+        return 'Все элементы должны быть натуральными числами.';
+    }
+
+    if (numbers.some(number => !Number.isInteger(number) || number <= 0)) {
+        return 'Все числа должны быть натуральными.';
+    }
 
     if (numbers.length < 2) {
-        return Math.abs(numbers[0]);
+        return numbers[0];
     }
 
     let result = numbers[0];
-    for (let i = 1; i < numbers.length; i++) {
-        result = nod2(result, numbers[i]);
-    }
+    numbers.forEach(number => {
+        result = greatestCommonDivisor(result, number);
+    });
 
-    return Math.abs(result);
+    return result;
 };
-
-const euclid = (...numbers) => nod(...numbers);
