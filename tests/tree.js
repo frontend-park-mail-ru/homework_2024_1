@@ -78,4 +78,9 @@ QUnit.module('Тестируем функцию tree', function () {
 		assert.strictEqual(tree(8), expected);
 		assert.strictEqual(tree('8'), expected);
 	});
+
+	QUnit.test('Высота ёлочки не может быть произвольного типа данных', function (assert) {
+		assert.strictEqual(tree("abc"), null);
+		assert.strictEqual(tree([101, 4, 123]), null);
+	});
 });
