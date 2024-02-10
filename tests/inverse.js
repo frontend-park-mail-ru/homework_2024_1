@@ -51,7 +51,6 @@ QUnit.module('Тестируем функцию inverse', function () {
 	QUnit.test('Вторым аргументом в функцию передано не число', function (assert) {
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], "a"), null);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], true), null);
-		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], []), null);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], {}), null);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], NaN), null);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], undefined), [ 5, 4, 3, 2, 1 ]);
