@@ -10,6 +10,7 @@ QUnit.module('Тестируем функцию minmax', function () {
 		assert.deepEqual(minmax('0'), [ 0, 0 ]);
 		assert.deepEqual(minmax('1'), [ 1, 1 ]);
 		assert.deepEqual(minmax('Infinity'), [ Infinity, Infinity ]);
+		assert.deepEqual(minmax('Infinity 2'), [ 2, Infinity ]);
 		assert.deepEqual(minmax('-Infinity'), [ -Infinity, -Infinity ]);
 		assert.deepEqual(minmax('42'), [ 42, 42 ]);
 		assert.deepEqual(minmax('.0'), [ .0, .0 ]);
