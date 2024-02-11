@@ -1,6 +1,6 @@
 'use strict';
 
-const roman = function (roman) {
+const roman = (roman) => {
     const romanNumbers = [
         {num: 1, ch: "I"}, {num: 4, ch: "IV"}, {num: 5, ch: "V"},
         {num: 9, ch: "IX"}, {num: 10, ch: "X"}, {num: 40, ch: "XL"},
@@ -9,47 +9,31 @@ const roman = function (roman) {
         {num: 1000, ch: "M"},
     ];
 
-    if (containsDigits(roman)) {
-        return arabToRoman(roman, romanNumbers);
+    if (isNaN(roman)) {
+        roman = roman.toUpperCase();
+        let idx = 12;
+        let pointer = 0;
+        let result = 0;
+        while (pointer < roman.length) {
+            while (roman.substring(pointer, pointer + romanNumbers[idx].ch.length) !== romanNumbers[idx].ch) {
+                idx--;
+                if (idx === 0) break;
+            }
+            result += romanNumbers[idx].num;
+            pointer += romanNumbers[idx].ch.length;
+        }
+        return result;
     } else {
-        return romanToArab(roman, romanNumbers);
-    }
-}
-
-function arabToRoman(input, romanNumbers) {
-    let pointer = 12;
-    let res = "";
-    let A = input;
-    while (A > 0) {
-        while (romanNumbers[pointer].num > A) {
-            pointer -= 1;
+        let pointer = 12;
+        let result = "";
+        let A = roman;
+        while (A > 0) {
+            while (romanNumbers[pointer].num > A) {
+                pointer -= 1;
+            }
+            result += romanNumbers[pointer].ch;
+            A -= romanNumbers[pointer].num;
         }
-        res += romanNumbers[pointer].ch;
-        A -= romanNumbers[pointer].num;
+        return result;
     }
-    return res;
 }
-
-function romanToArab(input, romanNumbers) {
-    input = input.toUpperCase();
-    let i = 12;
-    let pointer = 0;
-    let res = 0;
-    while (pointer < input.length) {
-        while (input.substring(pointer, pointer + romanNumbers[i].ch.length) !== romanNumbers[i].ch) {
-            i--;
-            if (i === 0) break;
-        }
-        res += romanNumbers[i].num;
-        pointer += romanNumbers[i].ch.length;
-    }
-    return res;
-}
-
-function containsDigits(input) {
-    if (typeof(input) !== "string") {
-        input = String(input);
-    }
-    return /\d/.test(input);
-}
-
