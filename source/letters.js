@@ -1,8 +1,14 @@
 "use strict";
 
+/**
+ * Deletes repeating letters from the sequence
+ * @param {string} seq - sequence to proceed
+ * @param {boolean} saveFirst - if true then saves only first occurrence of letter, if false - only the last one; if undefined then deletes all the repeating letters
+ * @returns {string} - proceeded string
+ */
 function letters(seq, saveFirst) {
     if (seq == undefined)
-        return undefined
+        return undefined;
 
     let seqArr = Array.from(seq)
     let seen = new Map();
@@ -24,7 +30,7 @@ function letters(seq, saveFirst) {
     seqArr.forEach(function(letter, i) {
         let letterObj = seen.get(letter);
         // "saveFirst == false" is due to there is an "saveFirst == undefined" option possible
-        if (letterObj.unique || (saveFirst && i == letterObj.first) || (saveFirst == false && i == letterObj.last)) {
+        if (letterObj.unique || (saveFirst && i === letterObj.first) || (saveFirst == false && i === letterObj.last)) {
             newSeq += letter;
         }
     })
