@@ -55,4 +55,12 @@ QUnit.module('Тестируем функцию roman', function () {
 	QUnit.test('roman валидирует данные', function (assert) {
 		assert.strictEqual(roman([1, 12, 4124]), null);
 	});
+
+	QUnit.test('roman правильно обрабатывает объект string', function (assert) {
+		assert.strictEqual(roman(new String("V")), 5);
+	});
+
+	QUnit.test('roman правильно обрабатывает большие числа', function (assert) {
+		assert.strictEqual(roman(9001), null);
+	});
 });
