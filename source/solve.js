@@ -5,6 +5,7 @@ const MINUS = '-';
 const MULTIPLY = '*';
 const LEFT_PARENTH = '(';
 const RIGHT_PARENTH = ')';
+const X = 'x';
 
 const OPERATORS_WITH_PRIORITY = {
     '+': 1,
@@ -15,13 +16,13 @@ const OPERATORS_WITH_PRIORITY = {
 // Преобразует строковое арифметическое выражение в массив операндов, операторов и скобок.
 // Просто expression.split(' ') не подходит, так как есть случаи вида '(x + 1)', 
 // где в качестве операнда будет записан, например, '1)'.
-const parseOperandsFromExpression = (expression, x) => {
-    const stringX = x.toString()
+const parseOperandsFromExpression = (expression, argument, argumentName=X) => {
+    const stringArgument = argument.toString()
     let number = '';
     let operatorsCount = 0;
     let operandsCount = 0;
-    let result = expression.split('').reduce((acc, curr) => {
-        switch(curr) {
+    const tokensArray = expression.split('').reduce((currTokens, currToken) => {
+        switch(currToken) {
             case PLUS:
             case MINUS:
             case MULTIPLY:
@@ -29,76 +30,85 @@ const parseOperandsFromExpression = (expression, x) => {
             case LEFT_PARENTH:
             case RIGHT_PARENTH:
                 if (number) {
-                    acc.push(number);
+                    currTokens.push(number);
                     ++operandsCount;
                 }
                 number = '';
-                acc.push(curr);
+                currTokens.push(currToken);
                 break;
             case ' ':
                 if (number) {
-                    acc.push(number);
+                    currTokens.push(number);
                     ++operandsCount;
                 }
                 number = '';
                 break;
-            case 'x':
-                acc.push(stringX);
+            case argumentName:
+                currTokens.push(stringArgument);
                 ++operandsCount;
                 break;
             default:
-                number += curr;
+                number += currToken;
                 break;
         }
-        return acc;
+        return currTokens;
     }, []);
 
     if (number) {
-        result.push(number);
+        tokensArray.push(number);
         ++operandsCount;
     }
 
-    if (operandsCount !== operatorsCount + 1)
+    if (operandsCount !== operatorsCount + 1) {
         throw new Error(`invalid input expression ${expression}`);
+    }
 
-    return result;
+    return tokensArray;
 }
 
 const handleStackWhenParsingOperatorCondition = (stack, token) => (
     stack.length > 0 && 
-    stack[stack.length - 1] !== LEFT_PARENTH && 
-    OPERATORS_WITH_PRIORITY[stack[stack.length - 1]] >= OPERATORS_WITH_PRIORITY[token]
+    stack.at(-1) !== LEFT_PARENTH && 
+    OPERATORS_WITH_PRIORITY[stack.at(-1)] >= OPERATORS_WITH_PRIORITY[token]
 )
 
 // Преобразует строковое арифметическое выражение в массив токенов формата reverse polish notation
-const parseRPNFromExpression = (expression, x) => {
-    const tokens = parseOperandsFromExpression(expression, x);
+const parseRPNFromExpression = (expression, argument, argumentName) => {
+    const tokens = parseOperandsFromExpression(expression, argument, argumentName);
     const stack = [];
     const queue = [];
 
     tokens.forEach(token => {
         if (token.match(/\d+$/)) { // Если токен - число
-            queue.push(token);
-        } else if (Object.keys(OPERATORS_WITH_PRIORITY).includes(token)) { // Если токен - оператор
+            return queue.push(token);
+        } 
+
+        if (OPERATORS_WITH_PRIORITY[token]) { // Если токен - оператор
             while (handleStackWhenParsingOperatorCondition(stack, token)) {
                 queue.push(stack.pop());
             }
-            stack.push(token);
-        } else if (token === LEFT_PARENTH) {
-            stack.push(token);
-        } else if (token === RIGHT_PARENTH) {
+            return stack.push(token);
+        } 
+
+        if (token === LEFT_PARENTH) {
+            return stack.push(token);
+        } 
+
+        if (token === RIGHT_PARENTH) {
             let lastLeftParenthIdx = stack.lastIndexOf(LEFT_PARENTH);
-            if (stack.length === 0 || lastLeftParenthIdx === -1) 
+            if (stack.length === 0 || lastLeftParenthIdx === -1) {
                 throw new Error(`invalid parentheses sequence in input expression ${expression}`);
+            }
             queue.push(...stack.splice(lastLeftParenthIdx + 1).reverse());
-            stack.pop();
-        } else {
-            throw new Error(`invalid token ${token} while parsing rpn from expression`);
+            return stack.pop();
         }
+
+        throw new Error(`invalid token ${token} while parsing rpn from expression`);
     })
 
-    if (stack.indexOf(LEFT_PARENTH) !== -1) 
+    if (stack.indexOf(LEFT_PARENTH) !== -1) {
         throw new Error(`invalid parentheses sequence in input expression ${expression}`);
+    }
 
     queue.push(...stack.reverse());
 
@@ -120,16 +130,17 @@ const evalToken = (operand1, operand2, operator) => {
     }
 }
 
-const checkIfValidParamTypes = (expression, x) => (
-    (typeof expression === 'string' || typeof expression === 'symbol') 
-    && (typeof x === 'number' || typeof x === 'bigint')
+const checkIfValidParamTypes = (expression, argument) => (
+    typeof expression === 'string'
+    && (typeof argument === 'number' || typeof argument === 'bigint')
 );
 
-const solve = (expression, x) => {
+const solve = (expression, argument, argumentName) => {
     try {
-        if (!checkIfValidParamTypes(expression, x)) 
+        if (!checkIfValidParamTypes(expression, argument)) {
             throw new Error(`invalid type of some argument`);
-        const queue = parseRPNFromExpression(expression, x);
+        }
+        const queue = parseRPNFromExpression(expression, argument, argumentName);
         const stack = [];
 
         if (queue.length === 0) {
@@ -138,19 +149,20 @@ const solve = (expression, x) => {
 
         queue.forEach((token) => {
             if (token.match(/\d+$/)) {
-                stack.push(token);
-            } else if (Object.keys(OPERATORS_WITH_PRIORITY).includes(token)) {
+                return stack.push(token);
+            } 
+            
+            if (OPERATORS_WITH_PRIORITY[token]) {
                 const operand2 = stack.pop();
                 const operand1 = stack.pop();
-                stack.push(evalToken(operand1, operand2, token));
-            } else {
-                throw new Error(`invalid token ${token} in rpn`);
+                return stack.push(evalToken(operand1, operand2, token));
             }
+            
+            throw new Error(`invalid token ${token} in rpn`);
         });
 
         return stack[0];
     } catch (e) {
-        console.log(e.message);
         return NaN;
     }
 }

@@ -24,5 +24,8 @@ QUnit.module('Тестируем функцию solve', function () {
 	QUnit.test('solve возвращает NaN при неверном типе хотя бы одного аргумента', function (assert) {
 		assert.true(isNaN(solve([], 1)));
 		assert.true(isNaN(solve('x', '')));
+		assert.true(isNaN(solve('x', null)));
+		assert.true(isNaN(solve('x')));
+		assert.true(isNaN(solve(undefined, 1)));
 	})
 });
