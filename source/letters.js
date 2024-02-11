@@ -11,7 +11,7 @@ function letters(seq, saveFirst) {
         return undefined;
 
     let seqArr = Array.from(seq)
-    let seen = new Map();
+    const seen = new Map();
     // Analyse sequence
     seqArr.forEach((letter, i) => {
         if (seen.has(letter)) {
@@ -30,7 +30,7 @@ function letters(seq, saveFirst) {
     seqArr.forEach((letter, i) => {
         let letterObj = seen.get(letter);
         // 'saveFirst == false' is due to there is an 'saveFirst == undefined' option possible
-        if (letterObj.unique || (saveFirst && i === letterObj.first) || (saveFirst == false && i === letterObj.last)) {
+        if (letterObj.unique || (saveFirst && i === letterObj.first) || (saveFirst === false && i === letterObj.last)) {
             newSeq += letter;
         }
     })

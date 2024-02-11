@@ -66,3 +66,4 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters('', false), '');
 	});
 });
+
