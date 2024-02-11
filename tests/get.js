@@ -73,5 +73,6 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get(true, '.fff.ttt'), undefined);
 		assert.strictEqual(get('aaaaa', '.'), 'aaaaa');
 		assert.strictEqual(get('aaaaa', '.length'), 5);
+		assert.strictEqual(get('aaaaa', new String('.length')), 5);
 	});
 });
