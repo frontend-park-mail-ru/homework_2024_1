@@ -38,4 +38,9 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('i love frontend'), 'Defnnort Elov I');
 		assert.strictEqual(sort('hello world'), 'Dlorw Ehllo');
 	});
+
+  QUnit.test('Функция сортирует цифры и знаки', function (assert) {
+		assert.strictEqual(sort('6*473521_'), '_*1234567');
+    assert.strictEqual(sort('447 372 321'), '123 237 447');
+	});
 });
