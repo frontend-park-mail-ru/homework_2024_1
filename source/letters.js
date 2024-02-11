@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * Deletes repeating letters from the sequence
@@ -13,7 +13,7 @@ function letters(seq, saveFirst) {
     let seqArr = Array.from(seq)
     let seen = new Map();
     // Analyse sequence
-    seqArr.forEach(function(letter, i) {
+    seqArr.forEach((letter, i) => {
         if (seen.has(letter)) {
             seen.get(letter).last = i;
             seen.get(letter).unique = false;
@@ -26,10 +26,10 @@ function letters(seq, saveFirst) {
     })
 
     // Create new sequence
-    let newSeq = "";
-    seqArr.forEach(function(letter, i) {
+    let newSeq = '';
+    seqArr.forEach((letter, i) => {
         let letterObj = seen.get(letter);
-        // "saveFirst == false" is due to there is an "saveFirst == undefined" option possible
+        // 'saveFirst == false' is due to there is an 'saveFirst == undefined' option possible
         if (letterObj.unique || (saveFirst && i === letterObj.first) || (saveFirst == false && i === letterObj.last)) {
             newSeq += letter;
         }
