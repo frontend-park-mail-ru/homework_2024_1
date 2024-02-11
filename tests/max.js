@@ -1,28 +1,23 @@
 'use strict';
 
-QUnit.module('Тестируем функцию max', function () {
-	QUnit.test('Возвращает максимальное из трёх положительных чисел', function (assert) {
-		assert.strictEqual(max([ 1, 2, 3 ]), 3, 'max([1, 2, 3]) === 3');
-		assert.strictEqual(max([ 3, 2, 1 ]), 3, 'max([3, 2, 1]) === 3');
+QUnit.module('Тестируем функцию rle', function () {
+	QUnit.test('rle обрабатывает строку с повторяющимися символами', function (assert) {
+		assert.strictEqual(rle('+++'), '+3', "rle('+++') === '+3'");
+		assert.strictEqual(rle('AAAB'), 'A3B', "rle('AAAB') === 'A3B'");
+		assert.strictEqual(rle('BCCDDDAXXXX'), 'BC2D3AX4', "rle('BCCDDDAXXXX') === 'BC2D3AX4'");
+		assert.strictEqual(rle('AVVVBBBVVXDHJFFFFDDDDDDHAAAAJJJDDSLSSSDDDD'), 'AV3B3V2XDHJF4D6HA4J3D2SLS3D4',
+			"rle('AVVVBBBVVXDHJFFFFDDDDDDHAAAAJJJDDSLSSSDDDD') === 'AV3B3V2XDHJF4D6HA4J3D2SLS3D4'");
 	});
-
-	QUnit.test('Возвращает максимальное из трёх отрицательных чисел', function (assert) {
-		assert.strictEqual(max([ -1, -2, -3 ]), -1, 'max([-1, -2, -3]) === -1');
-		assert.strictEqual(max([ -3, -2, -1 ]), -1, 'max([-3, -2, -1]) === -1');
+	QUnit.test('rle обрабатывает пустую строку', function (assert) {
+		assert.strictEqual(rle(''), '', "rle('') === ''");
 	});
-
-	QUnit.test('Возвращает максимальное из трёх чисел разных знаков', function (assert) {
-		assert.strictEqual(max([ -1, 0, 1 ]), 1, 'max([-1, 0, 1]) === 1');
-		assert.strictEqual(max([ 1, 0, -1 ]), 1, 'max([1, 0, -1]) === 1');
+	QUnit.test('rle обрабатывает строку с числами', function (assert) {
+		assert.strictEqual(rle('111111'), '16', "rle('111111') === '16'");
 	});
-
-	QUnit.test('Работает правильно с одинаковыми числами', function (assert) {
-		assert.strictEqual(max([ 0, 0, 0 ]), 0, 'max([0, 0, 0]) === 0');
-		assert.strictEqual(max([ 42, 42, 42 ]), 42, 'max([42, 42, 42]) === 42');
+	QUnit.test('rle корректно обрабатывает строку с одним символом', function (assert) {
+		assert.strictEqual(rle('A'), 'A', "rle('A') === 'A1'");
 	});
-
-	QUnit.test('Работает правильно со специальными константами', function (assert) {
-		assert.strictEqual(max([ Infinity, 100000, 0 ]), Infinity);
-		assert.strictEqual(max([ 0, -1000, -Infinity ]), 0);
+	QUnit.test('rle корректно обрабатывает не строковые входные данные', function (assert) {
+		assert.strictEqual(rle(123), 'введите строку', "rle(123) === 'введите строку'");
 	});
 });
