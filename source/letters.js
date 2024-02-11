@@ -6,7 +6,7 @@
  * @param {boolean} saveFirst - if true then saves only first occurrence of letter, if false - only the last one; if undefined then deletes all the repeating letters
  * @returns {string} - proceeded string
  */
-function letters(seq, saveFirst) {
+const letters = (seq, saveFirst) => {
     if (typeof seq != 'string')
         return undefined;
 
