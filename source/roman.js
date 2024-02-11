@@ -19,7 +19,6 @@ const roman = (roman) => {
 
     if (isNaN(roman)) {
         roman = roman.toUpperCase();
-        console.log(roman)
         let idx = 14;
         let pointer = 0;
         let result = 0;
@@ -52,6 +51,3 @@ const roman = (roman) => {
     }
 }
 
-console.log(isNaN("boba"))
-console.log(isNaN("1904"))
-console.log(isNaN(1904))
