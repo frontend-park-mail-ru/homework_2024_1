@@ -121,7 +121,7 @@ QUnit.module('Тестируем функцию sorting', function () {
 		assert.deepEqual(actual, expected);
 	});
 
-	QUnit.test('sorting сортирует по трем полям с разными типами', function (assert) {
+	QUnit.test('sorting сортирует по трем полям с недопустимым типом (null)', function (assert) {
 		const initial = [
 			{prop1: 3, id: '1', check: true},
 			{prop1: 3, id: '2', check: false},
@@ -134,16 +134,7 @@ QUnit.module('Тестируем функцию sorting', function () {
 		];
 		const actual = sorting(initial, [ 'id', 'check', 'prop1']);
 
-		const expected = [
-			{prop1: 2, id: '1', check: false},
-			{prop1: 1, id: '1', check: true},
-			{prop1: 3, id: '1', check: true},
-			{prop1: 4, id: '1', check: true},
-			{prop1: 1, id: '2', check: false},
-			{prop1: 3, id: '2', check: false},
-			{prop1: 2, id: '2', check: true},
-			{prop1: 4, id: '2', check: true},
-		];
+		const expected = null;
 
 		assert.deepEqual(actual, expected);
 	});
@@ -171,6 +162,44 @@ QUnit.module('Тестируем функцию sorting', function () {
 			{prop1: 3, id: '1', check: 1},
 			{prop1: 4, id: '2', check: 1},
 		];
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting сортирует по трем полям с недопустимыми типами, но без их сортировки', function (assert) {
+		const initial = [
+			{prop1: 3, id: '1', check: true},
+			{prop1: 3, id: '2', check: false},
+			{prop1: 1, id: '1', check: true},
+			{prop1: 1, id: '2', check: false},
+			{prop1: 4, id: '1', check: true},
+			{prop1: 4, id: '2', check: true},
+			{prop1: 2, id: '1', check: false},
+			{prop1: 2, id: '2', check: true}
+		];
+		const actual = sorting(initial, [ 'id', 'prop1']);
+
+		const expected = [
+			{prop1: 1, id: '1', check: true},
+			{prop1: 2, id: '1', check: false},
+			{prop1: 3, id: '1', check: true},
+			{prop1: 4, id: '1', check: true},
+			{prop1: 1, id: '2', check: false},
+			{prop1: 2, id: '2', check: true},
+			{prop1: 3, id: '2', check: false},
+			{prop1: 4, id: '2', check: true}
+		];
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting сортирует по полям с недопустимыми типами', function (assert) {
+		const initial = [
+			{prop1: {1: "string"}, id: undefined, check: true},
+		];
+		const actual = sorting(initial, [ 'id', 'prop1']);
+
+		const expected = null;
 
 		assert.deepEqual(actual, expected);
 	});

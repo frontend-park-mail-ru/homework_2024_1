@@ -2,8 +2,8 @@
 
 /**
  * Сравнивает переменные, если они строки, то лексиграфически, иначе переводит в тип Number
- * @param {any} a 
- * @param {any} b 
+ * @param {number, string} a 
+ * @param {number, string} b 
  * @returns {number} Если a > b возвращает положительное число, если a === b, то 0, иначе отрицательное число
  */
 function comporator(a, b){
@@ -23,6 +23,9 @@ function comporator(a, b){
 const sorting = (array, keys) => {
     for (let key of keys.reverse()) {
         for (let [index, item] of array.entries()) {
+            if (typeof item[key] !== 'string' && typeof item[key] !== 'number'){
+                return null;
+            }
             let insertIndex = array.findIndex((elem) => (comporator(elem[key], item[key]) > 0));
             if ((insertIndex >= 0) && (insertIndex < index)){
                 array.splice(index, 1);
