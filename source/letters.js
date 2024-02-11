@@ -1,3 +1,5 @@
+"use strict";
+
 function letters(seq, saveFirst) {
     if (seq == undefined)
         return undefined
@@ -18,7 +20,7 @@ function letters(seq, saveFirst) {
     })
 
     // Create new sequence
-    newSeq = "";
+    let newSeq = "";
     seqArr.forEach(function(letter, i) {
         let letterObj = seen.get(letter);
         // "saveFirst == false" is due to there is an "saveFirst == undefined" option possible
