@@ -48,12 +48,31 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get(object, '.baz.length'), undefined);
 		assert.strictEqual(get(object, '.0.1.2'), undefined);
 	});
-	QUnit.test('get правильно обрабатывает undefined', function (assert) {
+	QUnit.test('get правильно обрабатывает undefined, переданный как первый аргумент', function (assert) {
 		const object = undefined;
 
 		assert.strictEqual(get(object, '.'), object);
 		assert.strictEqual(get(object, '.smth.deep'), undefined);
 		assert.strictEqual(get(object, '.fffff'), undefined);
 		assert.strictEqual(get(object, '.0.1.2'), undefined);
+		assert.strictEqual(get(object, undefined), undefined);
+	});
+	QUnit.test('get правильно обрабатывает undefined/null, переданный как второй аргумент', function (assert) {
+		assert.strictEqual(get({}, undefined), undefined);
+		assert.strictEqual(get([1, 2, 3], undefined), undefined);
+		assert.strictEqual(get({ a: 123 }, undefined), undefined);
+		assert.strictEqual(get([], null), undefined);
+		assert.strictEqual(get({}, null), undefined);
+		assert.strictEqual(get({ a: 123 }, null), undefined);
+	});
+	QUnit.test('get правильно обрабатывает примитивы, переданный как первый аргумент', function (assert) {
+
+		assert.strictEqual(get(12, '.'), 12);
+		assert.strictEqual(get(12, '.gggg'), undefined);
+		assert.strictEqual(get(true, undefined), undefined);
+		assert.strictEqual(get(true, '.'), true);
+		assert.strictEqual(get(true, '.fff.ttt'), undefined);
+		assert.strictEqual(get('aaaaa', '.'), 'aaaaa');
+		assert.strictEqual(get('aaaaa', '.length'), 5);
 	});
 });
