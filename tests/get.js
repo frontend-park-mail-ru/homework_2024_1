@@ -76,3 +76,4 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get('aaaaa', new String('.length')), 5);
 	});
 });
+

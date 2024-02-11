@@ -11,3 +11,4 @@ const get = (obj, property) => {
     }
     return copy;
 }
+
