@@ -43,4 +43,9 @@ QUnit.module('Тестируем функцию plain', function () {
 		assert.deepEqual(plain([NaN, NaN, [[NaN], NaN]]), [NaN, NaN, NaN, NaN], "Работает с типом NaN")
 		assert.deepEqual(plain([1]),[1], "Работает с единственным элементом" )
 	})
+	QUnit.test('Тесты с невалидными входными данными', function(assert){
+		assert.deepEqual(plain(1), undefined);
+		assert.deepEqual(plain({'apple':'juice', 'honey':'bee'}), undefined);
+		assert.deepEqual(plain(null), undefined)
+	})
 });
