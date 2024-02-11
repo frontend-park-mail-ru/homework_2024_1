@@ -19,23 +19,27 @@ const roman = (roman) => {
 
     if (isNaN(roman)) {
         roman = roman.toUpperCase();
-        let idx = 14;
-        let pointer = 0;
-        let result = 0;
-        while (pointer < roman.length) {
-            while (roman.substring(pointer, pointer + romanNumbers[idx].ch.length) !== romanNumbers[idx].ch) {
-                idx--;
-                if (idx === 0) break;
+        if (/^[IVXLCDM]+$/i.test(roman)) {
+            let idx = 14;
+            let pointer = 0;
+            let result = 0;
+            while (pointer < roman.length) {
+                while (roman.substring(pointer, pointer + romanNumbers[idx].ch.length) !== romanNumbers[idx].ch) {
+                    idx--;
+                    if (idx === 0) break;
+                }
+                result += romanNumbers[idx].num;
+                pointer += romanNumbers[idx].ch.length;
             }
-            result += romanNumbers[idx].num;
-            pointer += romanNumbers[idx].ch.length;
+            return result;
+        } else {
+            return "Не валидные данные!";
         }
-        return result;
     } else {
         let pointer = 14;
         let result = "";
         let A;
-        if (typeof(roman) === "string") {
+        if (typeof (roman) === "string") {
             A = roman.replace(" ", "").replace(".", "");
         } else {
             A = roman;
@@ -50,4 +54,3 @@ const roman = (roman) => {
         return result;
     }
 }
-
