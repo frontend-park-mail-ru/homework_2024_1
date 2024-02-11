@@ -1,15 +1,24 @@
-const minmax = numbers => {
-    numbers = numbers.split(' ').filter(num => num!=='');
-	//обработка пустой строки / строки только с пробелами
-	if (numbers.length === 0) {
+const minmax = numericString => {
+	
+	if (typeof numericString !== typeof ' '){
+
 		return [undefined, undefined];
+
 	}
+
+    subStringArray = numericString.split(' ').filter(num => num !== '');
+
 	//преобразование подстрок в значение
-	numbers = numbers.map(Number).filter(num => !isNaN(num));
-	if (numbers.length === 0) {
+	numArray = subStringArray.map(Number).filter(num => !isNaN(num));
+	if (numArray.length === 0) {
+
 		return [undefined, undefined];
+
 	}
-    const min = Math.min(...numbers);
-    const max = Math.max(...numbers);
+
+    const min = Math.min(...numArray);
+    const max = Math.max(...numArray);
+
     return [min, max];
+
 };
