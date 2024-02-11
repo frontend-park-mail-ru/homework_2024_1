@@ -7,7 +7,7 @@
  * @returns {string} - proceeded string
  */
 function letters(seq, saveFirst) {
-    if (seq == undefined)
+    if (typeof seq != 'string')
         return undefined;
 
     let seqArr = Array.from(seq)
