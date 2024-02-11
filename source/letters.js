@@ -7,7 +7,7 @@
  * @returns {string} - proceeded string
  */
 const letters = (seq, saveFirst) => {
-    if (typeof seq != 'string')
+    if (typeof seq != 'string' && !(seq instanceof String))
         return undefined;
 
     let seqArr = Array.from(seq)

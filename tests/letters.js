@@ -83,6 +83,13 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters(true, true), undefined);
 		assert.strictEqual(letters(true, false), undefined);
 	});
+	
+	QUnit.test('Если на вход попадает объект String', function (assert) {
+		assert.strictEqual(letters(new String('привет, мир')), 'пвет, м');
+		assert.strictEqual(letters(new String('hello, world')), 'he, wrd');
+		assert.strictEqual(letters(new String('мама мыла раму')), 'ылру');
+		assert.strictEqual(letters(new String('"Кукареку!", сказал Петух')), 'Кр!,сзлПтх');
+	});
 
 });
 
