@@ -120,4 +120,42 @@ QUnit.module('Тестируем функцию sorting', function () {
 
 		assert.deepEqual(actual, expected);
 	});
+
+	QUnit.test('sorting не изменяет массив, если он уже отсортирован', function (assert) {
+		const initial = [
+			{prop1: 1},
+			{prop1: 2},
+			{prop1: 3},
+			{prop1: 4}
+		];
+		const actual = sorting(initial, [ 'prop1' ]);
+
+		const expected = [
+			{prop1: 1},
+			{prop1: 2},
+			{prop1: 3},
+			{prop1: 4}
+		];
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting не сортирует по несуществующим полям', function (assert) {
+		const initial = [
+			{prop1: 3, id: '1'},
+			{prop1: 3, id: '2'},
+			{prop1: 1, id: '1'},
+			{prop1: 1, id: '2'},
+		];
+		const actual = sorting(initial, [ 'id', 'prop2' ]);
+
+		const expected = [
+			{prop1: 3, id: '1'},
+			{prop1: 1, id: '1'},
+			{prop1: 3, id: '2'},
+			{prop1: 1, id: '2'},
+		];
+
+		assert.deepEqual(actual, expected);
+	});
 });
