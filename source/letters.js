@@ -1,4 +1,7 @@
 function letters(seq, saveFirst) {
+    if (seq == undefined)
+        return undefined
+
     let seqArr = Array.from(seq)
     let seen = new Map();
     // Analyse sequence
