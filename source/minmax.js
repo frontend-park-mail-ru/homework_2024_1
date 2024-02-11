@@ -1,11 +1,15 @@
 const minmax = numbers => {
-    numbers = numbers.match(/-?\.?\d+\e-?\d+|-?\d*\.?\d+|-?\bInfinity\b/g); //-?\.?\d+\e-?\d+ парсит 1е4 и всё что с этим связано
-    //-?\d*\.?\d+ парсит целые числа и числа с плавающей точкой ... \b-?Infinity\b парсит Infinity, причём оно должно быть отделено
-    // от остального текста.  /g - для поиска по всей строке, а не первого встреченного числа
-    if (numbers !== null){
-        const min = Math.min(...numbers);
-        const max = Math.max(...numbers);
-        return [min, max];
-    }
-    return [undefined, undefined];
+    numbers = numbers.split(' ').filter(num => num!=='');
+	//обработка пустой строки / строки только с пробелами
+	if (numbers.length === 0) {
+		return [undefined, undefined];
+	}
+	//преобразование подстрок в значение
+	numbers = numbers.map(Number).filter(num => !isNaN(num));
+	if (numbers.length === 0) {
+		return [undefined, undefined];
+	}
+    const min = Math.min(...numbers);
+    const max = Math.max(...numbers);
+    return [min, max];
 };
