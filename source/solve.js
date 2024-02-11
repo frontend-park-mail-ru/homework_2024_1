@@ -13,9 +13,14 @@ const OPERATORS_WITH_PRIORITY = {
     '*': 2,
 };
 
-// Преобразует строковое арифметическое выражение в массив операндов, операторов и скобок.
-// Просто expression.split(' ') не подходит, так как есть случаи вида '(x + 1)', 
-// где в качестве операнда будет записан, например, '1)'.
+/**
+ * Parses valid tokens such as operators, integer numbers and parentheses from mathematical expression,
+ * throws error if expression is invalid in that regard
+ * @param {string} expression - mathematical expression
+ * @param {number | bigint} argument - integer value of an argument
+ * @param {string} argumentName - name of the argument of the expression, defaults to 'x'
+ * @returns {string[]} array of tokens in expression
+ */
 const parseOperandsFromExpression = (expression, argument, argumentName=X) => {
     const stringArgument = argument.toString()
     let number = '';
@@ -66,24 +71,36 @@ const parseOperandsFromExpression = (expression, argument, argumentName=X) => {
     return tokensArray;
 }
 
+/**
+ * Shows whether we can continue parsing values from stack when token is operator
+ * @param {*} stack - stack of tokens that is currently being iterated through
+ * @param {*} token - current token from array of parsed tokens
+ * @returns {boolean}
+ */
 const handleStackWhenParsingOperatorCondition = (stack, token) => (
     stack.length > 0 && 
     stack.at(-1) !== LEFT_PARENTH && 
     OPERATORS_WITH_PRIORITY[stack.at(-1)] >= OPERATORS_WITH_PRIORITY[token]
 )
 
-// Преобразует строковое арифметическое выражение в массив токенов формата reverse polish notation
+/**
+ * Converts mathematical expression into the Reverse Polish Notation format
+ * @param {string} expression - mathematical expression
+ * @param {number | bigint} argument - integer value of an argument
+ * @param {string} argumentName - name of the argument of the expression
+ * @returns {string[]} array of tokens in RPN
+ */
 const parseRPNFromExpression = (expression, argument, argumentName) => {
     const tokens = parseOperandsFromExpression(expression, argument, argumentName);
     const stack = [];
     const queue = [];
 
     tokens.forEach(token => {
-        if (token.match(/\d+$/)) { // Если токен - число
+        if (token.match(/\d+$/)) { // Token is a number
             return queue.push(token);
         } 
 
-        if (OPERATORS_WITH_PRIORITY[token]) { // Если токен - оператор
+        if (OPERATORS_WITH_PRIORITY[token]) { // Token is an operator
             while (handleStackWhenParsingOperatorCondition(stack, token)) {
                 queue.push(stack.pop());
             }
@@ -115,6 +132,14 @@ const parseRPNFromExpression = (expression, argument, argumentName) => {
     return queue;
 }
 
+/**
+ * Counts value of expression which contains two operands and an operator '+', '-' or '*', 
+ * throws error if invalid operator specified
+ * @param {number} operand1
+ * @param {number} operand2 
+ * @param {'+' | '-' | '*'} operator
+ * @returns {number}
+ */
 const evalToken = (operand1, operand2, operator) => {
     const intOperand1 = parseInt(operand1);
     const intOperand2 = parseInt(operand2);
@@ -130,11 +155,25 @@ const evalToken = (operand1, operand2, operator) => {
     }
 }
 
+/**
+ * Checks whether user-provided parameters are of valid type
+ * @param {string} expression - mathematical expression
+ * @param {number | bigint} argument - integer value of an argument
+ * @returns {boolean}
+ */
 const checkIfValidParamTypes = (expression, argument) => (
     typeof expression === 'string'
     && (typeof argument === 'number' || typeof argument === 'bigint')
 );
 
+/**
+ * Counts value of mathematical expression which contains 
+ * characters '+', '-', '*', '(', ')', spaces and an argument of custom name
+ * @param {string} expression - mathematical expression
+ * @param {number | bigint} argument - integer value of an argument
+ * @param {string} argumentName - name of the argument of the expression
+ * @returns {number} value of expression or NaN if expression is invalid 
+ */
 const solve = (expression, argument, argumentName) => {
     try {
         if (!checkIfValidParamTypes(expression, argument)) {
@@ -151,7 +190,7 @@ const solve = (expression, argument, argumentName) => {
             if (token.match(/\d+$/)) {
                 return stack.push(token);
             } 
-            
+
             if (OPERATORS_WITH_PRIORITY[token]) {
                 const operand2 = stack.pop();
                 const operand1 = stack.pop();
