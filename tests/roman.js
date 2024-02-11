@@ -44,5 +44,6 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman(''), null);
 		assert.strictEqual(roman(null), null);
 		assert.strictEqual(roman(' '), null);
+		assert.strictEqual(roman(['VI', 'V']), null);
 	});
 });

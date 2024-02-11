@@ -1,5 +1,11 @@
 'use strict'; // строгий режим
 
+/**
+ * Преобразует число десятичной позиционной системы в римскую и обратно.
+ * @param {(string|number)} input - Входное значение для преобразования.
+ * @returns {(number|string|null)} - Преобразованное значение или null, если входные данные не поддерживаются.
+ */
+
 const roman = (input) => {
     const romanNumerals = [
         { value: 1000, numeral: 'M' },
@@ -48,9 +54,14 @@ const roman = (input) => {
     }
 };
 
+/**
+ * Предобрабатывает входное значение.
+ * @param {(string|number)} input - Входное значение для обработки.
+ * @returns {(string|number|null)} - Обработанное значение или null, если входные данные не поддерживаются.
+ */
 
 function preprocessInput(input) {
-    if (input === null || input === undefined) {
+    if (typeof input !== 'number' && typeof input !== 'string') {
         return null;
     }
     const romanRegexp = /^[IVXLCDM]+$/;
