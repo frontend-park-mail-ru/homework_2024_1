@@ -1,6 +1,6 @@
 'use strict'
 
-function get(obj, property){
+const get = (obj, property) => {
     if (typeof(property) !== 'string' && !(property instanceof String)) return undefined;
     const propertyQuery = property.split('.').filter(str => str.length > 0);
 
