@@ -17,9 +17,10 @@ const roman = (roman) => {
         {num: 1000, ch: "M"}, {num: 4000, ch: "MIƆƆƆ"}, {num: 5000, ch: "IƆƆƆ"},
     ];
 
-    if (typeof (roman) !== "number" && typeof (roman) !== "string") {
+    if (!/^(string|number)$/.test(typeof roman) && !(roman instanceof String)) {
         return null;
     }
+
     if (isNaN(roman)) {
         roman = roman.toUpperCase();
         if (/^[IVXLCDM]+$/i.test(roman)) {
@@ -39,6 +40,9 @@ const roman = (roman) => {
             return null;
         }
     } else {
+        if (roman > 8999) {
+            return null;
+        }
         let pointer = 14;
         let result = "";
         let A;
@@ -57,3 +61,5 @@ const roman = (roman) => {
         return result;
     }
 }
+
+
