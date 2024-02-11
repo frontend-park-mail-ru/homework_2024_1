@@ -23,10 +23,11 @@ function comporator(a, b){
 const sorting = (array, keys) => {
     for (let key of keys.reverse()) {
         for (let [index, item] of array.entries()) {
-            if (typeof item[key] !== 'string' && typeof item[key] !== 'number'){
+            const instanceCheck = !(item[key] instanceof Number || item[key] instanceof String);
+            if (typeof item[key] !== 'string' && typeof item[key] !== 'number' && instanceCheck){
                 return null;
             }
-            let insertIndex = array.findIndex((elem) => (comporator(elem[key], item[key]) > 0));
+            const insertIndex = array.findIndex((elem) => (comporator(elem[key], item[key]) > 0));
             if ((insertIndex >= 0) && (insertIndex < index)){
                 array.splice(index, 1);
                 array.splice(insertIndex, 0, item);
