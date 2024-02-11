@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * Sorts words and letters.
+ * @param {string} sentence - sentence or word you want to sort
+ * @returns {string} - sorted sentence with sorted words
+ */
+
 const sort = (sentence) => sentence.split(' ').map(wordSort).sort(ruComparator).join(' ');
 
 const wordSort = (word) => {
