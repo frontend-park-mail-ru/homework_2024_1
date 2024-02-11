@@ -37,4 +37,21 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman('1990'), 'MCMXC');
 		assert.strictEqual(roman('2017'), 'MMXVII');
 	});
+
+    QUnit.test('roman не заходит за границы допустимых значений', function (assert) {
+        assert.strictEqual(roman(4000), null);
+        assert.strictEqual(roman(0), null);
+    });
+
+    QUnit.test('roman проверяет корректность римского числа', function (assert) {
+        assert.strictEqual(roman('MMaboba'), null);
+        assert.strictEqual(roman('MAN'), null);
+        assert.strictEqual(roman('XO'), null);
+
+    });
+
+    QUnit.test('roman проверяет на корректный тип объекты', function (assert) {
+        assert.strictEqual(roman([]), null);
+        assert.strictEqual(roman({}), null);
+    });
 });
