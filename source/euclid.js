@@ -7,8 +7,9 @@
  * @returns {Number} gcd
  */
 const gcd = (num1, num2) => {
-    if (!num2)
-    return num1;
+    if (!num2) {
+        return num1;
+    }
 
     return gcd(num2, num1 % num2);
 }
@@ -20,13 +21,13 @@ const gcd = (num1, num2) => {
  */
 const euclid = (...numbers) => {
     if (!numbers.length) {
-        return undefined
+        return null;
     }
 
     let result = numbers[0];
     
     numbers.forEach((number) => {
-        result = gcd(result, number)
+        result = gcd(result, number);
     })
 
     return result;
