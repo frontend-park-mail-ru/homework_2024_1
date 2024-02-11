@@ -31,10 +31,9 @@ function euclid(...numbers) {
         return null;
     }
 
-    let result = numbers[0];
-    numbers.forEach(function (number) {
-        result = gcd(result, number);
-    });
+    const result = numbers.reduce(function (result, current) {
+        return gcd(result, current);
+    }, 0);
 
     return Math.abs(result);
 }
