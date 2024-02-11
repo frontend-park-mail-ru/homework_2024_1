@@ -38,14 +38,14 @@ QUnit.module('Тестируем функцию plain', function () {
 		
 	});
 	QUnit.test('Дополнительные тесты', function(assert){
-		assert.deepEqual(plain([[],[[ 'a',['bcde', [Infinity]], ['f']], null, [false, [NaN]], NaN], NaN, -Infinity ]), ['a', 'bcde', Infinity, 'f', null, false, NaN, NaN, NaN, -Infinity], "Работает с элементами разных типов");
-		assert.deepEqual(plain([[12.4, 54.4, 1 , 'a','b',['cd'],[NaN]], 123e-2,[]]), [12.4,54.4, 1, 'a', 'b', 'cd', NaN, 1.23], 'Работает с элементами разных типов'),
-		assert.deepEqual(plain([NaN, NaN, [[NaN], NaN]]), [NaN, NaN, NaN, NaN], "Работает с типом NaN")
-		assert.deepEqual(plain([1]),[1], "Работает с единственным элементом" )
+		assert.deepEqual(plain([ [], [ [ 'a', [ 'bcde', [ Infinity ] ], [ 'f' ] ], null, [false, [ NaN ] ], NaN ], NaN, -Infinity ]), [ 'a', 'bcde', Infinity, 'f', null, false, NaN, NaN, NaN, -Infinity ], "Работает с элементами разных типов");
+		assert.deepEqual(plain([ [ 12.4, 54.4, 1, 'a', 'b', [ 'cd' ], [ NaN ] ], 123e-2, [] ]), [12.4, 54.4, 1, 'a', 'b', 'cd', NaN, 1.23 ], 'Работает с элементами разных типов'),
+		assert.deepEqual(plain([ NaN, NaN, [ [ NaN ], NaN ] ]), [ NaN, NaN, NaN, NaN ], "Работает с типом NaN")
+		assert.deepEqual(plain([ 1 ]),[ 1 ], "Работает с единственным элементом" )
 	})
-	QUnit.test('Тесты с невалидными входными данными', function(assert){
-		assert.deepEqual(plain(1), undefined);
-		assert.deepEqual(plain({'apple':'juice', 'honey':'bee'}), undefined);
-		assert.deepEqual(plain(null), undefined)
+	QUnit.test('Тесты с невалидными входными данными', function(assert) {
+		assert.deepEqual(plain(1), null);
+		assert.deepEqual(plain({ 'apple' : 'juice', 'honey' : 'bee' }), null);
+		assert.deepEqual(plain(null), null)
 	})
 });
