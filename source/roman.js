@@ -33,7 +33,7 @@ const roman = (roman) => {
             }
             return result;
         } else {
-            return "Не валидные данные!";
+            return null;
         }
     } else {
         let pointer = 14;
