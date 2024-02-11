@@ -57,13 +57,12 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get(object, '.0.1.2'), undefined);
 		assert.strictEqual(get(object, undefined), undefined);
 	});
-	QUnit.test('get правильно обрабатывает undefined/null, переданный как второй аргумент', function (assert) {
-		assert.strictEqual(get({}, undefined), undefined);
-		assert.strictEqual(get([1, 2, 3], undefined), undefined);
+	QUnit.test('get правильно обрабатывает некорректный тип второго аргумента', function (assert) {
 		assert.strictEqual(get({ a: 123 }, undefined), undefined);
-		assert.strictEqual(get([], null), undefined);
-		assert.strictEqual(get({}, null), undefined);
 		assert.strictEqual(get({ a: 123 }, null), undefined);
+		assert.strictEqual(get({ a: 123 }, { b: 12 }), undefined);
+		assert.strictEqual(get({ a: 123 }, false), undefined);
+		assert.strictEqual(get({ a: 123 }, [1, 2, 3]), undefined);
 	});
 	QUnit.test('get правильно обрабатывает примитивы, переданный как первый аргумент', function (assert) {
 

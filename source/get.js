@@ -1,7 +1,7 @@
 'use strict'
 
 function get(obj, property){
-    if (!property) return undefined;
+    if (typeof(property) !== 'string') return undefined;
     const propertyQuery = property.split('.').filter(str => str.length > 0);
 
     let copy = obj;
