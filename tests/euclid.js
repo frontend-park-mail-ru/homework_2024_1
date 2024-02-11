@@ -1,11 +1,21 @@
 'use strict';
 
 QUnit.module('Тестируем функцию euclid', function () {
+	QUnit.test('На вход пришло 0 аргументов', function (assert) {
+		assert.strictEqual(euclid(), undefined, 'euclid() === undefined');
+	});
+
 	QUnit.test('На входе всего одно число', function (assert) {
 		assert.strictEqual(euclid(1), 1, 'euclid(1) === 1');
 		assert.strictEqual(euclid(2), 2, 'euclid(2) === 2');
 		assert.strictEqual(euclid(7), 7, 'euclid(7) === 7');
 		assert.strictEqual(euclid(6006), 6006, 'euclid(6006) === 6006');
+	});
+
+	QUnit.test('Функция должна правильно находить НОД двух натуральных чисел', function (assert) {
+		assert.strictEqual(euclid(33, 30), 3, 'euclid(33, 30) === 3');
+		assert.strictEqual(euclid(100, 200), 100, 'euclid(100, 200) === 100');
+		assert.strictEqual(euclid(17, 5), 1, 'euclid(17, 5) === 1');
 	});
 
 	QUnit.test('Функция должна правильно находить НОД трёх натуральных чисел', function (assert) {
