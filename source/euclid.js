@@ -5,7 +5,7 @@
 const greatestCommonDivisor = (a, b) => (b === 0 ? a : greatestCommonDivisor(b, a % b));
 
 const validateNaturalNumbers = numbers => {
-    return numbers.every(number => Number.isInteger(number) && number > 0);
+    return numbers.every(number => Number.isInteger(number) && number > 0) && !(numbers.length === 0);
 }
 
 const euclid = (...numbers) => {
