@@ -53,4 +53,23 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters('от топота копыт', false), 'а копыт');
 		assert.strictEqual(letters('hello world', false), 'he world');
 	});
+
+	QUnit.test('Типичный плесйхолдер ru+en', function (assert) {
+		assert.strictEqual(letters('Вот вам яркий пример современных тенденций — выбранный нами инновационный путь предоставляет широкие возможности для системы массового участия. Повседневная практика показывает, что граница обучения кадров не оставляет шанса для новых предложений. Также как базовый вектор развития, а также свежий взгляд на привычные вещи — безусловно открывает новые горизонты для укрепления моральных ценностей.'), 'ВПТщ');
+
+		assert.strictEqual(letters('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis, est et auctor fringilla, augue purus condimentum mi, vitae laoreet nulla nulla eleifend enim. Sed bibendum tempus ex eget gravida. Phasellus luctus odio nec ultrices placerat. Donec ac nisl sit amet est semper mollis quis at neque. Cras vel erat nisi. Nunc ipsum justo, tempor in eros vitae, commodo suscipit diam. Fusce luctus et odio at luctus. Suspendisse eu condimentum orci. Sed malesuada suscipit arcu in elementum. Fusce efficitur elit ipsum, ullamcorper sodales ante bibendum nec.', true), 'Lorem ipsudlta,cng.DbfvSxPhqCNjF');
+
+	});
+
+	QUnit.test('Разные байт-коды в utf-8', function (assert) {
+		assert.strictEqual(letters('񟿾񟿿𿿾𿿿𯿿𯿿𿿾𿿿񏿾𯿿𿿾𿿿񏿾'), '񟿾񟿿');
+
+		assert.strictEqual(letters('񟿾񟿿𿿾𿿿𯿿', true), '񟿾񟿿𿿾𿿿𯿿');
+
+		assert.strictEqual(letters('�𯿿𿿾𿿿񏿾񏿿񟿾񟿿', false), '�𯿿𿿾𿿿񏿾񏿿񟿾񟿿');
+	});
+
+	QUnit.test('Буквы из языков, где текст читается справа налево', function (assert) {
+		assert.strictEqual(letters('߿𐀀߿𐀀߿𐀀߿𐀀߿𐀀߿𐀀߿𐀀߿𐀀', false), '߿𐀀');
+	});
 });
