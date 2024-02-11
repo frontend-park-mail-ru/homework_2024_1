@@ -1,5 +1,26 @@
 'use strict';
 
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+	 	 .replace(/'/g, "&#39;");
+}
+
+function filter(html, allowedTags) {
+    let result = html.replace(/<[^>]*>/g, tag => `__TAG__${tag}__TAG__`)
+                     .split(/__TAG__/)
+                     .map((part, index) => index % 2 === 0 ? escapeHtml(part) : part)
+                     .join('');
+
+    const tagPattern = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+    return result.replace(tagPattern, (match, tagName) => {
+        return allowedTags.includes(tagName.toLowerCase()) ? match : escapeHtml(match);
+    });
+}
+
 QUnit.module('Проверка работы функции filter', function () {
 	QUnit.test('filter экранирует символы в обычном тексте', function (assert) {
 		const input = '- "42!", сказала Машина. Это и был главный ответ на Вопрос жизни, вселенной & всего такого...';
