@@ -49,6 +49,6 @@ QUnit.module('Тестируем функцию roman', function () {
 	});
 
 	QUnit.test('roman валидирует данные', function (assert) {
-		assert.strictEqual(roman('VHBVbBVYBSUYIHBVohivbhjxbhdvVIIIIIAAAAA'), 'Не валидные данные!');
+		assert.strictEqual(roman('VHBVbBVYBSUYIHBVohivbhjxbhdvVIIIIIAAAAA'), null);
 	});
 });
