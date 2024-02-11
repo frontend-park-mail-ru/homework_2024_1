@@ -1,11 +1,35 @@
 'use strict'; // строгий режим
 
 /**
+ * Предобрабатывает входное значение.
+ * @param {(string|number)} input - Входное значение для обработки.
+ * @returns {(string|number|null)} - Обработанное значение или null, если входные данные не поддерживаются.
+ */
+const preprocessInput = (input) => {
+    if (typeof input !== 'number' && typeof input !== 'string' && !(input instanceof String || input instanceof Number)) {
+        return null;
+    }
+    const romanRegexp = /^[IVXLCDM]+$/;
+
+    const numericInput = parseInt(input, 10);
+    if (!isNaN(numericInput)) {
+        return numericInput;
+    }
+
+    input = input.toUpperCase();
+
+    if (!romanRegexp.test(input)) {
+        return null;
+    }
+
+    return input;
+}
+
+/**
  * Преобразует число десятичной позиционной системы в римскую и обратно.
  * @param {(string|number)} input - Входное значение для преобразования.
  * @returns {(number|string|null)} - Преобразованное значение или null, если входные данные не поддерживаются.
  */
-
 const roman = (input) => {
     const romanNumerals = [
         { value: 1000, numeral: 'M' },
@@ -53,29 +77,3 @@ const roman = (input) => {
             return null;
     }
 };
-
-/**
- * Предобрабатывает входное значение.
- * @param {(string|number)} input - Входное значение для обработки.
- * @returns {(string|number|null)} - Обработанное значение или null, если входные данные не поддерживаются.
- */
-
-function preprocessInput(input) {
-    if (typeof input !== 'number' && typeof input !== 'string') {
-        return null;
-    }
-    const romanRegexp = /^[IVXLCDM]+$/;
-
-    const numericInput = parseInt(input, 10);
-    if (!isNaN(numericInput)) {
-        return numericInput;
-    }
-
-    input = input.toUpperCase();
-
-    if (!romanRegexp.test(input)) {
-        return null;
-    }
-
-    return input;
-}
