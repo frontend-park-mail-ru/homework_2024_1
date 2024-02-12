@@ -67,7 +67,23 @@ QUnit.module('Тестируем функцию plainify', function () {
 		    'field_null': null
 		};
 
-		assert.deepEqual(plainify(nested4), plain4);
+	    assert.deepEqual(plainify(nested4), plain4);
+
+        const nested5 = 5;
+
+	    assert.throws(() => { plainify(nested5); },
+	        new Error('InvalidArgumentException'));
+
+	    const nested6 = {};
+
+	    const plain6 = {};
+
+	    assert.deepEqual(plainify(nested6), plain6);
+
+	    const nested7 = null;
+
+	    assert.throws(() => { plainify(nested7); },
+	        new Error('InvalidArgumentException'));
 
 	});
 });
