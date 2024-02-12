@@ -44,6 +44,12 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman('2.017'), 'MMXVII');
 	});
 
+	QUnit.test('roman правильно определяет, что было передано на вход', function (assert) {
+		assert.strictEqual(roman(new String('1.904')), 'MCMIV');
+		assert.strictEqual(roman(new String('1.990')), 'MCMXC');
+		assert.strictEqual(roman(new String('2.017')), 'MMXVII');
+	});
+
 	QUnit.test('у roman необходимый диапазон работы', function (assert) {
 		assert.strictEqual(roman('5000'), 'IƆƆƆ');
 	});
@@ -53,11 +59,15 @@ QUnit.module('Тестируем функцию roman', function () {
 	});
 
 	QUnit.test('roman валидирует данные', function (assert) {
-		assert.strictEqual(roman([1, 12, 4124]), null);
+		assert.strictEqual(roman([1, 12, 4124]), "I");
 	});
 
 	QUnit.test('roman правильно обрабатывает объект string', function (assert) {
 		assert.strictEqual(roman(new String("V")), 5);
+	});
+
+	QUnit.test('roman правильно обрабатывает объект string', function (assert) {
+		assert.strictEqual(roman(new String("2")), "II");
 	});
 
 	QUnit.test('roman правильно обрабатывает большие числа', function (assert) {
