@@ -73,14 +73,16 @@ const parseOperandsFromExpression = (expression, argument, argumentName=X) => {
 
 /**
  * Shows whether we can continue parsing values from stack when token is operator
- * @param {*} stack - stack of tokens that is currently being iterated through
- * @param {*} token - current token from array of parsed tokens
+ * @param {string[]} stack - stack of tokens that is currently being iterated through
+ * @param {string} parsedToken - current token from array of parsed tokens
+ * @param {number} stackTokenIndex - index of the current token in the stack
  * @returns {boolean}
  */
-const handleStackWhenParsingOperatorCondition = (stack, token) => (
-    stack.length > 0 && 
-    stack.at(-1) !== LEFT_PARENTH && 
-    OPERATORS_WITH_PRIORITY[stack.at(-1)] >= OPERATORS_WITH_PRIORITY[token]
+const shouldParseStack = (stack, parsedToken, stackTokenIndex) => (
+    stackTokenIndex >= 0 && 
+    stackTokenIndex < stack.length &&
+    stack.at(stackTokenIndex) !== LEFT_PARENTH && 
+    OPERATORS_WITH_PRIORITY[stack.at(stackTokenIndex)] >= OPERATORS_WITH_PRIORITY[parsedToken]
 )
 
 /**
@@ -101,7 +103,7 @@ const parseRPNFromExpression = (expression, argument, argumentName) => {
         } 
 
         if (OPERATORS_WITH_PRIORITY[token]) { // Token is an operator
-            while (handleStackWhenParsingOperatorCondition(stack, token)) {
+            while (shouldParseStack(stack, token, stack.length - 1)) {
                 queue.push(stack.pop());
             }
             return stack.push(token);
@@ -112,7 +114,7 @@ const parseRPNFromExpression = (expression, argument, argumentName) => {
         } 
 
         if (token === RIGHT_PARENTH) {
-            let lastLeftParenthIdx = stack.lastIndexOf(LEFT_PARENTH);
+            const lastLeftParenthIdx = stack.lastIndexOf(LEFT_PARENTH);
             if (stack.length === 0 || lastLeftParenthIdx === -1) {
                 throw new Error(`invalid parentheses sequence in input expression ${expression}`);
             }
@@ -127,9 +129,7 @@ const parseRPNFromExpression = (expression, argument, argumentName) => {
         throw new Error(`invalid parentheses sequence in input expression ${expression}`);
     }
 
-    queue.push(...stack.reverse());
-
-    return queue;
+    return [...queue, ...stack.reverse()];
 }
 
 /**
@@ -161,7 +161,7 @@ const evalToken = (operand1, operand2, operator) => {
  * @param {number | bigint} argument - integer value of an argument
  * @returns {boolean}
  */
-const checkIfValidParamTypes = (expression, argument) => (
+const isValidParamTypes = (expression, argument) => (
     typeof expression === 'string'
     && (typeof argument === 'number' || typeof argument === 'bigint')
 );
@@ -176,7 +176,7 @@ const checkIfValidParamTypes = (expression, argument) => (
  */
 const solve = (expression, argument, argumentName) => {
     try {
-        if (!checkIfValidParamTypes(expression, argument)) {
+        if (!isValidParamTypes(expression, argument)) {
             throw new Error(`invalid type of some argument`);
         }
         const queue = parseRPNFromExpression(expression, argument, argumentName);
