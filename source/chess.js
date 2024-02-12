@@ -7,8 +7,11 @@
  */
 const chess = (boardSize) => {
   boardSize = Number(boardSize);
-  if (!boardSize) return null;
-  if (boardSize <= 1 || boardSize > Number.MAX_VALUE || boardSize % 1) return null;
+  if (!boardSize) {
+    return null;
+  }
+  if (boardSize <= 1 || boardSize > Number.MAX_VALUE || boardSize % 1)
+    return null;
 
   return Array(boardSize)
     .fill("")
