@@ -1,33 +1,17 @@
-'use strict'
+'use strict';
 
-function zip() {
-    if (!arguments.length) {
-        return {};
-    }
+/**
+ * Объединяет свойства объектов массива в один объект
+ * @param {array} args - массив объектов
+ * @returns {object} - результирующий объект
+ */
 
-    // Создадим множество setItems, чтобы получить только уникальные объекты для сжатия (для этого преобразуем в строку JSON) 
-    let setItems = new Set(Array.from(arguments).map(obj => JSON.stringify(obj)));
-    // Преобразуем обратно в объекты
-    setItems = Array.from(setItems, jsonObject => JSON.parse(jsonObject));
+const zip = (...args) => {
+  if (!args.length) return null;
 
-    // setObjectFields - аккумулирующее значение
-    let mapObjectFields = new Map();
-    setItems.forEach((item) => {
-        const keyValueArray = Object.entries(item);
-        if (keyValueArray.length) {
-            keyValueArray.forEach((row) => {
-                const key = row[0];
-                const value = row[1];
-                if (!mapObjectFields.has(key)) {
-                    mapObjectFields.set(key, value);
-                }
-            });
-        }
-    });
+  for (let arg of args) {
+    if (typeof arg !== 'object') return null;
+  }
 
-    const resultObject = {};
-    for (const [key, value] of mapObjectFields.entries()) {
-        resultObject[key] = value;
-    }
-    return resultObject;
-}
+  return Object.assign({}, ...args.reverse());
+};
