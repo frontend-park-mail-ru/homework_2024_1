@@ -11,21 +11,21 @@ QUnit.module('Тестируем функцию solve', function () {
 	});
 
 	QUnit.test('solve возвращает NaN при вводе некорректного выражения', function (assert) {
-		assert.true(isNaN(solve('x / 0', 1)));
-		assert.true(isNaN(solve('a * 1', 2)));
-		assert.true(isNaN(solve('x + 1)', 1)));
-		assert.true(isNaN(solve('(x + 1', 1)));
-		assert.true(isNaN(solve('x a 1', 1)));
-		assert.true(isNaN(solve('x123 + 1', 1)));
-		assert.true(isNaN(solve('123 1', 1)));
-		assert.true(isNaN(solve('', 1)));
+		assert.ok(isNaN(solve('x / 0', 1)));
+		assert.ok(isNaN(solve('a * 1', 2)));
+		assert.ok(isNaN(solve('x + 1)', 1)));
+		assert.ok(isNaN(solve('(x + 1', 1)));
+		assert.ok(isNaN(solve('x a 1', 1)));
+		assert.ok(isNaN(solve('x123 + 1', 1)));
+		assert.ok(isNaN(solve('123 1', 1)));
+		assert.ok(isNaN(solve('', 1)));
 	});
 
 	QUnit.test('solve возвращает NaN при неверном типе хотя бы одного аргумента', function (assert) {
-		assert.true(isNaN(solve([], 1)));
-		assert.true(isNaN(solve('x', '')));
-		assert.true(isNaN(solve('x', null)));
-		assert.true(isNaN(solve('x')));
-		assert.true(isNaN(solve(undefined, 1)));
+		assert.ok(isNaN(solve([], 1)));
+		assert.ok(isNaN(solve('x', '')));
+		assert.ok(isNaN(solve('x', null)));
+		assert.ok(isNaN(solve('x')));
+		assert.ok(isNaN(solve(undefined, 1)));
 	})
 });
