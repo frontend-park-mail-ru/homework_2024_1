@@ -1,4 +1,5 @@
 'use strict';
+
  const plain = (array) => {
 	if (!Array.isArray(array)) {
 		return null;
@@ -15,3 +16,4 @@
 		return res;
 	}, [])
 }
+
