@@ -33,7 +33,7 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get(object, '.baz.0'), object.baz[ 0 ]);
 		assert.strictEqual(get(object, '.baz.length'), object.baz.length);
 		assert.strictEqual(get(object, '.deep.0.foobar'), object.deep[ 0 ].foobar);
-		assert.strictEqual(get(object, '.baz.3'), object.baz[ 3 ])
+		assert.strictEqual(get(object, '.baz.3'), object.baz[ 3 ]);
 		assert.strictEqual(get(object, '.baz.4'), undefined);
 	});
 
