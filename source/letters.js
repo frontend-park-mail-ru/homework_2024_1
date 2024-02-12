@@ -7,8 +7,9 @@
  * @returns {string} Конечный результат.
  */
 const letters = (text, flag) => {
-    if (typeof text !== "string")
+    if (typeof text !== "string") {
         throw new Error("Аргумент text обязательно должен быть типа string")
+    }
 
     // Map с частотным анализом
     const map = Array.from(text).reduce(
@@ -17,14 +18,16 @@ const letters = (text, flag) => {
     );
 
     // Повторно обходим данную строку и выдаём результат
-    let res = "";
-    Array.from(text).forEach(letter => {
-        if (map.get(letter) === 1 || (map.get(letter) !== 0 && flag)){
-            res += letter;
-            map.set(letter, 0);
-        } else if (flag === false) {
-            map.set(letter, map.get(letter)-1);
-        }
-    })
-    return res;
+    return Array.from(text).reduce(
+        (res, letter) => {
+            if (map.get(letter) === 1 || (map.get(letter) !== 0 && flag)){
+                map.set(letter, 0);
+                return res + letter;
+            } else if (flag === false) {
+                map.set(letter, map.get(letter)-1);
+            }
+            return res;
+        },
+        ""
+    );
 };

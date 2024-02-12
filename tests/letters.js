@@ -73,7 +73,7 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters('߿𐀀߿𐀀߿𐀀߿𐀀߿𐀀߿𐀀߿𐀀߿𐀀', false), '߿𐀀');
 	});
 
-	QUnit.test('Передаём неверные типы и намеренно вызываем ошибку', function (assert) {
+	QUnit.test('Должна выбросить ошибку при неверном типе аргумента', function (assert) {
 		assert.throws(function() {
 			letters(undefined);
 		}, /Аргумент text обязательно должен быть типа string/, 'Аргумент text обязательно должен быть типа string');
