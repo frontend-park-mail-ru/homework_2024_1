@@ -1,46 +1,44 @@
 'use strict';
 
 /**
- * Функция составляет Map с частотным анализом каждого элемента входного массива.
- * @param {Array} arr Входной массив.
- * @returns {Map} Map, где ключ - элемент, значение - его частота.
+ * Функция составляет Map с частотным анализом каждого символа входной строки.
+ * @param {string} str Входная строка.
+ * @returns {Map} Map, где ключ - символ, значение - его частота.
  */
-const freqMap = (arr) => {
-    // в рамках этой задачи вместо array можно юзать string, но пускай функция будет более универсальной
-    if (!(arr instanceof Array)) {
-        throw new Error("Функция работает только с массивами");
-    }
-    return arr.reduce(
+const freqMap = (str) => typeof str !== "string" ?
+    (() => {
+        throw new Error("Функция работает только со строками");
+    })() :
+    Array.from(str).reduce(
         (m, elem) => m.set(elem, (m.get(elem) || 0) + 1),
         new Map()
     );
-}
+
 
 /**
- * Функция удаляет из массива элементы, которые встречаются более одного раза.
- * @param {Array} arr Входной массив.
- * @param {Map} freq Map с частотным анализом элементов.
+ * Функция удаляет из строки символы, которые встречаются более одного раза.
+ * @param {string} str Входная строка.
+ * @param {Map} freq Map с частотным анализом символов.
  * @param {boolean} flag Если true, то оставляет первый элемент среди повторяющихся. Если false, то последний. Если аргумент не указан, то удаляет все повторяющиеся элементы.
- * @returns {Array} Конечный результат.
+ * @returns {string} Конечный результат.
  */
-const arrayByFreq = (arr, freq, flag) => {
-    if (!(arr instanceof Array)) {
-        throw new Error("Функция работает только с массивами");
-    }
-    return arr.reduce(
+const strByFreq = (str, freq, flag) => typeof str !== "string" ?
+    (() => {
+        throw new Error("Функция работает только со строками")
+    })() :
+    Array.from(str).reduce(
         (acc, elem) => {
-            if (freq.get(elem) === 1 || (freq.get(elem) !== 0 && flag)){
+            if (freq.get(elem) === 1 || (freq.get(elem) !== 0 && flag)) {
                 freq.set(elem, 0);
-                return acc + [elem];
+                return acc + elem;
             }
             if (flag === false) {
-                freq.set(elem, freq.get(elem)-1);
+                freq.set(elem, freq.get(elem) - 1);
             }
             return acc;
         },
-        []
+        ""
     );
-}
 
 /**
  * Функция удаляет из строки символы, которые встречаются в ней больше одного раза.
@@ -48,9 +46,5 @@ const arrayByFreq = (arr, freq, flag) => {
  * @param {boolean} flag Если true, то оставляет первый символ среди повторяющихся. Если false, то последний. Если аргумент не указан, то удаляет все повторяющиеся символы.
  * @returns {string} Конечный результат.
  */
-const letters = (text, flag) => {
-    if (typeof text !== "string") {
-        throw new Error("Аргумент text обязательно должен быть типа string")
-    }
-    return arrayByFreq(Array.from(text), freqMap(Array.from(text)), flag).toString();
-};
+// проверки на тип нет, т.к. в функциях strByFreq и freqMap она и так есть
+const letters = (text, flag) => strByFreq(text, freqMap(text), flag);
