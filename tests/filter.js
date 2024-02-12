@@ -1,23 +1,29 @@
 'use strict';
 
 function escapeHtml(unsafe) {
-    return unsafe
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-	 	 .replace(/'/g, "&#39;");
+     return unsafe.replace(/[&<>"']/g, match => {
+            switch (match) {
+            case '&': return '&amp;';
+            case '<': return '&lt;';
+            case '>': return '&gt;';
+            case '"': return '&quot;';
+            case "'": return '&#39;';
+        }
+    });
 }
 
 function filter(html, allowedTags) {
+
+	let allowedTagsSet = new Set(allowedTags.map(tag => tag.toLowerCase()));
+
     let result = html.replace(/<[^>]*>/g, tag => `__TAG__${tag}__TAG__`)
                      .split(/__TAG__/)
                      .map((part, index) => index % 2 === 0 ? escapeHtml(part) : part)
                      .join('');
 
-    const tagPattern = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+	const tagPattern = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
     return result.replace(tagPattern, (match, tagName) => {
-        return allowedTags.includes(tagName.toLowerCase()) ? match : escapeHtml(match);
+        return allowedTagsSet.has(tagName.toLowerCase()) ? match : escapeHtml(match);
     });
 }
 
