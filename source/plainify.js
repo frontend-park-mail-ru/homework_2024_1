@@ -9,7 +9,7 @@
  * @returns {object} object: Plained object.
  */
 const plainify = (object) => {
-	if (typeof object !== 'object' || object === null) {
+	if (typeof object !== 'object' || !object) {
 		throw new Error('InvalidArgumentException');
 	}
 	return plain_obj(object);
@@ -17,11 +17,11 @@ const plainify = (object) => {
 
 const plain_obj = (object, parent_string='') => {
 	let result = [];
-	parent_string += parent_string !== '' ? '.' : '';
+	parent_string += parent_string ? '.' : '';
 	Object.keys(object).forEach((key) => {
 		if (Object.prototype.hasOwnProperty.call(object, key)) {
 			const name = parent_string + key;
-			if (typeof object[key] !== 'object' || object[key] === null) {
+			if (typeof object[key] !== 'object' || !object[key]) {
 				result.push([name, object[key]]);
 			} 
 			else {
