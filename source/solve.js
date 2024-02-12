@@ -177,14 +177,13 @@ const isValidParamTypes = (expression, argument) => (
 const solve = (expression, argument, argumentName) => {
     try {
         if (!isValidParamTypes(expression, argument)) {
-            throw new Error(`invalid type of some argument`);
+            throw new TypeError(`invalid type of some argument`);
         }
         const queue = parseRPNFromExpression(expression, argument, argumentName);
-        const stack = [];
-
-        if (queue.length === 0) {
+        if (!queue.length) {
             return NaN;
         }
+        const stack = [];
 
         queue.forEach((token) => {
             if (token.match(/\d+$/)) {
