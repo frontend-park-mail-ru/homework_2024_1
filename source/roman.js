@@ -17,11 +17,11 @@ const roman = (roman) => {
         {num: 1000, ch: "M"}, {num: 4000, ch: "MIƆƆƆ"}, {num: 5000, ch: "IƆƆƆ"},
     ];
 
-    if (!/^(string|number)$/.test(typeof roman) && !(roman instanceof String)) {
-        return null;
+    if (typeof(roman) === "string" || typeof(roman.valueOf()) === "string") {
+        roman = roman.replace(" ", "").replace(".", "")
     }
 
-    if (isNaN(roman)) {
+    if (isNaN(parseInt(roman))) {
         roman = roman.toUpperCase();
         if (/^[IVXLCDM]+$/i.test(roman)) {
             let idx = 14;
@@ -40,6 +40,7 @@ const roman = (roman) => {
             return null;
         }
     } else {
+        roman = parseInt(roman);
         if (roman > 8999) {
             return null;
         }
