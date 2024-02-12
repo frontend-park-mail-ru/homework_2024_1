@@ -51,4 +51,19 @@ QUnit.module('Тестируем функцию format', function () {
 		assert.strictEqual(format(input, 2), expected2);
 		assert.strictEqual(format(input, 3), expected3);
 	});
+
+	QUnit.test('format возвращает undefined при неправильно переданнных данных', function (assert) {
+		assert.strictEqual(format("str", 3), undefined);
+		assert.strictEqual(format([1, 2], "str"), undefined);
+		assert.strictEqual(format(["aed", 2], 2), undefined);
+	});
+
+	QUnit.test('format работает правильно при недостатке элементов в массиае', function (assert) {
+		const input = [ 0, 1 ];
+
+		const expected2 =
+			'0 1';
+
+		assert.strictEqual(format(input, 2), expected2);
+	});
 });
