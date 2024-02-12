@@ -23,6 +23,8 @@ QUnit.module('Тестируем функцию minmax', function () {
 	});
 
 	QUnit.test('minmax правильно парсит несколько чисел', function (assert) {
+		var str = new String('1 2 3.5');
+		assert.deepEqual(minmax(str), [ 1, 3.5]);
 		assert.deepEqual(minmax('0 0 0 0'), [ 0, 0 ]);
 		assert.deepEqual(minmax('1 1 1 1'), [ 1, 1 ]);
 		assert.deepEqual(minmax('1 2 3 4'), [ 1, 4 ]);
@@ -38,12 +40,10 @@ QUnit.module('Тестируем функцию minmax', function () {
 		var undefinedParametr; //undefined
 		var NaNParametr = Number('asx'); //NaN
 		var nullParametr = null;
-		var str = new String('asx');
 		assert.deepEqual(minmax(undefinedParametr), [ undefined, undefined]);
 		assert.deepEqual(minmax([1, 2, 3, 4]), [ undefined, undefined]);
 		assert.deepEqual(minmax(NaNParametr), [ undefined, undefined]);
 		assert.deepEqual(minmax(nullParametr), [ undefined, undefined]);
-		assert.deepEqual(minmax(str), [ undefined, undefined]);
 	});
 });
 

@@ -1,14 +1,14 @@
 'use strict';
 
 /**
-* Find minimum and maximum numbers in string.
-* @param {string} str - The input string.
-* @returns {[number, number]} - An array in which the first element 
-* is the minimum and the second is the maximum
+ * Find minimum and maximum numbers in string.
+ * @param {string} str - The input string.
+ * @returns {[number, number]} - An array in which the first element 
+ * is the minimum and the second is the maximum
 */
-
 const minmax = (str) => {
-    if (typeof(str) !== 'string') {
+    console.log(typeof(str))
+    if (typeof(str) !== 'string' && !(str instanceof String)) {
         return [ undefined, undefined ];
     }
     if (str === '') { 
