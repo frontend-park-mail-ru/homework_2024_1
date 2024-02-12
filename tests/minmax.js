@@ -38,11 +38,12 @@ QUnit.module('Тестируем функцию minmax', function () {
 		var undefinedParametr; //undefined
 		var NaNParametr = Number('asx'); //NaN
 		var nullParametr = null;
+		var str = new String('asx');
 		assert.deepEqual(minmax(undefinedParametr), [ undefined, undefined]);
 		assert.deepEqual(minmax([1, 2, 3, 4]), [ undefined, undefined]);
 		assert.deepEqual(minmax(NaNParametr), [ undefined, undefined]);
 		assert.deepEqual(minmax(nullParametr), [ undefined, undefined]);
-		assert.deepEqual(minmax("string"), [ undefined, undefined]);
+		assert.deepEqual(minmax(str), [ undefined, undefined]);
 	});
 });
 
