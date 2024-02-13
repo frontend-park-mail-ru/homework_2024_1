@@ -14,4 +14,12 @@ QUnit.module('Тестируем функцию rle', function () {
     QUnit.test('Работает правильно с пустой строкой', function (assert) {
 	assert.strictEqual(rle(''), '');
     });
+    QUnit.test('Работает правильно без параметра', function (assert) {
+	assert.throws(function () {rle()}, /Parameter is not a string or missing!/);
+    });
+    QUnit.test('Работает правильно с неверным параметром', function (assert) {
+	assert.throws(function () {rle(111)}, /Parameter is not a string or missing!/);
+	assert.throws(function () {rle([1, 2, 3])}, /Parameter is not a string or missing!/);
+	assert.throws(function () {rle(NaN)}, /Parameter is not a string or missing!/);
+    });
 });
