@@ -53,4 +53,11 @@ QUnit.module('Тестируем функцию euclid', function () {
 		assert.throws(() => euclid(10, 0, 'l'), /Все числа должны быть натуральными./, 'Ошибка при вводе строк');
 		assert.throws(() => euclid('ll'), /Все числа должны быть натуральными./, 'Ошибка при вводе строк');
 	});
+
+	QUnit.test('Функция должна выдавать ошибку при вводе undefined/null значений', function (assert) {
+		assert.throws(() => euclid(null, 1), /Все числа должны быть натуральными./, 'Ошибка при вводе undefined/null');
+		assert.throws(() => euclid(1, undefined), /Все числа должны быть натуральными./, 'Ошибка при вводе undefined/null');
+		assert.throws(() => euclid(), /Все числа должны быть натуральными./, 'Ошибка при вводе undefined/null');
+		assert.throws(() => euclid(null, undefined), /Все числа должны быть натуральными./, 'Ошибка при вводе undefined/null');
+	});
 });
