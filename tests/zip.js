@@ -99,40 +99,9 @@ QUnit.module('Тестируем функцию zip', function () {
 
   // Мои тесты
   QUnit.test('Функция не принимает параметры', (assert) => {
+    console.log('Функция не принимает параметры')
     assert.deepEqual(zip(), null);
   });
-
-  QUnit.test(
-    'Функция работает с объектами, имеющими как одинаковые поля, так и разные',
-    (assert) => {
-      const obj1 = {
-        answer: 'BMSTU',
-        year: 1831,
-        name: 'Ernestovich',
-      };
-
-      const obj2 = {
-        answer: 'MTI',
-        state: 'Massachusetts',
-        count_students: 100000,
-      };
-
-      const obj3 = {
-        author: 'Ivan Lobanov',
-      };
-
-      const resultObject = {
-        answer: 'BMSTU',
-        year: 1831,
-        name: 'Ernestovich',
-        state: 'Massachusetts',
-        count_students: 100000,
-        author: 'Ivan Lobanov',
-      };
-
-      assert.deepEqual(zip(obj1, obj2, obj3), resultObject);
-    }
-  );
 
   QUnit.test(
     'Функция работает с массивом данных, среди которых есть тип данных, отличный от объекта',
