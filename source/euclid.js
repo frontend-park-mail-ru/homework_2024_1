@@ -11,7 +11,7 @@ function gcd(num1, num2) {
         throw new Error("numbers shouldn't be 0");
     }
     if (Math.floor(num1) !== num1 || Math.floor(num2) !== num2) {
-        throw new Error("numbers should be natural");
+        throw new RangeError("numbers should be natural");
     }
 
     if (!num2) {
