@@ -6,11 +6,11 @@ QUnit.module('Тестируем функцию euclid', function () {
 	});
 
 	QUnit.test('Работает правильно с отрицательными числами', function (assert) {
-		assert.strictEqual(euclid(-12, -18), 6, 'euclid(-12, -18) === 6');
+		assert.throws(() => euclid(-12, -18), Error, 'euclid(-12, -18) throws Error');
 	});
 
 	QUnit.test('Работает правильно с числами разных знаков', function (assert) {
-		assert.strictEqual(euclid(-12, 18, -6), 6, 'euclid(-12, 18, -6) === 6');
+		assert.throws(() => euclid(-12, 18, -6), Error, 'euclid(-12, 18, -6) throws Error');
 	});
 
 	QUnit.test('Работает правильно с произвольным количеством чисел', function (assert) {

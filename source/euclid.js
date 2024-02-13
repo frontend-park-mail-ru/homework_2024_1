@@ -3,9 +3,11 @@
 const euclid = (...args) => {
     for (let i = 0; i < args.length; i++) {
         if (typeof args[i] !== 'number' || !isFinite(args[i])) {
-            throw new Error('Invalid argument: all arguments must be numbers');
+            throw new Error('Invalid argument: all arguments must be finite numbers');
         }
-        args[i] = Math.abs(args[i]);
+        if (args[i] < 0) {
+            throw new Error('Invalid argument: all arguments must be non-negative numbers');
+        }
     }
     
     if(args.length == 2) {
