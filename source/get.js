@@ -15,3 +15,4 @@ function get(object, property){
     }
     return current;
 }
+
