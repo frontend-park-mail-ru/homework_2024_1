@@ -66,9 +66,7 @@ QUnit.module('Тестируем функцию zip', function () {
 			works: true
 		};
 		assert.deepEqual(
-			zip({name: "Margo"}, {weight: 49}, {profession: "designer"}, {company: "vk", works: true}), obj6,
-			`zip( {name: "Margo"}, {weight: 49}, {profession: "designer"}, {company: "vk", works: true} ) === ${JSON.stringify(obj6)}`
-		);
+			zip({name: "Margo"}, {weight: 49}, {profession: "designer"}, {company: "vk", works: true}), obj6);
 	});
 
 	QUnit.test('Функция работает со свойствами, которые встречаются в нескольких объектах', function (assert) {
@@ -85,8 +83,7 @@ QUnit.module('Тестируем функцию zip', function () {
 			name: "Margo",
 			weight: 49
 		};
-		assert.deepEqual(zip({name: "Margo", weight: 49}, {name: "Anna", weight: 49}), obj2,
-			`zip( {name: "Margo", weight: 49}, {name: "Anna", weight: 49} ) === ${JSON.stringify(obj2)}`);
+		assert.deepEqual(zip({name: "Margo", weight: 49}, {name: "Anna", weight: 49}), obj2);
 
 
 		const obj3 = {
@@ -96,9 +93,8 @@ QUnit.module('Тестируем функцию zip', function () {
 			age: 20
 		};
 		assert.deepEqual(
-			zip({name: "Margo"}, {weight: 49}, {height: 160}, {name: "Anna", weight: 50, height: 165, age: 20}), obj3,
-			`zip( {name: "Margo"}, {weight: 49}, {height: 160}, {name: "Anna", weight: 50, height: 165, age: 20} ) === ${JSON.stringify(obj3)}`
-		);
+			zip({name: "Margo"}, {weight: 49}, {height: 160},
+				{name: "Anna", weight: 50, height: 165, age: 20}), obj3);
 	});
 
 
@@ -112,9 +108,15 @@ QUnit.module('Тестируем функцию zip', function () {
 		};
 		assert.deepEqual(
 			zip({}, {name: "Margo"}, {weight: 49}, {height: 160}, {}, {name: "Alice"},
-				{name: "Anna", weight: 50, height: 165, age: 20}, {}), obj,
-			`zip( {}, {name: "Margo"}, {weight: 49}, {height: 160}, {}, {name: "Alice"}, 
-                {name: "Anna", weight: 50, height: 165, age: 20}, {} ) === ${JSON.stringify(obj)}`
-		);
+				{name: "Anna", weight: 50, height: 165, age: 20}, {}), obj);
+	});
+
+	QUnit.test('Функция умеет работать с невалидными данными', function (assert) {
+		assert.throws(() => zip([1, 2, 3]), Error);
+		assert.throws(() => zip(true, false), Error);
+		assert.throws(() => zip('jjj'), Error);
+		assert.throws(() => zip(1, 'jjj', [1, 2, 3]), Error);
+		assert.throws(() => zip(null), Error);
+		assert.throws(() => zip({1: 2}, {2: 3}, 'a'), Error);
 	});
 });
