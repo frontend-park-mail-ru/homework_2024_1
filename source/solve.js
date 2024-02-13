@@ -179,10 +179,12 @@ const solve = (expression, argument, argumentName) => {
         if (!isValidParamTypes(expression, argument)) {
             throw new TypeError(`invalid type of some argument`);
         }
+
         const queue = parseRPNFromExpression(expression, argument, argumentName);
         if (!queue.length) {
             return NaN;
         }
+        
         const stack = [];
 
         queue.forEach((token) => {
