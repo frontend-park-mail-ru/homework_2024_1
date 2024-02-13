@@ -26,14 +26,17 @@ const format = (numbers, col) => {
     if (!Array.isArray(numbers) || col <= 0) {
         throw new TypeError('wrong parameters');
     }
+
     return numbers.reduce((result, num, i) => {
         const columnNumbers = column(numbers, col, i % col);
         const columnOfStrings = columnNumbers.map(n => String(n));
         const arrayOfLength = columnOfStrings.map(str => str.length);
         const maxLength = Math.max(...arrayOfLength);
         const spacesForAlign = maxLength - String(numbers[i]).length;
-        result += ' '.repeat(spacesForAlign + ((i % col) === 0 ? 0 : 1)) + numbers[i];
-        const isLastRow = (i == numbers.length - 1);
+        const isFirstColumn = (i % col) === 0;
+        const additionalSpaces = isFirstColumn ? 0 : 1;
+        result += ' '.repeat(spacesForAlign + additionalSpaces) + numbers[i];
+        const isLastRow = i == numbers.length - 1;
         if ((i + 1) % col === 0 && !isLastRow) {
             result += '\n';
         }
