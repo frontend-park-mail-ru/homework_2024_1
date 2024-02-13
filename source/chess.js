@@ -1,14 +1,20 @@
-const chess = (dimension = 2) => {
-    let board = '', invert = 0, i = 0//здесь invert - смещение для новой строки
-    if (!Number.isInteger(dimension = +dimension) || dimension <= 1){//если длина доски не является допустимым значением
-        return null
+/**
+ * Print chess board with a current length
+ * @param {number} dimension - length of chess board
+ * @returns {string}
+ */
+const chess = (dimension) => {
+
+    //если длина доски не является допустимым значением
+    if (!Number(dimension) || dimension <= 1) {
+        return null;
     }
-    while (i < dimension ** 2){
-        board += (((i++ + invert) % 2) == 0 ? '*' : ' ')//чередование символов
-        if (i % dimension == 0){//если конец строки, то перейти на новую строку
-            board += '\n'
-            invert += dimension % 2 == 0//обновить смещение
-        }
-    }
-    return board
+
+    let board = "* ".repeat(dimension / 2),
+        isOdd = Number(dimension % 2 === 1)
+
+    board = (board + '*'.repeat(isOdd) + '\n' + board.split('').reverse().join('') +
+            ' '.repeat(isOdd) + '\n').repeat(dimension / 2) + (board + '*\n').repeat(isOdd);
+
+    return board;
 };
