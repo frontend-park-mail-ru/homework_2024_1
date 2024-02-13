@@ -1,20 +1,20 @@
 'use strict';
 
-const euclid = function () {
-    for (let i = 0; i < arguments.length; i++) {
-        if (typeof arguments[i] !== 'number' || !isFinite(arguments[i])) {
+const euclid = (...args) => {
+    for (let i = 0; i < args.length; i++) {
+        if (typeof args[i] !== 'number' || !isFinite(args[i])) {
             throw new Error('Invalid argument: all arguments must be numbers');
         }
-        arguments[i] = Math.abs(arguments[i]);
+        args[i] = Math.abs(args[i]);
     }
     
-    if(arguments.length == 2) {
-        if (arguments[1] == 0) return arguments[0];
-        else return euclid(arguments[1], arguments[0] % arguments[1]);
-    }   else if (arguments.length > 2) {
-        var result = euclid(arguments[0], arguments[1]);
-        for (var i = 2; i < arguments.length; i++)
-            result = euclid(result, arguments[i]);
+    if(args.length == 2) {
+        if (args[1] == 0) return args[0];
+        else return euclid(args[1], args[0] % args[1]);
+    }   else if (args.length > 2) {
+        var result = euclid(args[0], args[1]);
+        for (var i = 2; i < args.length; i++)
+            result = euclid(result, args[i]);
         return result;
     }
 };
