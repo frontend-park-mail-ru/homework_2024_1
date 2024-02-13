@@ -19,3 +19,4 @@ const get = (object, property) => {
     }
     return current;
 }
+
