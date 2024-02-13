@@ -1,7 +1,7 @@
-function filter(input, allowedTags) {
+const filter = (input, allowedTags) => {
     const tagRegExp = /<\/?([a-zA-Z0-9]+)[^>]*>/g;
     const matches = [...input.matchAll(tagRegExp)];
-    let tagsMas = []
+    let tagsMas = [];
     for (const match of matches) {
         let tag = match[0];
         tag = tag.substring(1, tag.length - 1);
@@ -11,9 +11,9 @@ function filter(input, allowedTags) {
         }
     }
     return saveText(input, allowedTags, tagsMas);
-}
+};
 
-function saveText(text, allowedTags, tagIndexes) {
+const saveText = (text, allowedTags, tagIndexes) => {
     const map = {
         '&': '&amp;',
         '<': '&lt;',
@@ -23,24 +23,22 @@ function saveText(text, allowedTags, tagIndexes) {
     };
 
     const regex = new RegExp(`[&<>"'\\s]`, 'g');
-    return text.replaceAll(regex, function (match, index) {
+    return text.replaceAll(regex, (match, index) => {
         if (checkIndex(index, tagIndexes)) {
             return match;
         } else {
             return map[match] || match;
         }
     });
+};
 
-}
-
-function findClosingTag(text, tagName) {
+const findClosingTag = (text, tagName) => {
     const openingTagRegex = new RegExp(`<${tagName}\\b[^>]*>`, 'g');
     const closingTagRegex = new RegExp(`</${tagName}>`, 'g');
-
     const openingTags = [...text.matchAll(openingTagRegex)];
     const closingTags = [...text.matchAll(closingTagRegex)];
-    tagsIndex = []
-    flag = false
+    const tagsIndex = [];
+    let flag = false;
 
     for (let i = 0; i < openingTags.length; i++) {
         let openingTagIndex = openingTags[i].index;
@@ -51,18 +49,18 @@ function findClosingTag(text, tagName) {
             if (closingTagIndex > openingTagIndex) {
                 let openingTagLength = openingTags[i][0].length;
                 tagsIndex.push(openingTagIndex, closingTagIndex + openingTagLength);
-                flag = true
+                flag = true;
                 break;
             }
         }
-        if (flag === false){
+        if (!flag) {
             tagsIndex.push(openingTagIndex, text.length);
         }
     }
-    return tagsIndex
-}
+    return tagsIndex;
+};
 
-function checkIndex(index, indexMas) {
+const checkIndex = (index, indexMas) => {
     for (const pair of indexMas) {
         const [start, end] = pair;
         if (index >= start && index <= end) {
@@ -70,4 +68,4 @@ function checkIndex(index, indexMas) {
         }
     }
     return false;
-}
+};
