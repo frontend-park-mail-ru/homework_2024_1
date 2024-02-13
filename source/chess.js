@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Print chess board with a current length
  * @param {number} dimension - length of chess board
