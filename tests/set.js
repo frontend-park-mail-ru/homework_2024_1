@@ -1,9 +1,6 @@
 'use strict';
 
 QUnit.module('Тестируем функцию set', function () {
-
-
-
 	QUnit.test('set работает правильно c объектами с существующими свойствами', function (assert) {
 		const object = {
 			deep: {
@@ -117,6 +114,12 @@ QUnit.module('Тестируем функцию set', function () {
 	QUnit.test('set работает правильно при установке значения в несуществующем объекте с использованием массива вложенных свойств', function (assert) {
 		assert.deepEqual(set({}, ['nesteded', 'prop'], 'value'), { nesteded: { prop: 'value' } });
 		assert.deepEqual(set(null, ['nesteded', 'prop'], 'value'), { nesteded: { prop: 'value' } });
+	});
+
+	QUnit.test('set обрабатывает исключения, когда в path приходит что-то не то', function (assert) {
+		assert.deepEqual(set({foo: 'bar'}, null, 'baz'), undefined );
+		assert.deepEqual(set({foo: 'bar'}, 'foo', 'baz'), undefined);
+		assert.deepEqual(set({foo: 'bar'}, 2, 'baz'), undefined);
 	});
 
 });

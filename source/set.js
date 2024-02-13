@@ -1,24 +1,56 @@
 'use strict';
 
-const set = function(object, path, value) {
-  const properties = Array.isArray(path) ? path : path.split('.');
-  let i = Array.isArray(path) ? 0 : 1;
-
-  let current_object = object;
-  if (object === null) {
-    current_object = {};
-    object = current_object;
+/**
+ * Получает путь к вложенному свойству объекта и устанавливает значение в это свойство
+ *
+ * @param {Object} object - Исходный объект
+ * @param {string | Array<string>} path - Путь к свойству в виде строки или массива строк
+ * @param {*} value - Значение, которое нужно установить
+ * @returns {Object} - Исходный объект с установленным значением
+ */
+const set = (object, path, value) => {
+  let currentObject = object;
+  if (!object) {
+    currentObject = {};
+    object = currentObject;
   }
 
-  for (i; i < properties.length - 1; i++) {
-    const property = properties[i];
-    if (!current_object.hasOwnProperty(property)) {
-      current_object[property] = {};
+  if (typeof path === 'number' || path === null) {
+    return;
+  }
+
+  let properties
+   if (Array.isArray(path)) {
+    
+     properties = path;
+   }
+   else {
+      properties = path.split('.');
+      properties.shift();
+      if (path.substring(0, 1) != '.'){
+        return
+      }
+   };
+   
+  const lastProperty = properties.pop();
+
+  /**
+ * Создает или возвращает объект для указанного свойства внутри заданного объекта.
+ *
+ * @param {Object} object - Исходный объект, в котором нужно установить или получить свойство.
+ * @param {string} property - Свойство, для которого нужно создать или получить объект.
+ * @returns {Object} - Созданный или полученный объект для указанного свойства.
+ */
+  const setObject = (object, property) => {
+    if (!object.hasOwnProperty(property)) {
+      object[property] = {};
     }
-    current_object = current_object[property];
-  }
-  current_object[properties[properties.length - 1]] = value;
+    return object[property];
+  };
+
+  const finalObject = properties.reduce(setObject, object);
+  finalObject[lastProperty] = value;
+
   return object;
 };
-
 
