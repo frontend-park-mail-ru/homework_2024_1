@@ -7,9 +7,9 @@
  */
 
 const zip = (...objects) => {
-  let is_vald_objects = objects.some((object) => object === null || typeof object !== 'object');
+  const isNotValdObjects = objects.some((object) => object === null || typeof object !== 'object');
 
-  if (!objects.length || is_vald_objects) {
+  if (!objects.length || isNotValdObjects) {
     return null;
   }
 

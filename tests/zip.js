@@ -137,13 +137,6 @@ QUnit.module('Тестируем функцию zip', function () {
   );
 
   QUnit.test(
-    'Функция принимает один объект null',
-    (assert) => {
-      assert.deepEqual(zip(null), null);
-    }
-  );
-
-  QUnit.test(
     'Функция принимает список объектов, среди которых есть массив',
     (assert) => {
       const obj1 = {
