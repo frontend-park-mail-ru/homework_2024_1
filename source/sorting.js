@@ -56,9 +56,10 @@ function mergeSort(array, prop) {
 function sorting(array, properties) {
     let result = array;
     if (Array.isArray(properties) && Array.isArray(array) && properties.length && array.length) {
-        for (let prop of properties.reverse()) {
-            result = mergeSort(array, prop);
-        }
+        // for (let prop of properties.reverse()) {
+        //     result = mergeSort(array, prop);
+        // }
+        result = properties.reverse().reduce((result, prop) => mergeSort(result, prop), array);
     }
     return result;
 }
