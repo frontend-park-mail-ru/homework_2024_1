@@ -1,6 +1,12 @@
 'use strict';
 
-
+/**
+ * Производит слияние 2 отсортированных частей массива в правильном порядке.
+ * @param {Array} left - первый массив элементов
+ * @param {Array} right - второй массив элементов
+ * @param {string} prop - свойство, по которому происходит сортировка и сравнение
+ * @returns {array} result - полученный отсортированный массив
+ */
 function merge(left, right, prop) {
     let result = [];
     let i = 0;
@@ -22,7 +28,12 @@ function merge(left, right, prop) {
     return result;
 }
 
-
+/**
+ * Алгоритм сортировки слиянием.
+ * @param {Array} array - входной массив данных
+ * @param {ыекштп} prop - свойство, по которому происходит сортировка
+ * @returns {Array} - отсортированный массив
+ */
 function mergeSort(array, prop) {
     if (array.length > 1) {
         let halfLen = array.length / 2;
@@ -33,7 +44,15 @@ function mergeSort(array, prop) {
     return array;
 }
 
-
+/**
+ * Принимает на вход массив plain-объектов и массив имён свойств,
+ * по которым необходимо отсортировать массив объектов,
+ * и реализует устойчивую сортировку этого массива в порядке возрастания
+ * (строки сортируются лексикографически, числа в порядке возрастания).
+ * @param {Array} array - входной массив значений
+ * @param {Array} properties - набор свойств
+ * @returns {Array} - отсортированный объект
+ */
 function sorting(array, properties) {
     if (Array.isArray(properties) && Array.isArray(array) && properties.length && array.length) {
         for (let prop of properties.reverse()) {
