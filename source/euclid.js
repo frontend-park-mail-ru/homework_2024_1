@@ -1,12 +1,11 @@
 'use strict';
 
-const max = numbers => Math.max(...numbers);
-
 const euclid = function () {
     for (let i = 0; i < arguments.length; i++) {
-        if (typeof arguments[i] !== 'number') {
+        if (typeof arguments[i] !== 'number' || !isFinite(arguments[i])) {
             throw new Error('Invalid argument: all arguments must be numbers');
         }
+        arguments[i] = Math.abs(arguments[i]);
     }
     
     if(arguments.length == 2) {
