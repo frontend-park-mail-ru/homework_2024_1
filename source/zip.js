@@ -7,8 +7,11 @@
  */
 
 const zip = (...objects) => {
-  if (!objects.length || objects.some((obj) => obj === null || typeof obj !== 'object' )) {
+  let is_vald_objects = objects.some((object) => object === null || typeof object !== 'object');
+
+  if (!objects.length || is_vald_objects) {
     return null;
   }
-  return Object.assign(...objects.reverse());
+
+  return Object.assign({}, ...objects.reverse());
 };
