@@ -5,12 +5,22 @@ function chess(n) {
     return null;
   }
 
+  let oddRow = "";
+  let evenRow = "";
   let matrix = "";
-  for (let i = 0; i < n * n; i++) {
-    matrix += (i % n + Math.floor(i / n)) % 2 === 0 ? '*' : ' ';
-    if ((i + 1) % n === 0) {
-      matrix += '\n';
-    }
+
+  for (let i = 0; i < n; i++) {
+    oddRow += i % 2 == 0 ? "*" : " ";
+    evenRow += i % 2 == 0 ? " " : "*";
   }
+
+  oddRow += "\n"
+  evenRow += "\n"
+  
+  for (let i = 0; i < n; i++) {
+    matrix += i % 2 == 0 ? oddRow : evenRow;
+  }
+
   return matrix;
 }
+
