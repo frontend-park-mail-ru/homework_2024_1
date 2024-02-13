@@ -2,13 +2,13 @@
 
 /**
  * Объединяет свойства объектов массива в один объект
- * @param {array} objectsToZip - массив объектов
+ * @param {array} objects - массив объектов
  * @returns {object} - результирующий объект
  */
 
-const zip = (...objectsToZip) => {
-  if (!objectsToZip.length || objectsToZip.some((objToZip) => objToZip === null || typeof objToZip !== 'object' )) {
+const zip = (...objects) => {
+  if (!objects.length || objects.some((obj) => obj === null || typeof obj !== 'object' )) {
     return null;
   }
-  return Object.assign(...objectsToZip.reverse());
+  return Object.assign(...objects.reverse());
 };
