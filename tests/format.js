@@ -79,8 +79,14 @@ QUnit.module('Тестируем функцию format', function () {
 		
 		const expected = '';
 
-		assert.strictEqual(format(input1, 2), expected);
-		assert.strictEqual(format(input2, 2), expected);
-		assert.strictEqual(format([1, 2, 3], input3), expected);
+		assert.throws(() => {
+			format(input1, 2);
+		}, TypeError);
+		assert.throws(() => {
+			format(input2, 1);
+		}, TypeError);
+		assert.throws(() => {
+			format([1, 2, 3], input3);
+		}, TypeError);
 	});
 });
