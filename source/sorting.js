@@ -31,7 +31,7 @@ function merge(left, right, prop) {
 /**
  * Алгоритм сортировки слиянием.
  * @param {Array} array - входной массив данных
- * @param {ыекштп} prop - свойство, по которому происходит сортировка
+ * @param {string} prop - свойство, по которому происходит сортировка
  * @returns {Array} - отсортированный массив
  */
 function mergeSort(array, prop) {
@@ -39,7 +39,7 @@ function mergeSort(array, prop) {
         let halfLen = array.length / 2;
         let leftPart = mergeSort(array.slice(0, halfLen), prop);
         let rightPart = mergeSort(array.slice(halfLen), prop);
-        array = merge(leftPart, rightPart, prop);
+        return merge(leftPart, rightPart, prop);
     }
     return array;
 }
@@ -54,10 +54,11 @@ function mergeSort(array, prop) {
  * @returns {Array} - отсортированный объект
  */
 function sorting(array, properties) {
+    let result = array;
     if (Array.isArray(properties) && Array.isArray(array) && properties.length && array.length) {
         for (let prop of properties.reverse()) {
-            array = mergeSort(array, prop);
+            result = mergeSort(array, prop);
         }
     }
-    return array;
+    return result;
 }
