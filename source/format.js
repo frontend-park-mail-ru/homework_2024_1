@@ -7,14 +7,13 @@
  * @param {number} nCol - Номер нужной колонки
  * @returns {number[]} Числа из nCol-й колонки
  */
-const column = (numbers, columns, nCol) => {
-    return numbers.reduce((columnNumbers, num, i) => {
+const column = (numbers, columns, nCol) =>
+    numbers.reduce((columnNumbers, num, i) => {
         if (i % columns === nCol) {
             columnNumbers.push(num);
         }
         return columnNumbers;
     }, []);
-};
 
 /**
  * Форматирование строки
@@ -26,17 +25,21 @@ const format = (numbers, col) => {
     if (!Array.isArray(numbers) || col <= 0) {
         return '';
     }
-    return numbers.reduce((result, num, i) => {
-        const columnNumbers = column(numbers, col, i % col);
-        const columnOfStrings = columnNumbers.map(n => String(n));
-        const arrayOfLength = columnOfStrings.map(str => str.length);
-        const maxLength = Math.max(...arrayOfLength);
-        const spacesForAlign = maxLength - String(numbers[i]).length;
-        result += ' '.repeat(spacesForAlign + ((i % col) === 0 ? 0 : 1)) + numbers[i];
-        let isLastRow;
-        if ((i + 1) % col === 0 && (isLastRow = i) != numbers.length - 1) {
-            result += '\n';
-        }
-        return result;
-    }, []);
+    try {
+        return numbers.reduce((result, num, i) => {
+            const columnNumbers = column(numbers, col, i % col);
+            const columnOfStrings = columnNumbers.map(n => String(n));
+            const arrayOfLength = columnOfStrings.map(str => str.length);
+            const maxLength = Math.max(...arrayOfLength);
+            const spacesForAlign = maxLength - String(numbers[i]).length;
+            result += ' '.repeat(spacesForAlign + ((i % col) === 0 ? 0 : 1)) + numbers[i];
+            let isLastRow = (i == numbers.length - 1);
+            if ((i + 1) % col === 0 && !isLastRow) {
+                result += '\n';
+            }
+            return result;
+        }, '');
+    } catch(e) {
+        return '';
+    }
 };
