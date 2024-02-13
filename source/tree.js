@@ -5,6 +5,13 @@ const SPACE_SYMBOL = ' ';
 const TREE_SYMBOL = '*';
 const TRUNK_SYMBOL = '|';
 
+/**
+ * Builds layer of tree picture by symbols.
+ * @param {number} width - Width of picture.
+ * @param {number} layerWidth - Width of tree layer.
+ * @param {string} layerSymbol - Symbol which will used to build a layer.
+ * @returns {string} - Layer of picture.
+ */
 const buildLayer = (width, layerWidth, layerSymbol) => {
     const emptySpace = SPACE_SYMBOL.repeat(Math.floor((width - layerWidth) / 2));
     const layerSpace = layerSymbol.repeat(layerWidth);
@@ -12,8 +19,13 @@ const buildLayer = (width, layerWidth, layerSymbol) => {
     return emptySpace + layerSpace + emptySpace + ENDLINE_SYMBOL;
 }
 
+/**
+ * Builds a tree picture by symbols.
+ * @param {number|string} size - Height of tree.
+ * @returns {string} - Picture of tree.
+ */
 const tree = (size) => {
-    if (!["number", "string"].includes(typeof size) || isNaN(parseInt(size, 10)) || size < 3) {
+    if (!["number", "string"].includes(typeof size) || Number.isNaN(parseInt(size, 10)) || size < 3) {
         return null;
     }
 
