@@ -1,6 +1,6 @@
 'use strict';
 
-QUnit.module('Тестируем функцию max', function () {
+QUnit.module('Тестируем функцию euclid', function () {
 	QUnit.test('Возвращает максимальное из трёх положительных чисел', function (assert) {
 		assert.strictEqual(max([ 1, 2, 3 ]), 3, 'max([1, 2, 3]) === 3');
 		assert.strictEqual(max([ 3, 2, 1 ]), 3, 'max([3, 2, 1]) === 3');
@@ -24,5 +24,21 @@ QUnit.module('Тестируем функцию max', function () {
 	QUnit.test('Работает правильно со специальными константами', function (assert) {
 		assert.strictEqual(max([ Infinity, 100000, 0 ]), Infinity);
 		assert.strictEqual(max([ 0, -1000, -Infinity ]), 0);
+	});
+
+	QUnit.test('Работает правильно с двумя числами', function (assert) {
+		assert.strictEqual(euclid(12, 18), 6, 'euclid(12, 18) === 6');
+	});
+
+	QUnit.test('Работает правильно с произвольным количеством чисел', function (assert) {
+		assert.strictEqual(euclid(20, 30, 15, 70, 40), 5, 'euclid(20, 30, 15, 70, 40) === 5');
+	});
+
+	QUnit.test('Работает правильно с одинаковыми числами', function (assert) {
+		assert.strictEqual(euclid(11, 11, 11), 11, 'euclid(11, 11, 11) === 11');
+	});
+
+	QUnit.test('Работает правильно при введение значений неправильного типа', function (assert) {
+		assert.throws(() => euclid(a, b), Error, 'euclid(a, b) throws Error');
 	});
 });
