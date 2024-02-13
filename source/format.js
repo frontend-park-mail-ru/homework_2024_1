@@ -1,45 +1,49 @@
 'use strict';
 
-const format = (array, columns) => {
+/**
+ * @param {number[]} intArray - array of integer values
+ * @param {number} columns - number of columns
+ * @returns {undefined|string} - formatted string or undefined if wrong arguments
+ */
+const format = (intArray, columns) => {
     // type checking
-    if (    !Array.isArray(array) ||
-            array.some(item => !Number.isInteger(item)) ||
-            !Number.isInteger(columns)) {
-        return undefined
+    if (!Array.isArray(intArray) ||
+        intArray.some(item => !Number.isInteger(item)) ||
+        !Number.isInteger(columns)) {
+        return undefined;
     }
 
-    const formatLenArray = []
+    const formatLenArray = [];
 
-    for (let i = 0, col = 0; i < array.length; ++i, ++col) {
-        if (col >= columns) {
-            col = 0
+    intArray.forEach((value, index) => {
+        const currColumn = index % columns
+        const currArrayValueLen = value.toString().length;
+
+        if (!formatLenArray[currColumn] ||
+            formatLenArray[currColumn] < currArrayValueLen) {
+            formatLenArray[currColumn] = currArrayValueLen;
         }
+    });
 
-        if (    formatLenArray[col] === undefined ||
-                formatLenArray[col] < array[i].toString().length) {
-            formatLenArray[col] = array[i].toString().length
+    let strResult = "";
+
+    intArray.forEach((value, index) => {
+        const currColumn = index % columns;
+        const currArrayValueLen = value.toString().length;
+
+        if (currColumn !== 0) {
+            strResult += " ";
         }
-    }
-
-    let strResult = ""
-
-    for (let i = 0, col = 0; i < array.length; ++i, ++col) {
-        if (col >= columns) {
-            col = 0
-        }
-
-        if (col !== 0) {
-            strResult += " "
-        }
-
         strResult +=
-            " ".repeat(formatLenArray[col] - array[i].toString().length)
-            + array[i].toString()
+            " ".repeat(formatLenArray[currColumn] - currArrayValueLen)
+            + value.toString();
 
-        if(col === columns - 1 && i !== array.length - 1){
-            strResult += "\n"
+        const isLastRow = index === intArray.length - 1;
+
+        if(currColumn === columns - 1 && !isLastRow){
+            strResult += "\n";
         }
-    }
+    });
 
-    return strResult
+    return strResult;
 }

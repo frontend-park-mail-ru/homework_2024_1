@@ -58,7 +58,7 @@ QUnit.module('Тестируем функцию format', function () {
 		assert.strictEqual(format(["aed", 2], 2), undefined);
 	});
 
-	QUnit.test('format работает правильно при недостатке элементов в массиае', function (assert) {
+	QUnit.test('format работает правильно при недостатке элементов в массиве', function (assert) {
 		const input = [ 0, 1 ];
 
 		const expected2 =
