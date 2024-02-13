@@ -13,7 +13,7 @@ const chess = (dimension) => {
     }
 
     let board = "* ".repeat(dimension / 2),
-        isOdd = Number(dimension % 2 === 1)
+        isOdd = Number(dimension % 2 === 1);
 
     board = (board + '*'.repeat(isOdd) + '\n' + board.split('').reverse().join('') +
             ' '.repeat(isOdd) + '\n').repeat(dimension / 2) + (board + '*\n').repeat(isOdd);
