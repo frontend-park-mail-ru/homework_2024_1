@@ -1,6 +1,8 @@
 'use strict';
 
 /**
+ * Format array of Integer values into string with columns
+ *
  * @param {number[]} intArray - array of integer values
  * @param {number} columns - number of columns
  * @returns {undefined|string} - formatted string or undefined if wrong arguments
@@ -10,7 +12,7 @@ const format = (intArray, columns) => {
     if (!Array.isArray(intArray) ||
         intArray.some(item => !Number.isInteger(item)) ||
         !Number.isInteger(columns)) {
-        return undefined;
+        throw new TypeError();
     }
 
     const formatLenArray = [];
@@ -25,25 +27,21 @@ const format = (intArray, columns) => {
         }
     });
 
-    let strResult = "";
-
-    intArray.forEach((value, index) => {
+    return intArray.reduce((result, value, index) => {
         const currColumn = index % columns;
         const currArrayValueLen = value.toString().length;
 
         if (currColumn !== 0) {
-            strResult += " ";
+            result += " ";
         }
-        strResult +=
-            " ".repeat(formatLenArray[currColumn] - currArrayValueLen)
+        result += " ".repeat(formatLenArray[currColumn] - currArrayValueLen)
             + value.toString();
 
         const isLastRow = index === intArray.length - 1;
 
         if(currColumn === columns - 1 && !isLastRow){
-            strResult += "\n";
+            result += "\n";
         }
-    });
-
-    return strResult;
+        return result;
+    }, '');
 }
