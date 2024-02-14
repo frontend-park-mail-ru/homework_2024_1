@@ -49,7 +49,7 @@ QUnit.module('Тестируем функцию roman', function () {
     });
 
     QUnit.test('roman проверяет корректность римского числа', function (assert) {
-        assert.throws(() => {roman('MMaboba')}, RangeError);
+		assert.throws(() => {roman('MMaboba')}, RangeError);
         assert.throws(() => {roman('MAN')}, RangeError);
         assert.throws(() => {roman('XO')}, RangeError);
 

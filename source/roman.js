@@ -5,7 +5,7 @@
  * @constant
  * @type {Array.<{decimalValue: number, romanValue: string}>}
  */
-const listWithConvertRomanToDecimal = [
+const LIST_WITH_CONVERTION_ROMAN_AND_DECIMAL = [
   /**
    * @type {Object}
    * @property {number} decimalValue - Значение в десятичной системе счисления.
@@ -41,7 +41,7 @@ const convertFromRomanToDecimal = (romanNumber) => {
     throw new RangeError('Неправильная запись римского числа');
   }
 
-  const decimalNumber = listWithConvertRomanToDecimal.reduce(
+  const decimalNumber = LIST_WITH_CONVERTION_ROMAN_AND_DECIMAL.reduce(
     (currentSum, currentPair) => {
       let checkOnStartRegex = new RegExp(
         '^' + currentPair.romanValue + '{0,4}',
@@ -81,7 +81,7 @@ const convertFromDecimalToRoman = (decimalNumber) => {
     throw new RangeError('Число должно быть больше 0 и меньше 4000');
   }
 
-  const romanNumber = listWithConvertRomanToDecimal.reduce(
+  const romanNumber = LIST_WITH_CONVERTION_ROMAN_AND_DECIMAL.reduce(
     (resultRomanNumber, currentPair) => {
       while (convertedDecimalNumber >= currentPair.decimalValue) {
         convertedDecimalNumber -= currentPair.decimalValue;
