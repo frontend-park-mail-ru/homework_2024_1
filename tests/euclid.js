@@ -9,7 +9,7 @@ QUnit.module('Тестируем функцию euclid', function () {
 		assert.throws(function () {euclid(0, 0)});
 	});
 
-	QUnit.test("На вход пришли не натуральные числа", function (assert) {
+	QUnit.test('На вход пришли не натуральные числа', function (assert) {
 		assert.throws(function () {euclid(0, 0)});
 		assert.throws(function () {euclid(false, 1)});
 		assert.throws(function () {euclid(Object, 0)});
