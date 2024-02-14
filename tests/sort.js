@@ -5,7 +5,8 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('яяя'), 'Яяя', 'Работает с русским алфавитом');
 		assert.strictEqual(sort('Бббббб'), 'Бббббб');
 		assert.strictEqual(sort('zzzzzz'), 'Zzzzzz', 'Работает с английским алфавитом');
-		assert.strictEqual(sort('Rrrrrrrr'), 'rrrrrrrr');
+		// assert.strictEqual(sort('Rrrrrrrr'), 'rrrrrrrr'); // Я думаю тут ошибка тестов, ведь нам надо делать первую букву прописной, а остальные строчными
+		assert.strictEqual(sort('rrrrrrrr'), 'Rrrrrrrr');
 	});
 
 	QUnit.test('Функция делает все буквы, кроме первой, строчными', function (assert) {
@@ -34,8 +35,25 @@ QUnit.module('Тестируем функцию sort', function () {
 
 	QUnit.test('Функция работает правильно', function (assert) {
 		assert.strictEqual(sort('мама мыла раму'), 'Аамм Алмы Амру');
-		assert.strictEqual(sort('космический корабль летит на марс'), 'Абклорь Амрс Aн Еиийккмоссч Еилтт');
+		// assert.strictEqual(sort('космический корабль летит на марс'), 'Абклорь Амрс Aн Еиийккмоссч Еилтт'); // тут в заданном предложении все русские буквы, а в результате присутствует одна латинская A
+		assert.strictEqual(sort('космический корабль летит на марс'), 'Абклорь Амрс Ан Еиийккмоссч Еилтт');
 		assert.strictEqual(sort('i love frontend'), 'Defnnort Elov I');
 		assert.strictEqual(sort('hello world'), 'Dlorw Ehllo');
+		assert.strictEqual(sort('Привет привет привет мир'), 'Веипрт Веипрт Веипрт Имр');
 	});
+
+	QUnit.test('Функция работает правильно с разными регистрами', function (assert) {
+		assert.strictEqual(sort('РоНаЛДу МеССи'), 'Адлнору Еимсс');
+		assert.strictEqual(sort('rOnAldO mEssI'), 'Adlnoor Eimss');
+	})
+
+	QUnit.test('Функция работает правильно с лишними пробелами', function (assert) {
+		assert.strictEqual(sort('          РоНаЛДу МеССи      '), 'Адлнору Еимсс');
+		assert.strictEqual(sort('   rOnAldO    mEssI  '), 'Adlnoor Eimss');
+	})
+
+	QUnit.test('Функция работает правильно с пустой строкой', function (assert) {
+		assert.strictEqual(sort('    '), '');
+		assert.strictEqual(sort(''), '');
+	})
 });
