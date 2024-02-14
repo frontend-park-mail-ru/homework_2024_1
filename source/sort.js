@@ -9,27 +9,51 @@
 const sort = (sentence) =>
   quickSort(sentence.split(' ').map(wordSort)).join(' ');
 
+/**
+ * Sorts letters in word and changes letters case.
+ * @param {string} word - word you want to sort
+ * @returns {string} - word with sorted letters and first capital letter
+ */
+
 const wordSort = (word) => {
   word = quickSort(word.split('')).join('');
   return word[0].toUpperCase() + word.slice(1).toLowerCase();
 };
+
+/**
+ * Function to compare specific russian symbols (e.g. 'ё').
+ * @param {string} a - first symbol
+ * @param {string} b - another symbol
+ * @returns {number} - comparison result
+ */
 
 const ruComparator = (a, b) => {
   const collator = new Intl.Collator('ru-RU');
   return collator.compare(a, b);
 };
 
-const quickSort = (arr) => {
-  if (arr.length < 2) return arr;
+/**
+ * Sorts array of elements.
+ * @param {Array.<string>} arr - array you want to sort
+ * @returns {Array.<string>} - sorted array
+ */
 
-  let leftArr = [];
-  let rightArr = [];
-  
+const quickSort = (arr) => {
+  if (arr.length < 2) {
+    return arr;
+  }
+
+  const leftArr = [];
+  const rightArr = [];
+
   let pivot = arr[0];
 
   arr.slice(1).forEach((val) => {
-    if (ruComparator(val, pivot) === -1) leftArr.push(val);
-    else rightArr.push(val);
+    if (ruComparator(val, pivot) === -1) {
+      leftArr.push(val);
+    } else {
+      rightArr.push(val);
+    }
   });
 
   let sortLeft = quickSort(leftArr);
