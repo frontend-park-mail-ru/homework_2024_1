@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * Returns greatest common diviser of two numbers
@@ -6,7 +6,7 @@
  * @param {Number} num2
  * @returns {Number} gcd
  */
-function gcd(num1, num2) {
+const gcd = (num1, num2) => {
     if (!num1 && !num2) {
         throw new Error("numbers shouldn't be 0");
     }
@@ -26,7 +26,7 @@ function gcd(num1, num2) {
  * @param  {...Number} numbers
  * @returns {Number} gcd of all numbers
  */
-function euclid(...numbers) {
+const euclid = (...numbers) => {
     if (!numbers.length) {
         return null;
     }
