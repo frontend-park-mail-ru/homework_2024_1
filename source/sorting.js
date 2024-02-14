@@ -60,7 +60,7 @@ function mergeSort(array, prop) {
 function sorting(array, properties) {
     let result = array;
     if (Array.isArray(properties) && Array.isArray(array) && properties.length && array.length) {
-        result = properties.reverse().reduce((tmpSorted, prop) => mergeSort(tmpSorted, prop), array);
+        result = properties.reduceRight((tmpSorted, prop) => mergeSort(tmpSorted, prop), array);
     }
     return result;
 }
