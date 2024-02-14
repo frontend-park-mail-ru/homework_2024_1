@@ -25,4 +25,27 @@ QUnit.module('Проверка работы функции filter', function () 
         assert.strictEqual(filter(`<script>alert('1');</script>`, ['strong', 'em']), '&lt;script&gt;alert(&#39;1&#39;);&lt;/script&gt;');
         assert.strictEqual(filter(`<img src="bad" onerror="alert('1');">`, ['strong', 'em']), '&lt;img src=&quot;bad&quot; onerror=&quot;alert(&#39;1&#39;);&quot;&gt;');
     });
+
+
+    QUnit.test('filter экранирует неразрешенные html-тэги', function (assert) {
+        const input = 'Текст с неразрешенным тегом <script>я тебя взломаю бу-бу-бу-бу-бу</script>';
+
+        const output = filter(input, ['strong', 'em']);
+
+        const expected = 'Текст с неразрешенным тегом &lt;script&gt;я тебя взломаю бу-бу-бу-бу-бу&lt;/script&gt;';
+
+        assert.strictEqual(output, expected);
+    });
+
+
+    QUnit.test('filter корректно обрабатывает смешанный текст с разрешенными и неразрешенными тегами', function (assert) {
+        const input = 'Привет, <strong>мир</strong>! Это <script>вредоносный код</script>';
+
+        const output = filter(input, ['strong']);
+
+        const expected = 'Привет, <strong>мир</strong>! Это &lt;script&gt;вредоносный код&lt;/script&gt;';
+
+        assert.strictEqual(output, expected);
+    });
+
 });
