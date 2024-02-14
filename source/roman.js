@@ -35,7 +35,7 @@ const ROMAN_CORRECT_REGEX = new RegExp(
  * @returns {number} - Возвращает преобразованное число в десятичной системе счисления.
  */
 const convertFromRomanToDecimal = (romanNumber) => {
- let upperRomanNumber = romanNumber.toUpperCase();
+  let upperRomanNumber = romanNumber.toUpperCase();
 
   if (!ROMAN_CORRECT_REGEX.test(upperRomanNumber) || !upperRomanNumber.length) {
     throw new RangeError('Неправильная запись римского числа');
