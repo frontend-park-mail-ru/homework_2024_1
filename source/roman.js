@@ -47,6 +47,7 @@ const convertFromRomanToDecimal = (romanNumber) => {
         '^' + currentPair.romanValue + '{0,4}',
         'g'
       );
+
       if (checkOnStartRegex.test(upperRomanNumber)) {
         let matchedLetters = upperRomanNumber.match(checkOnStartRegex);
         let countLetters = matchedLetters
@@ -57,6 +58,7 @@ const convertFromRomanToDecimal = (romanNumber) => {
           currentPair.romanValue.length * countLetters
         );
       }
+
       return currentSum;
     },
     0
@@ -87,6 +89,7 @@ const convertFromDecimalToRoman = (decimalNumber) => {
         convertedDecimalNumber -= currentPair.decimalValue;
         resultRomanNumber += currentPair.romanValue;
       }
+
       return resultRomanNumber;
     },
     ''
