@@ -2,7 +2,9 @@
 'use strict';
 
 function anagram (words) {
-    words = words ?? [];
+    if (!Array.isArray(words)) {
+        words = [words];
+    }
     return Object.values(words.reduce((anagramDictionary, word) => {
         if (typeof word !== 'string'){
             return anagramDictionary;
