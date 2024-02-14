@@ -55,10 +55,11 @@ QUnit.module('Тестируем функцию letters', function () {
 	});
 
 	QUnit.test('Проверяет корректность типа первого параметра', function (assert) {
-        assert.strictEqual(letters(NaN), null);
-		assert.strictEqual(letters(454324532, true), null);
-		assert.strictEqual(letters([1,2,"hello", {'a' : 5}] ,false), null);
-		assert.strictEqual(letters(null), null);
+		assert.strictEqual(letters(new String('aaa')), '');
+        assert.throws(() => {letters(NaN)}, TypeError('Invalid first parameter!'));
+		assert.throws(() => {letters(454324532, true)}, TypeError('Invalid first parameter!'));
+		assert.throws(() => {letters([1,2,"hello", {'a' : 5}] ,false)}, TypeError('Invalid first parameter!'));
+		assert.throws(() => {letters(null)}, TypeError('Invalid first parameter!'));
 	});	
 
 	QUnit.test('Правильно удаляет разные повторяющиеся буквы', function (assert) {
@@ -80,9 +81,12 @@ QUnit.module('Тестируем функцию letters', function () {
 	});	
 
 	QUnit.test('Проверка на соответствие второго аргумента', function (assert)  {
-		assert.strictEqual(letters('programming is fun', 42), null);
-		assert.strictEqual(letters('python programming', 'wow'), null);
-		assert.strictEqual(letters('data science', NaN), null);
-		assert.strictEqual(letters('machine learning', {a : 1, b : 2}), null);
+		assert.throws(() => {letters('programming is fun', 42)}, TypeError('Invalid second parameter!'));
+		assert.throws(() => {letters('python programming', 'wow')}, TypeError('Invalid second parameter!'));
+		assert.throws(() => {letters('data science', NaN)}, TypeError('Invalid second parameter!'));
+		assert.throws(() => {letters('machine learning', {a : 1, b : 2})}, TypeError('Invalid second parameter!'));
+		assert.strictEqual(letters('abcdefabc', new Boolean(null)), 'defabc');
+		assert.strictEqual(letters('abcdefabc', new Boolean({a : 1, b: 2})), 'abcdef');
+		assert.strictEqual(letters('blablabla', undefined), '');
 	}
 )});

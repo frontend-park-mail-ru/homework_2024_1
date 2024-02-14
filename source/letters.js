@@ -2,16 +2,23 @@
 
 const CHAR_AMOUNT_IN_STRING = 2;
 
+
+/**
+ * Функция возвращает строку такую, что каждый из исходных символов строки будет входить в нее не более 1 раза.
+ * @param {string} initialString - входная строка
+ * @param {boolean} shouldLeaveFirstChar true - оставит первое вхождение, false - последнее каждого повторяющегося символа. 
+ * @returns {string} Новая строка с удаленными символами
+ */
 const getStringWithSingleOccuranceOfRepeatedChars = (initialString, shouldLeaveFirstChar) => {
     
     const setWithUniqueStringChars = new Set();
     if (!shouldLeaveFirstChar) {
         for (let i = initialString.length - 1; i >= 0; i--) {
-            setWithUniqueStringChars.add(initialString[i]);
+            setWithUniqueStringChars.add(initialString.at(i));
         }
     } else {
-        for (let char of initialString) {
-            setWithUniqueStringChars.add(char);
+        for (let i = 0; i < initialString.length; i++) {
+            setWithUniqueStringChars.add(initialString.at(i));
         }
     }
 
@@ -19,6 +26,12 @@ const getStringWithSingleOccuranceOfRepeatedChars = (initialString, shouldLeaveF
                 : Array.from(setWithUniqueStringChars).reverse().join('');
 }
 
+
+/**
+ * Функция возвращает строку с символами, входившими в неё изначально не более одного раза.
+ * @param {string} initialString - входная строка
+ * @returns {string} Новая строка с символами, входившими изначально в неё не более одного раза.
+ */
 const getStringWithOnlyUniqueLetters = (initialString) => {
     const charArray = initialString.split(''); 
     const charToCharCountMap = charArray.reduce((countMap, char) => {
@@ -39,12 +52,19 @@ const getStringWithOnlyUniqueLetters = (initialString) => {
  * @returns {string} Новая строка с удаленными символами
  */
 const letters = (initialString, shouldLeaveFirstChar) => {
-    const isNotString = (typeof(initialString) !== 'string');
-    const isNotBool = (typeof(shouldLeaveFirstChar) !== 'boolean');
-    const isNotUndefined = (typeof(shouldLeaveFirstChar) !== 'undefined');
+    const isString = (initialString instanceof String) || typeof(initialString) === 'string';
+    const isBool = typeof(shouldLeaveFirstChar) === 'boolean' || shouldLeaveFirstChar instanceof Boolean;
+    const isUndefined = shouldLeaveFirstChar === undefined;
+    
+    if (!isString) {
+        throw new TypeError("Invalid first parameter!");
+    }
 
-    if (isNotString || (isNotBool && isNotUndefined)) {
-        return null;
+    if (!isUndefined) {
+        if (!isBool) {
+            throw new TypeError("Invalid second parameter!");
+        }
+        shouldLeaveFirstChar = shouldLeaveFirstChar.valueOf();
     }
     
     switch (shouldLeaveFirstChar) { 
@@ -54,6 +74,6 @@ const letters = (initialString, shouldLeaveFirstChar) => {
         case false: 
             return getStringWithSingleOccuranceOfRepeatedChars(initialString, shouldLeaveFirstChar);
         default:
-            return null;
+            return getStringWithSingleOccuranceOfRepeatedChars(initialString, !!shouldLeaveFirstChar);
     }
 }
