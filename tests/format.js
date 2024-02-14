@@ -3,7 +3,7 @@
 QUnit.module('Тестируем функцию format', function () {
 	QUnit.test('format работает правильно c одной колонкой и положительными числами', function (assert) {
 		const input = [ 0, 1, 2, 10, 100, 1000, 10000 ];
-		
+
 		const expected =
 			'    0\n' +
 			'    1\n' +
@@ -17,11 +17,9 @@ QUnit.module('Тестируем функцию format', function () {
 	});
 
 	QUnit.test('format работает правильно c одной колонкой и числами разного знака', function (assert) {
-		const input1 = [ 0, 1, 2, 10, 100, -100, 1000, 10000, -10000 ];
+		const input = [ 0, 1, 2, 10, 100, -100, 1000, 10000, -10000 ];
 
-		const input2 = [1];
-
-		const expected1 =
+		const expected =
 			'     0\n' +
 			'     1\n' +
 			'     2\n' +
@@ -31,12 +29,8 @@ QUnit.module('Тестируем функцию format', function () {
 			'  1000\n' +
 			' 10000\n' +
 			'-10000';
-		
-		const expected2 =
-			'1';
 
-		assert.strictEqual(format(input1, 1), expected1);
-		assert.strictEqual(format(input2, 1), expected2);
+		assert.strictEqual(format(input, 1), expected);
 	});
 
 	QUnit.test('format работает правильно c несколькими колонками', function (assert) {
@@ -53,29 +47,36 @@ QUnit.module('Тестируем функцию format', function () {
 			'   0     1      2\n' +
 			'  10   100   -100\n' +
 			'1000 10000 -10000';
-		
-		const expected4 =
-			'0 1 2 10 100 -100 1000 10000 -10000';
-
-		const expected5 =
-			'    0      1 2 10 100 -100 1000\n' +
-			'10000 -10000';
-		
-		const expected6 =
-			'1 2'
 
 		assert.strictEqual(format(input, 2), expected2);
 		assert.strictEqual(format(input, 3), expected3);
-		assert.strictEqual(format(input, 9), expected4);
-		assert.strictEqual(format(input, 7), expected5);
-		assert.strictEqual(format([1, 2], 2), expected6);
-		assert.strictEqual(format([1, 2], 6), expected6);
+	});
+
+	QUnit.test('format работает правильно одним числом', function (assert) {
+		const input = [1];
+		
+		const expected =
+			'1';
+
+		assert.strictEqual(format(input, 1), expected);
+	});
+
+	QUnit.test('format работает правильно c кол-вом колонок, превышающим или равным кол-ву чисел', function (assert) {
+		const input = [ 0, 1, 2, 10, 100, -100, 1000, 10000, -10000 ];
+		
+		const expected =
+			'0 1 2 10 100 -100 1000 10000 -10000';
+
+		assert.strictEqual(format(input, 9), expected);
+		assert.strictEqual(format(input, 23), expected);
 	});
 
 	QUnit.test('format обрабатывает некорректные входные параметры', function (assert) {
+		const validInput = [1, 2]
 		const input1 = "not array";
 		const input2 = 3.7;
 		const input3 = -1;
+		const input4 = () => 1 + 3;
 		
 		const expected = '';
 
@@ -87,6 +88,21 @@ QUnit.module('Тестируем функцию format', function () {
 		}, TypeError);
 		assert.throws(() => {
 			format([1, 2, 3], input3);
+		}, TypeError);
+		assert.throws(() => {
+			format(input4, 2);
+		}, TypeError);
+		assert.throws(() => {
+			format(validInput, input4);
+		}, TypeError);
+		assert.throws(() => {
+			format(null, 2);
+		}, TypeError);
+		assert.throws(() => {
+			format(undefined, 2);
+		}, TypeError);
+		assert.throws(() => {
+			format(Infinity, 2);
 		}, TypeError);
 	});
 });
