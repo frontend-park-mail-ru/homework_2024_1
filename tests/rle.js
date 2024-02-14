@@ -15,7 +15,7 @@ QUnit.module('Тестируем функцию rle', function () {
         assert.strictEqual(rle('111111'), '16', "rle('111111') === '16'");
     });
     QUnit.test('rle корректно обрабатывает строку с одним символом', function (assert) {
-        assert.strictEqual(rle('A'), 'A', "rle('A') === 'A1'");
+        assert.strictEqual(rle('A'), 'A', "rle('A') === 'A'");
     });
     // assert.throws проверяет, что функция rle(123) выбрасывает искл.
     QUnit.test('rle корректно обрабатывает не строковые входные данные', function (assert) {

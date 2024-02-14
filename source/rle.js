@@ -6,6 +6,7 @@
  * @param {string} input - входная строка, которую нужно сжать
  * @returns {string} - сжатая строка
  */
+
 function rle(input){
     if (typeof input !== 'string') {
         throw new Error("На вход должна подаваться строка");
@@ -25,8 +26,37 @@ function rle(input){
         prev = currentValue;
         return accumulator;
     }, []);
-    if (prev !== undefined) {
+    if(prev !== undefined){
         resultArray.push(prev + (counter > 1 ? counter : ''));
     }
     return resultArray.join('');
 }
+
+
+/*
+function rle(input){
+    if (typeof input !== 'string'){
+        throw new Error("На вход должна подаваться строка");
+    }
+    let counter = 0;
+    let prev = input[0];
+    const resultArray = [...input].map((currentValue) => {
+        if(currentValue ===prev){
+            counter++;
+            return '';
+        }
+        else{
+            let result = prev + (counter > 1 ? counter : '');
+            counter = 1;
+            prev = currentValue;
+            return result;
+        }
+    });
+    // добавляет последний элемент в resultArray
+    if (counter >0){
+        resultArray.push(prev +(counter > 1 ? counter : ''));
+    }
+    // слияние accumulator и currentValue в одну строку
+    return resultArray.reduce((accumulator, currentValue) => accumulator + currentValue, '');
+}
+ */
