@@ -1,6 +1,6 @@
 'use strict';
 
-QUnit.module('Тестируем функцию plainify', function () {
+QUnit.module('Тестируем работу функции plainify с валидными аргументами', function () {
 	QUnit.test('plainify работает правильно', function (assert) {
 		assert.deepEqual(plainify({foo: 'bar', baz: 42}), {'foo': 'bar', 'baz': 42});
 
@@ -72,7 +72,7 @@ QUnit.module('Тестируем функцию plainify', function () {
         const nested5 = 5;
 
 	    assert.throws(() => { plainify(nested5); },
-	        new Error('InvalidArgumentException'));
+	        new TypeError('InvalidArgumentException'));
 
 	    const nested6 = {};
 
@@ -80,10 +80,41 @@ QUnit.module('Тестируем функцию plainify', function () {
 
 	    assert.deepEqual(plainify(nested6), plain6);
 
-	    const nested7 = null;
+	    let a;
+	    const nested7 = {field: a};
 
-	    assert.throws(() => { plainify(nested7); },
-	        new Error('InvalidArgumentException'));
+	    const plain7 = {'field': a};
 
+	    assert.deepEqual(plainify(nested7), plain7);
+	    
+	});
+});
+
+QUnit.module('Тестируем работу функции plainify с невалидными аргументами', function () {
+	QUnit.test('plainify работает правильно', function (assert) {
+		const nested1 = null;
+
+	    assert.throws(() => { plainify(nested1); },
+	        new TypeError('InvalidArgumentException'));
+
+        const nested2 = new String("asdf");
+
+        assert.throws(() => { plainify(nested2); },
+	        new TypeError('InvalidArgumentException'));
+
+        const nested3 = 145;
+
+        assert.throws(() => { plainify(nested3); },
+	        new TypeError('InvalidArgumentException'));
+
+        const nested4 = [null, 132, new String("asdf")];
+
+        assert.throws(() => { plainify(nested4); },
+	        new TypeError('InvalidArgumentException'));
+
+        let nested5;
+
+		assert.throws(() => { plainify(nested5); },
+	        new TypeError('InvalidArgumentException'));
 	});
 });
