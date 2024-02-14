@@ -37,9 +37,9 @@ QUnit.module('Тестируем функцию minmax', function () {
 	});
 
 	QUnit.test('minmax игнорирует другие типы данных', function (assert) {
-		var undefinedParametr; //undefined
-		var NaNParametr = Number('asx'); //NaN
-		var nullParametr = null;
+		let undefinedParametr; //undefined
+		const NaNParametr = Number.NaN; //NaN
+		const nullParametr = null;
 		assert.deepEqual(minmax(undefinedParametr), [ undefined, undefined]);
 		assert.deepEqual(minmax([1, 2, 3, 4]), [ undefined, undefined]);
 		assert.deepEqual(minmax(NaNParametr), [ undefined, undefined]);

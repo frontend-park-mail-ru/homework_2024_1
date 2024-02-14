@@ -7,14 +7,13 @@
  * is the minimum and the second is the maximum
 */
 const minmax = (str) => {
-    console.log(typeof(str))
     if (typeof(str) !== 'string' && !(str instanceof String)) {
         return [ undefined, undefined ];
     }
-    if (str === '') { 
+    if (!str) { 
         return [ undefined, undefined ];
     }
-    const numbers = str.split(' ').map(Number).filter(element => !isNaN(element));  
+    const numbers = str.split(' ').map(Number).filter(element => !Number.isNaN(element));  
     if (numbers.length === 0) { 
         return [ undefined, undefined ];
     }
