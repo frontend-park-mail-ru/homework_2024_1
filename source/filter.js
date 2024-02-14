@@ -1,17 +1,4 @@
-const filter = (input, allowedTags) => {
-    const tagRegExp = /<\/?([a-zA-Z0-9]+)[^>]*>/g;
-    const matches = [...input.matchAll(tagRegExp)];
-    let tagsMas = [];
-    for (const match of matches) {
-        let tag = match[0];
-        tag = tag.substring(1, tag.length - 1);
-        const tagName = match[1];
-        if (allowedTags.includes(tag)) {
-            tagsMas.push(findClosingTag(input, tagName));
-        }
-    }
-    return saveText(input, allowedTags, tagsMas);
-};
+const checkIndex = (index, indexMas) => indexMas.some(([start, end]) => index >= start && index <= end);
 
 const saveText = (text, allowedTags, tagIndexes) => {
     const map = {
@@ -21,15 +8,9 @@ const saveText = (text, allowedTags, tagIndexes) => {
         '"': '&quot;',
         "'": '&#39;',
     };
-
-    const regex = new RegExp(`[&<>"'\\s]`, 'g');
-    return text.replaceAll(regex, (match, index) => {
-        if (checkIndex(index, tagIndexes)) {
-            return match;
-        } else {
-            return map[match] || match;
-        }
-    });
+    return text.replaceAll(/[&<>"'\s]/g, (match, index) =>
+        checkIndex(index, tagIndexes) ? match : map[match] || match
+    );
 };
 
 const findClosingTag = (text, tagName) => {
@@ -38,10 +19,10 @@ const findClosingTag = (text, tagName) => {
     const openingTags = [...text.matchAll(openingTagRegex)];
     const closingTags = [...text.matchAll(closingTagRegex)];
     const tagsIndex = [];
-    let flag = false;
 
     for (let i = 0; i < openingTags.length; i++) {
         let openingTagIndex = openingTags[i].index;
+        let flag = false;
 
         for (let j = 0; j < closingTags.length; j++) {
             let closingTagIndex = closingTags[j].index;
@@ -60,12 +41,12 @@ const findClosingTag = (text, tagName) => {
     return tagsIndex;
 };
 
-const checkIndex = (index, indexMas) => {
-    for (const pair of indexMas) {
-        const [start, end] = pair;
-        if (index >= start && index <= end) {
-            return true;
-        }
-    }
-    return false;
+const filter = (input, allowedTags) => {
+    const tagRegExp = /<\/?([a-zA-Z0-9]+)[^>]*>/g;
+    const matches = [...input.matchAll(tagRegExp)];
+    const tagsMas = matches
+        .map(match => match[0].substring(1, match[0].length - 1))
+        .filter(tag => allowedTags.includes(tag))
+        .map(match => findClosingTag(input, match));
+    return saveText(input, allowedTags, tagsMas);
 };
