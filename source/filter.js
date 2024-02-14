@@ -1,4 +1,9 @@
-const escapeHtml = (unsafe) => {
+/**
+ * Преобразует потенциально опасные символы в безопасный HTML-текст.
+ * @param {string} unsafeHtmlText - HTML-текст, который может содержать небезопасные символы.
+ * @returns {string} Безопасный HTML-текст с экранированными специальными символами.
+ */
+const makeHtmlSafe = (unsafeHtmlText) => {
     const charMap = {
         '&': '&amp;',
         '<': '&lt;',
@@ -7,8 +12,9 @@ const escapeHtml = (unsafe) => {
         "'": '&#39;'
     };
 
-    return unsafe.replace(/[&<>"']/g, match => charMap[match]);
+    return unsafeHtmlText.replace(/[&<>"']/g, match => charMap[match]);
 };
+
 
 function filter(html, allowedTags) {
     let allowedTagsDict = {};
@@ -21,7 +27,7 @@ function filter(html, allowedTags) {
         if (isTag && allowedTagsDict[tagName]) {
             return fragment;
         } else {
-            return escapeHtml(fragment);
+            return makeHtmlSafe(fragment);
         }
     }).join('');
 }
