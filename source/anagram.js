@@ -4,9 +4,9 @@
  * Функция для группироваки анаграмм из массива слов.
  * @param {Array.<string>} words - Массив слов, в котором нужно найти анаграммы.
  * @returns {Array.<Array.<string>>} - Массив массивов строк, где каждый внутренний массив является группой анаграмм.
- * @throws {Error} Если входной аргумент не является массивом или хотя бы один его элемент не является строкой.
+ * @throws {Error} Если входной аргумент не является массивом.
+ * @throws {Error} Если хотя бы один элемент входного массива не является строкой.
  */
-
 const anagram = (words) => {
     if (!Array.isArray(words)) {
         throw new Error("Input must be an array");
@@ -27,5 +27,8 @@ const anagram = (words) => {
         }
     });
 
-    return [...groups.values()].filter(group => group.length > 1).map(group => group.sort()).sort();
+    const anagramGroups = [...groups.values()].filter(group => group.length > 1);
+    const sortedAnagramGroups = anagramGroups.map(group => group.sort()).sort();
+
+    return sortedAnagramGroups;
 };
