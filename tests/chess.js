@@ -32,12 +32,9 @@ QUnit.module('Тестируем функцию chess', function () {
 		assert.strictEqual(chess('asd'), null);
 	});
 
-	QUnit.test('Шахматной доски [1, 2, 3] на [1, 2, 3] не бывает', function (assert) {
-		assert.strictEqual(chess([1, 2, 3]), null);
-	});
-
-	QUnit.test('Шахматной доски {name: "Alex"} на {name: "Alex"} не бывает', function (assert) {
+	QUnit.test('Шахматной доски object на object не бывает', function (assert) {
 		assert.strictEqual(chess({name: "Alex"}), null);
+		assert.strictEqual(chess([1, 2, 3]), null);
 	});
 
 	QUnit.test('Шахматной доски boolean на boolean не бывает', function (assert) {
@@ -48,6 +45,11 @@ QUnit.module('Тестируем функцию chess', function () {
 	QUnit.test('Шахматной доски c отсутствующем значением длины доски не бывает', function (assert) {
 		assert.strictEqual(chess(null), null);
 		assert.strictEqual(chess(undefined), null);
+	});
+
+	QUnit.test('Шахматной доски c не целочисленной длиной не бывает', function (assert) {
+		assert.strictEqual(chess(1.2), null);
+		assert.strictEqual(chess(8.6), null);
 	});
 
 	QUnit.test('Шахматная доска 8 на 8', function (assert) {
