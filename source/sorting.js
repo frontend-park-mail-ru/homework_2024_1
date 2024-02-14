@@ -12,6 +12,9 @@ function merge(left, right, prop) {
     let i = 0;
     let j = 0;
     while (i < left.length && j < right.length) {
+        if (!left[i] || !right[i] || typeof left[i] === Object && !(prop in left[i]) || typeof right[j] === Object && !(prop in right[j])) {
+            return null;
+        }
         if (left[i][prop] > right[j][prop]) {
             result.push(right[j]);
             ++j;
@@ -35,13 +38,14 @@ function merge(left, right, prop) {
  * @returns {Array} - отсортированный массив
  */
 function mergeSort(array, prop) {
+    let result = array;
     if (array.length > 1) {
         let halfLen = array.length / 2;
         let leftPart = mergeSort(array.slice(0, halfLen), prop);
         let rightPart = mergeSort(array.slice(halfLen), prop);
-        return merge(leftPart, rightPart, prop);
+        result = merge(leftPart, rightPart, prop);
     }
-    return array;
+    return (result) ? result : array;
 }
 
 /**
@@ -56,10 +60,7 @@ function mergeSort(array, prop) {
 function sorting(array, properties) {
     let result = array;
     if (Array.isArray(properties) && Array.isArray(array) && properties.length && array.length) {
-        // for (let prop of properties.reverse()) {
-        //     result = mergeSort(array, prop);
-        // }
-        result = properties.reverse().reduce((result, prop) => mergeSort(result, prop), array);
+        result = properties.reverse().reduce((tmpSorted, prop) => mergeSort(tmpSorted, prop), array);
     }
     return result;
 }
