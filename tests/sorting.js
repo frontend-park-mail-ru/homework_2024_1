@@ -160,9 +160,9 @@ QUnit.module('Тестируем функцию sorting', function () {
 	});
 
 	QUnit.test('sorting не сортирует по неправильным входным данным', function (assert) {
-		let initial = {'key': 'value'};
+		let initial = [{'key': 'value'}];
 		let actual = sorting(initial, [ 'id' ]);
-		let expected = {'key': 'value'};
+		let expected = [{'key': 'value'}];
 
 		assert.deepEqual(actual, expected);
 
@@ -177,5 +177,26 @@ QUnit.module('Тестируем функцию sorting', function () {
 		expected = [1, 2, 3, 10, 12, -4];
 
 		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting не сортирует по неправильным входным данным', function (assert) {
+		const initial = [
+			{prop1: 'foo'},
+			{prop1: 'bar', prop2: 1},
+			null,
+			{prop1: []}
+		];
+
+		const actual = sorting(initial, [ 'prop1' ]);
+
+		const expected = [
+			{prop1: 'foo'},
+			{prop1: 'bar', prop2: 1},
+			null,
+			{prop1: []}
+		];
+
+		assert.deepEqual(actual, expected);
+
 	});
 });
