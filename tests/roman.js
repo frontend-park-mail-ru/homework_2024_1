@@ -39,19 +39,26 @@ QUnit.module('Тестируем функцию roman', function () {
 	});
 
     QUnit.test('roman не заходит за границы допустимых значений', function (assert) {
-        assert.strictEqual(roman(4000), null);
-        assert.strictEqual(roman(0), null);
+		assert.throws(() => {roman(0)}, RangeError);
+		assert.throws(() => {roman(4000)}, RangeError);
+    });
+
+	QUnit.test('roman не обрабатывает числа с плавающей точкой', function (assert) {
+		assert.throws(() => {roman(0.3)}, TypeError);
+		assert.throws(() => {roman(99.1223)}, TypeError);
     });
 
     QUnit.test('roman проверяет корректность римского числа', function (assert) {
-        assert.strictEqual(roman('MMaboba'), null);
-        assert.strictEqual(roman('MAN'), null);
-        assert.strictEqual(roman('XO'), null);
+        assert.throws(() => {roman('MMaboba')}, RangeError);
+        assert.throws(() => {roman('MAN')}, RangeError);
+        assert.throws(() => {roman('XO')}, RangeError);
 
     });
 
-    QUnit.test('roman проверяет на корректный тип объекты', function (assert) {
-        assert.strictEqual(roman([]), null);
-        assert.strictEqual(roman({}), null);
+    QUnit.test('roman проверяет, что передан корректный тип данных', function (assert) {
+		assert.throws(() => {roman({})}, TypeError);
+		assert.throws(() => {roman([])}, TypeError);
+		assert.throws(() => {roman(true)}, TypeError);
+		assert.throws(() => {roman(undefined)}, TypeError);
     });
 });
