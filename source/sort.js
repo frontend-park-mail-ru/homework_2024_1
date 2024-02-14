@@ -7,7 +7,9 @@
  */
 
 const sort = (sentence) =>
-  quickSort(sentence.split(' ').map(wordSort)).join(' ');
+  typeof sentence === 'string'
+    ? quickSort(sentence.split(' ').map(wordSort)).join(' ')
+    : null;
 
 /**
  * Sorts letters in word and changes letters case.

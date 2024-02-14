@@ -43,4 +43,13 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('6*473521_'), '_*1234567');
 		assert.strictEqual(sort('447 372 321'), '123 237 447');
 	});
+
+  QUnit.test('Функция возвращает null в ответ на некорректные параметры', function (assert) {
+		assert.strictEqual(sort(undefined), null);
+		assert.strictEqual(sort(null), null);
+		assert.strictEqual(sort(NaN), null);
+		assert.strictEqual(sort(123), null);
+		assert.strictEqual(sort(true), null);
+		assert.strictEqual(sort([]), null);
+	});
 });
