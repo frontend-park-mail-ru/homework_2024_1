@@ -32,8 +32,14 @@ QUnit.module('Тестируем функцию minmax', function () {
 	QUnit.test('minmax игнорирует обычный текст', function (assert) {
 		assert.deepEqual(minmax('1, -5.8 или 10, хотя 34 + -5.3 и 73'), [ -5.8, 73 ]);
 	});
+
 	QUnit.test('в minmax передали число или вызвали без аргумента', function (assert) {
 		assert.deepEqual(minmax(3), [ undefined, undefined ]);
 		assert.deepEqual(minmax(), [ undefined, undefined ]);
+	});
+
+	QUnit.test('Дополнительные тесты: new String и добавление знаков , . ;', function (assert) {
+		assert.deepEqual(minmax(new String('1 2 3')), [ 1, 3 ]);
+		assert.deepEqual(minmax(new String('1,4 2; 3.')), [ 1, 4 ]);
 	});
 });
