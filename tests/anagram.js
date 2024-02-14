@@ -83,11 +83,18 @@ QUnit.module('Тестируем функцию anagram', function () {
 	});
 
 	QUnit.test('Функция работает правильно с заведомо некорректными входными данными.', function (assert) {
-		const input = [null, 123, 'мир'];
-
+		let foo = ['мир', 'рим']; foo = undefined;
+		const input = foo;
 		const output = [];
 
 		assert.deepEqual(anagram(input), output);
 	});
+
+	QUnit.test('Функция работает правильно с заведомо некорректными входными данными(2).', function (assert) {
+		const input = [null, undefined];
+		const output = [];
+		assert.deepEqual(anagram(input), output);
+	});
+
 	
 });
