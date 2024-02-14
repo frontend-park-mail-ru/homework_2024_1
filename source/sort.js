@@ -7,12 +7,21 @@
  */
 
 const sort = (sentence) => {
-  if (typeof sentence !== 'string' || sentence.length === 0) {
+  if (!isString(sentence) || sentence.length === 0) {
     return null;
   }
-  
+
   return quickSort(sentence.split(' ').map(wordSort)).join(' ');
 };
+
+/**
+ * Check if value is string.
+ * @param {*} value - value to check
+ * @returns {boolean}
+ */
+
+const isString = (value) =>
+  typeof value === 'string' || value instanceof String;
 
 /**
  * Sorts letters in word and changes letters case.
