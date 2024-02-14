@@ -39,26 +39,34 @@ QUnit.module('Тестируем функцию roman', function () {
 	});
 
     QUnit.test('roman не заходит за границы допустимых значений', function (assert) {
-		assert.throws(() => {roman(0)}, RangeError);
-		assert.throws(() => {roman(4000)}, RangeError);
+		let error = RangeError();
+		error.message = "Число должно быть больше 0 и меньше 4000"
+		assert.throws(() => {roman(0)}, error);
+		assert.throws(() => {roman(4000)}, error);
     });
 
 	QUnit.test('roman не обрабатывает числа с плавающей точкой', function (assert) {
-		assert.throws(() => {roman(0.3)}, TypeError);
-		assert.throws(() => {roman(99.1223)}, TypeError);
+		let error = TypeError();
+		error.message = "Число должно быть целым"
+		assert.throws(() => {roman(0.3)}, error);
+		assert.throws(() => {roman(99.1223)}, error);
     });
 
     QUnit.test('roman проверяет корректность римского числа', function (assert) {
-		assert.throws(() => {roman('MMaboba')}, RangeError);
-        assert.throws(() => {roman('MAN')}, RangeError);
-        assert.throws(() => {roman('XO')}, RangeError);
+		let error = RangeError();
+		error.message = "Неправильная запись римского числа"
+		assert.throws(() => {roman('MMaboba')}, error);
+        assert.throws(() => {roman('MAN')}, error);
+        assert.throws(() => {roman('XO')}, error);
 
     });
 
     QUnit.test('roman проверяет, что передан корректный тип данных', function (assert) {
-		assert.throws(() => {roman({})}, TypeError);
-		assert.throws(() => {roman([])}, TypeError);
-		assert.throws(() => {roman(true)}, TypeError);
-		assert.throws(() => {roman(undefined)}, TypeError);
+		let error = TypeError();
+		error.message = "Тип данных не поддерживается";
+		assert.throws(() => {roman({})}, error);
+		assert.throws(() => {roman([])}, error);
+		assert.throws(() => {roman(true)}, error);
+		assert.throws(() => {roman(undefined)}, error);
     });
 });

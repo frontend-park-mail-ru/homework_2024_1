@@ -41,21 +41,21 @@ const convertFromRomanToDecimal = (romanNumber) => {
     throw new RangeError('Неправильная запись римского числа');
   }
 
-  const decimalNumber = LIST_WITH_CONVERTION_ROMAN_AND_DECIMAL.reduce(
+  return LIST_WITH_CONVERTION_ROMAN_AND_DECIMAL.reduce(
     (currentSum, currentPair) => {
-      let checkOnStartRegex = new RegExp(
+      let checkOnStartWithGivenRomanLetter = new RegExp(
         '^' + currentPair.romanValue + '{0,4}',
         'g'
       );
 
-      if (checkOnStartRegex.test(upperRomanNumber)) {
-        let matchedLetters = upperRomanNumber.match(checkOnStartRegex);
-        let countLetters = matchedLetters
-          ? matchedLetters[0].split(currentPair.romanValue).length - 1
+      if (checkOnStartWithGivenRomanLetter.test(upperRomanNumber)) {
+        let matchedRomanLetters = upperRomanNumber.match(checkOnStartWithGivenRomanLetter);
+        let countMatchedRomanLetters = matchedRomanLetters
+          ? matchedRomanLetters[0].split(currentPair.romanValue).length - 1
           : 0;
-        currentSum += currentPair.decimalValue * countLetters;
+        currentSum += currentPair.decimalValue * countMatchedRomanLetters;
         upperRomanNumber = upperRomanNumber.slice(
-          currentPair.romanValue.length * countLetters
+          currentPair.romanValue.length * countMatchedRomanLetters
         );
       }
 
@@ -63,8 +63,6 @@ const convertFromRomanToDecimal = (romanNumber) => {
     },
     0
   );
-
-  return decimalNumber;
 };
 
 /**
@@ -83,7 +81,7 @@ const convertFromDecimalToRoman = (decimalNumber) => {
     throw new RangeError('Число должно быть больше 0 и меньше 4000');
   }
 
-  const romanNumber = LIST_WITH_CONVERTION_ROMAN_AND_DECIMAL.reduce(
+  return LIST_WITH_CONVERTION_ROMAN_AND_DECIMAL.reduce(
     (resultRomanNumber, currentPair) => {
       while (convertedDecimalNumber >= currentPair.decimalValue) {
         convertedDecimalNumber -= currentPair.decimalValue;
@@ -94,8 +92,6 @@ const convertFromDecimalToRoman = (decimalNumber) => {
     },
     ''
   );
-
-  return romanNumber;
 };
 
 /**
