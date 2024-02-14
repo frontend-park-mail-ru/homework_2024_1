@@ -27,5 +27,3 @@ const chess = (dimension) => {
 
     return lines;
 };
-
-console.log(chess(3))
