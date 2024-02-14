@@ -5,7 +5,8 @@
  *
  * @param {number[]} intArray - array of integer values
  * @param {number} columns - number of columns
- * @returns {undefined|string} - formatted string or undefined if wrong arguments
+ * @returns {string} - formatted string
+ * @throws {TypeError} - Will throw an error if arguments has wrong type
  */
 const format = (intArray, columns) => {
     // type checking
@@ -39,7 +40,7 @@ const format = (intArray, columns) => {
 
         const isLastRow = index === intArray.length - 1;
 
-        if(currColumn === columns - 1 && !isLastRow){
+        if (currColumn === columns - 1 && !isLastRow) {
             result += "\n";
         }
         return result;

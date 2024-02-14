@@ -52,10 +52,10 @@ QUnit.module('Тестируем функцию format', function () {
 		assert.strictEqual(format(input, 3), expected3);
 	});
 
-	QUnit.test('format возвращает undefined при неправильно переданнных данных', function (assert) {
-		assert.throws(format("str", 3), TypeError);
-		assert.throws(format([1, 2], "str"), TypeError);
-		assert.throws(format(["aed", 2], 2), TypeError);
+	QUnit.test('format выбрасывает TypeError при неправильно переданнных данных', function (assert) {
+		assert.throws(() => format("str", 3), TypeError);
+		assert.throws(() => format([1, 2], "str"), TypeError);
+		assert.throws(() => format(["aed", 2], 2), TypeError);
 	});
 
 	QUnit.test('format работает правильно при недостатке элементов в массиве', function (assert) {
