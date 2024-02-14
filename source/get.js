@@ -9,13 +9,13 @@
 const get = (object, property) => {
     let propertyArray = property.split('.').slice(1).filter(item => item.length > 0);
     let current = object;
-    for (let i = 0; i < propertyArray.length; i++) {
-        if (!current.hasOwnProperty(propertyArray[i])) {
+    propertyArray.forEach((item) => {
+        if (!current.hasOwnProperty(item)) {
             current = undefined;
-            break;
+            throw ReferenceError(`${item} property is undefined`);
         }
-        current = current[propertyArray[i]];
-    }
+        current = current[item];
+    })
     return current;
 }
 
