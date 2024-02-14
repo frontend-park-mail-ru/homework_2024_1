@@ -7,8 +7,9 @@
  * @returns {string} - proceeded string
  */
 const letters = (seq, saveFirst) => {
-    if (typeof seq != 'string' && !(seq instanceof String))
-        return undefined;
+    if (typeof seq != 'string' && !(seq instanceof String)) {
+        return null;
+    }
 
     let seqArr = Array.from(seq)
     const seen = new Map();
@@ -29,8 +30,7 @@ const letters = (seq, saveFirst) => {
     let newSeq = '';
     seqArr.forEach((letter, i) => {
         let letterObj = seen.get(letter);
-        // 'saveFirst == false' is due to there is an 'saveFirst == undefined' option possible
-        if (letterObj.unique || (saveFirst && i === letterObj.first) || (saveFirst === false && i === letterObj.last)) {
+        if (letterObj.unique || saveFirst != undefined && ((saveFirst && i === letterObj.first) || (!saveFirst && i === letterObj.last))) {
             newSeq += letter;
         }
     })

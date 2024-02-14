@@ -55,9 +55,9 @@ QUnit.module('Тестируем функцию letters', function () {
 	});	
 	
 	QUnit.test('Если на вход попадает undefined', function (assert) {
-		assert.strictEqual(letters(), undefined);
-		assert.strictEqual(letters(undefined, true), undefined);
-		assert.strictEqual(letters(undefined, false), undefined);
+		assert.strictEqual(letters(), null);
+		assert.strictEqual(letters(undefined, true), null);
+		assert.strictEqual(letters(undefined, false), null);
 	});
 
 	QUnit.test('Если на вход попадает пустая строка', function (assert) {
@@ -67,21 +67,21 @@ QUnit.module('Тестируем функцию letters', function () {
 	});
 	
 	QUnit.test('Если на вход попадает что-то не то', function (assert) {
-		assert.strictEqual(letters(10), undefined);
-		assert.strictEqual(letters(120, true), undefined);
-		assert.strictEqual(letters(822, false), undefined);
+		assert.strictEqual(letters(10), null);
+		assert.strictEqual(letters(120, true), null);
+		assert.strictEqual(letters(822, false), null);
 
-		assert.strictEqual(letters([12, 33]), undefined);
-		assert.strictEqual(letters([12, 33], true), undefined);
-		assert.strictEqual(letters([12, 33], false), undefined);
+		assert.strictEqual(letters([12, 33]), null);
+		assert.strictEqual(letters([12, 33], true), null);
+		assert.strictEqual(letters([12, 33], false), null);
 
-		assert.strictEqual(letters(null), undefined);
-		assert.strictEqual(letters(null, true), undefined);
-		assert.strictEqual(letters(null, false), undefined);
+		assert.strictEqual(letters(null), null);
+		assert.strictEqual(letters(null, true), null);
+		assert.strictEqual(letters(null, false), null);
 
-		assert.strictEqual(letters(true), undefined);
-		assert.strictEqual(letters(true, true), undefined);
-		assert.strictEqual(letters(true, false), undefined);
+		assert.strictEqual(letters(true), null);
+		assert.strictEqual(letters(true, true), null);
+		assert.strictEqual(letters(true, false), null);
 	});
 	
 	QUnit.test('Если на вход попадает объект String', function (assert) {
