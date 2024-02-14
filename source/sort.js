@@ -6,10 +6,13 @@
  * @returns {string} - sorted sentence with sorted words
  */
 
-const sort = (sentence) =>
-  typeof sentence === 'string'
-    ? quickSort(sentence.split(' ').map(wordSort)).join(' ')
-    : null;
+const sort = (sentence) => {
+  if (typeof sentence !== 'string' || sentence.length === 0) {
+    return null;
+  }
+  
+  return quickSort(sentence.split(' ').map(wordSort)).join(' ');
+};
 
 /**
  * Sorts letters in word and changes letters case.
