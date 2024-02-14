@@ -1,41 +1,14 @@
 'use strict';
 
-function updateMinMax(min, max, current) {
-    if (!isNaN(current)) {
-        if (max === undefined) {
-            max = current;
-        } else {
-            if (current > max) {
-                max = current;
-            }
-        }
-        if (min === undefined) {
-            min = current;
-        } else {
-            if (current < min) {
-                min = current;
-            }
-        }
-    }
-    return [min, max];
-}
-
-function minmax(numbers) {
-    let currentWord = "";
-    let currentNumber;
-    let minMaxNumbers = [undefined, undefined];
-    for (let symbol of numbers) {
-        if (symbol !== ' ') {
-            currentWord += symbol;
-        } else if (currentWord !== "") {
-            currentNumber = Number(currentWord)
-            minMaxNumbers = updateMinMax(minMaxNumbers[0], minMaxNumbers[1], currentNumber);
-            currentWord = "";
-        }
-    }
-    if (currentWord !== "") {
-        currentNumber = Number(currentWord);
-        minMaxNumbers = updateMinMax(minMaxNumbers[0], minMaxNumbers[1], currentNumber);
-    }
-    return minMaxNumbers;
+/**
+ * Finds minimum and maximum numbers from a string.
+ * @param {string} numbersStr - The string, that contains numbers.
+ * @returns {Array} - Array, that contains minimum and maximum numbers. If such numbers are not found, returns
+ * [undefined, undefined].
+ */
+function minmax(numbersStr) {
+    const numbersStrArr = numbersStr.replace(/[,!?]/g, '').split(' ');
+    let numbersArr = numbersStrArr.map((number) => number ? Number(number) : NaN);
+    numbersArr = numbersArr.filter(number => !isNaN(number));
+    return numbersArr.length === 0 ? [undefined, undefined] : [Math.min(...numbersArr), Math.max(...numbersArr)];
 }

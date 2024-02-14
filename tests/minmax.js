@@ -49,4 +49,9 @@ QUnit.module('Тестируем функцию minmax', function () {
 		assert.deepEqual(minmax('-Infinity йцуу'), [-Infinity, -Infinity]);
 	});
 
+	QUnit.test('minmax правильно работает со строками, содержащими пробелы между числами', function (assert) {
+		assert.deepEqual(minmax('12         -.123 		Infinity'), [-.123, Infinity]);
+		assert.deepEqual(minmax('12   -.12334'), [-.12334, 12]);
+	});
+
 });
