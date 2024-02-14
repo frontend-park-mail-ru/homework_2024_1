@@ -12,13 +12,17 @@ const get = (obj, property) => {
         return undefined;
     }
 
-    if (property[0] !== '.') return undefined;
+    if (property[0] !== '.'){
+        return undefined;
+    }
     
     const propertyQuery = property.split('.').filter(str => str.length > 0);
 
     let copy = obj;
     for (const curProp of propertyQuery){
-        if (!copy) return copy;
+        if (!copy) {
+            return copy;
+        }
         copy = copy[curProp];
     }
     return copy;
