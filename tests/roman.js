@@ -39,21 +39,21 @@ QUnit.module('Тестируем функцию roman', function () {
 	});
 
     QUnit.test('roman не заходит за границы допустимых значений', function (assert) {
-		let error = RangeError();
+		const error = RangeError();
 		error.message = "Число должно быть больше 0 и меньше 4000"
 		assert.throws(() => {roman(0)}, error);
 		assert.throws(() => {roman(4000)}, error);
     });
 
 	QUnit.test('roman не обрабатывает числа с плавающей точкой', function (assert) {
-		let error = TypeError();
+		const error = TypeError();
 		error.message = "Число должно быть целым"
 		assert.throws(() => {roman(0.3)}, error);
 		assert.throws(() => {roman(99.1223)}, error);
     });
 
     QUnit.test('roman проверяет корректность римского числа', function (assert) {
-		let error = RangeError();
+		const error = RangeError();
 		error.message = "Неправильная запись римского числа"
 		assert.throws(() => {roman('MMaboba')}, error);
         assert.throws(() => {roman('MAN')}, error);
@@ -62,7 +62,7 @@ QUnit.module('Тестируем функцию roman', function () {
     });
 
     QUnit.test('roman проверяет, что передан корректный тип данных', function (assert) {
-		let error = TypeError();
+		const error = TypeError();
 		error.message = "Тип данных не поддерживается";
 		assert.throws(() => {roman({})}, error);
 		assert.throws(() => {roman([])}, error);

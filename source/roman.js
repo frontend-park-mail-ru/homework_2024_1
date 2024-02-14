@@ -43,14 +43,14 @@ const convertFromRomanToDecimal = (romanNumber) => {
 
   return LIST_WITH_CONVERTION_ROMAN_AND_DECIMAL.reduce(
     (currentSum, currentPair) => {
-      let checkOnStartWithGivenRomanLetter = new RegExp(
+      const checkOnStartWithGivenRomanLetter = new RegExp(
         '^' + currentPair.romanValue + '{0,4}',
         'g'
       );
 
       if (checkOnStartWithGivenRomanLetter.test(upperRomanNumber)) {
-        let matchedRomanLetters = upperRomanNumber.match(checkOnStartWithGivenRomanLetter);
-        let countMatchedRomanLetters = matchedRomanLetters
+        const matchedRomanLetters = upperRomanNumber.match(checkOnStartWithGivenRomanLetter);
+        const countMatchedRomanLetters = matchedRomanLetters
           ? matchedRomanLetters[0].split(currentPair.romanValue).length - 1
           : 0;
         currentSum += currentPair.decimalValue * countMatchedRomanLetters;
