@@ -1,22 +1,33 @@
 'use strict';
 
+/**
+ * Функция вычисляет НОД для переданных натуральных чисел.
+ * @param  {...number} args - Числа, для которых необходимо найти НОД. 
+ * @throws {TypeError|Error}
+ * @returns {number|Error} - НОД переданных чисел или null, если переданы некорректные аргументы.
+ */
 const euclid = (...args) => {
     args.forEach((arg) => {
         if (typeof arg != 'number' || !isFinite(arg)) {
-            throw new Error('Недопустимый аргумент: все аргументы должны быть натуральными конечными числами');
+            throw new TypeError('Недопустимый аргумент: все аргументы должны быть натуральными конечными числами');
         }
+
         if (arg < 0) {
-            throw new Error('Недопустимый аргумент: все аргуметны должны быть неотрицательными числами');
+            throw new Error('Недопустимый аргумент: все аргументы должны быть неотрицательными числами');
         }
     });
 
-    if (args.length === 1) {
-        return args[0];
-    }
-    if (args.length === 2) {
-        if (args[1] === 0) return args[0];
-        else return euclid(args[1], args[0] % args[1]);
-    }   else if (args.length > 2) {
-        return args.reduce((result, current) => euclid(result, current));
+    switch (args.length) {
+        case 1:
+            return args[0];
+        case 2: 
+            const num1 = args[0];
+            const num2 = args[1];
+            if (num2 === 0) {
+                return num1;
+            }
+            return euclid(num2, num1 % num2);
+        default:
+            return args.reduce((result, current) => euclid(result, current));
     }
 }
