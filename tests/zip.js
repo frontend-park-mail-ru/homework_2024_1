@@ -85,7 +85,6 @@ QUnit.module('Тестируем функцию zip', function () {
 		};
 		assert.deepEqual(zip({name: "Margo", weight: 49}, {name: "Anna", weight: 49}), obj2);
 
-
 		const obj3 = {
 			name: "Margo",
 			weight: 49,
