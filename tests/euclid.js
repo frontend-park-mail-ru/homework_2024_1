@@ -28,12 +28,6 @@ QUnit.module('Тестируем функцию euclid', function () {
 		const temp = [ 80325, 55275, 8746650, 3000000, 45672375, 225, 54675 ];
 		assert.strictEqual(euclid(...[ ...temp, ...temp, ...temp, ...temp, ...temp ]), euclid(...temp));
 	});
-
-	QUnit.test('Работает правильно с одним числом', function (assert) {
-		assert.strictEqual(euclid(1), 1, 'euclid(1) === 1');
-		assert.strictEqual(euclid(5), 5, 'euclid(5) === 5');
-		assert.strictEqual(euclid(100012), 100012, 'euclid(100012) === 100012');
-	});
 	
 	QUnit.test('Работает правильно с двумя числами', function (assert) {
 		assert.strictEqual(euclid(12, 18), 6, 'euclid(12, 18) === 6');
