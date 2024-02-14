@@ -35,10 +35,7 @@ QUnit.module("Проверка работы функции filter", function () 
   });
 
   QUnit.test("filter обрабатывает пустую строку", function (assert) {
-    const input = "";
-    const output = filter(input, ["strong", "em"]);
-    const expected = "";
-    assert.strictEqual(output, expected);
+    assert.strictEqual(filter("", ["strong", "em"]), "");
   });
 
   QUnit.test(
@@ -47,6 +44,36 @@ QUnit.module("Проверка работы функции filter", function () 
       const input = "<strong><em>Hello!</em></strong>";
       const output = filter(input, ["strong", "em"]);
       const expected = "<strong><em>Hello!</em></strong>";
+      assert.strictEqual(output, expected);
+    }
+  );
+
+  QUnit.test(
+    "filter обрабатывает ошибку, где вместо текста передали число",
+    function (assert) {
+      const input = 1;
+      let output;
+      try {
+        output = filter(input, ["strong", "em"]);
+      } catch (error) {
+        output = error.message;
+      }
+      const expected = "Invalid input. 'input' must be a string.";
+      assert.strictEqual(output, expected);
+    }
+  );
+
+  QUnit.test(
+    "filter обрабатывает ошибку, где вместо массива тэгов передали число",
+    function (assert) {
+      const input = "<strong><em>Hello!</em></strong>";
+      let output;
+      try {
+        output = filter(input, 1);
+      } catch (error) {
+        output = error.message;
+      }
+      const expected = "Invalid input. 'allowedTags' must be an array.";
       assert.strictEqual(output, expected);
     }
   );
