@@ -1,8 +1,11 @@
 'use strict'
 
-const JUST_EOL = '\n';
-const ASTRA_EOL = '*\n';
-const SPACE_EOL = ' \n';
+const EOL = '\n';
+const ASTRA = '*';
+const SPACE = ' ';
+const ASTRA_EOL = `${ASTRA}${EOL}`;
+const SPACE_EOL = `${SPACE}${EOL}`;
+const ASTRA_SPACE = `${ASTRA}${SPACE}`;
 
 /**
  * Print chess board with a current length
@@ -15,14 +18,14 @@ const chess = (dimension) => {
         return null;
     }
 
-    let lines = "* ".repeat(dimension / 2);
-    let reverse_line = lines.split('').reverse().join('');
-    const isOdd = dimension % 2 === 1;
+    let lines = ASTRA_SPACE.repeat(dimension / 2);
+    let reversedLine = lines.split('').reverse().join('');
+    const isOdd = dimension % 2;
 
     if (isOdd) {
-        lines = (lines + ASTRA_EOL + reverse_line + SPACE_EOL).repeat(dimension / 2) + lines + ASTRA_EOL;
+        lines = (lines + ASTRA_EOL + reversedLine + SPACE_EOL).repeat(dimension / 2) + lines + ASTRA_EOL;
     } else {
-        lines = (lines + JUST_EOL + reverse_line + JUST_EOL).repeat(dimension / 2);
+        lines = (lines + EOL + reversedLine + EOL).repeat(dimension / 2);
     }
 
     return lines;
