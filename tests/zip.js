@@ -80,13 +80,13 @@ QUnit.module('Тестируем функцию zip', function () {
 	});
 
 	QUnit.test('Функция правильно работает с числами', function (assert) {
-		assert.deepEqual(zip(8, 7, 465.34), {});
+		assert.deepEqual(zip(8, 7, 465.34), {}, 'Не обрабатывает числа');
 		assert.deepEqual(zip({answer: 42}, 45, 0), {answer: 42});
 	});
 
 	QUnit.test('Функция работает с массивами и строками', function (assert) {
-		assert.deepEqual(zip('sfd'), {0:'s', 1:'f', 2:'d'}, 'Распаковывает по индексам как свойства объекта');
-		assert.deepEqual(zip([3, 4, 5]), {0:3, 1:4, 2:5});
-		assert.deepEqual(zip('sf', [3, 4, 5]), {0:'s', 1:'f', 2:5});
+		assert.deepEqual(zip('sfd'), {}, 'Не обрабатывает строки');
+		assert.deepEqual(zip([3, 4, 5]), {0:3, 1:4, 2:5}, 'Распаковывает по индексам как свойства объекта');
+		assert.deepEqual(zip('sf', [3, 4, 5], [10, 11, 12, 'aaa']), {0:3, 1:4, 2:5, 3:'aaa'});
 	});
 });
