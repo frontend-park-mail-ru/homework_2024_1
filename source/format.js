@@ -19,7 +19,7 @@ const format = (intArray, columns) => {
     const formatLenArray = [];
 
     intArray.forEach((value, index) => {
-        const currColumn = index % columns
+        const currColumn = index % columns;
         const currArrayValueLen = value.toString().length;
 
         if (!formatLenArray[currColumn] ||
