@@ -117,19 +117,19 @@ QUnit.module('Тестируем функцию set', function () {
 	});
 
 	QUnit.test('set обрабатывает исключения, когда в path приходит что-то не то', function (assert) {
-		assert.throws(function() {set({ foo: 'bar' }, null, 'baz')}, TypeError, 'Invalid path type');
-		assert.throws(function() {set({ foo: 'bar' }, 2, 'baz')}, TypeError, 'Invalid path type');
+		assert.throws(() => {set({ foo: 'bar' }, null, 'baz')}, TypeError, 'Invalid path type');
+		assert.throws(() => {set({ foo: 'bar' }, 2, 'baz')}, TypeError, 'Invalid path type');
 	});
 
 	QUnit.test('set работает правильно если переданный путь равен {}', function (assert) {
 
-		assert.throws(function() {set({ foo: 'bar' }, {}, 'baz')}, TypeError, 'Invalid path type');
-		assert.throws(function() {set({ foo: 'bar' }, {foo: 'bar'}, 'baz')}, TypeError, 'Invalid path type');
+		assert.throws(() => {set({ foo: 'bar' }, {}, 'baz')}, TypeError, 'Invalid path type');
+		assert.throws(() => {set({ foo: 'bar' }, {foo: 'bar'}, 'baz')}, TypeError, 'Invalid path type');
 	});
 
 	QUnit.test('set работает правильно если переданный путь представляет из себя функцию', function (assert) {
 
-		assert.throws(function() {set({ foo: 'bar' }, function(){return}, 'baz')}, TypeError, 'Invalid path type');
+		assert.throws(() => {set({ foo: 'bar' }, () => {return}, 'baz')}, TypeError, 'Invalid path type');
 	});
 
     // тесты для случая, когда путь приходит без точки в начале
@@ -227,7 +227,4 @@ QUnit.module('Тестируем функцию set', function () {
 
 		assert.deepEqual(set({}, 'deep.nested.field', null), object);
 	});
-
-	
-
 });
