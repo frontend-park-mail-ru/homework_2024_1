@@ -1,25 +1,33 @@
 'use strict'
 
-/* Сортировка букв в слове */
+/** 
+ * Сортировка букв в слове
+ * @param {string} word - слово, которое нужно отсортировать
+ * @returns {string} - отсортированное слово
+*/
 const sortLetters = (word) => {
     const newWord = word
         .toLowerCase()
         .split('')
-        .sort((letter, char) => letter.localeCompare(char))
+        .sort((letterA, letterB) => letterA.localeCompare(letterB))
         .join('');
     return newWord[0].toUpperCase() + newWord.slice(1);
 }
 
-/* Сортировка отдельных слов */
-const sort = (sentence) => {
+/** Сортировка отдельных слов 
+ * @param {string} sentence - неотсортированное предложение
+ * @throws {TypeError}
+ * @returns {{sentence | TypeError}} - отсортированное предложение или null,
+*/
+const sort = sentence => {
     if (typeof (sentence) !== "string") {
-        return "Необходимо ввести строку"
+        return new TypeError("Необходимо ввести строку");
     }
     return sentence
         .trim()
         .split(' ')
         .filter((word) => word !== '') // удаляем лишние пробелы
         .map(sortLetters)
-        .sort((word, ans) => word.localeCompare(ans))
+        .sort((wordA, wordB) => wordA.localeCompare(wordB))
         .join(' ');
 }
