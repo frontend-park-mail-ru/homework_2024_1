@@ -3,7 +3,7 @@
 
 function anagram (words) {
     if (!Array.isArray(words)) {
-        words = [words];
+        return [];
     }
     return Object.values(words.reduce((anagramDictionary, word) => {
         if (typeof word !== 'string'){
