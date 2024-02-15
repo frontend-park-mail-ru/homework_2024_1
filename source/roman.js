@@ -40,23 +40,23 @@ const roman = (roman) => {
     if (!isNaN(parseInt(roman))) {
         roman = parseInt(roman);
         if (roman > 8999) {
-            throw new Error('Число превышает максимально допустимое значение');
+            throw new RangeError('Число превышает максимально допустимое значение');
         }
 
         let pointer = 14;
         let result = '';
-        let subSum;
+        let numLeft;
         if (typeof (roman) === 'string') {
-            subSum = roman.replace(' ', '').replace('.', '');
+            numLeft = roman.replace(' ', '').replace('.', '');
         } else {
-            subSum = roman;
+            numLeft = roman;
         }
         while (subSum > 0) {
             while (romanNumbers[pointer].num > subSum) {
                 pointer -= 1;
             }
             result += romanNumbers[pointer].ch;
-            subSum -= romanNumbers[pointer].num;
+            numLeft -= romanNumbers[pointer].num;
         }
         return result;
     }
