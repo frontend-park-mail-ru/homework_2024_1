@@ -195,9 +195,74 @@ QUnit.module('Тестируем функцию sorting', function () {
 
 	QUnit.test('sorting сортирует по полям с недопустимыми типами', function (assert) {
 		const initial = [
-			{prop1: {1: "string"}, id: undefined, check: true},
+			{prop1: {1: 'string'}, id: undefined, check: true, null: null},
 		];
 		const actual = sorting(initial, [ 'id', 'prop1']);
+
+		const expected = null;
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting проверка работы, если передан объект instanceof String', function (assert) {
+		const initial = [
+			{prop1: 4, id: '2'},
+			{prop1: 4, id: new String('1')},
+		];
+
+		const actual = sorting(initial, ['id']);
+
+		const expected = [
+			{prop1: 4, id: '1'},
+			{prop1: 4, id: '2'},
+		];
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting проверка работы, если передан объект instanceof Number', function (assert) {
+		const initial = [
+			{prop1: 4, id: 2},
+			{prop1: 4, id: new Number(1)},
+		];
+
+		const actual = sorting(initial, ['id']);
+
+		const expected = [
+			{prop1: 4, id: 1},
+			{prop1: 4, id: 2},
+		];
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting проверка на undefined вместо object', function (assert) {
+		const initial = [
+			undefined,
+			{prop1: 4, id: '2', check: 1},
+		];
+		const actual = sorting(initial, ['prop1']);
+
+		const expected = null;
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting проверка на null вместо object', function (assert) {
+		const initial = [
+			{prop1: 4, id: '2', check: 1},
+			null,
+		];
+		const actual = sorting(initial, ['prop1']);
+
+		const expected = null;
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting проверка на undefined вместо массива', function (assert) {
+		const initial = undefined;
+		const actual = sorting(initial, ['prop1']);
 
 		const expected = null;
 
