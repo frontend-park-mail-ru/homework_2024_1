@@ -40,12 +40,17 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman('2017'), 'MMXVII');
 	});
 
-	QUnit.test('roman правильно обрабатывает некорректные последовательности символов', function (assert) {
+	QUnit.test('roman возвращает null, если на вход передана строка, которую невозможно перевести', function (assert) {
+		assert.strictEqual(roman(''), null);
 		assert.strictEqual(roman('&!"№%::?*()'), null);
 		assert.strictEqual(roman('Спасибо Мефодию за мефодицу'), null);
-		assert.strictEqual(roman(''), null);
-		assert.strictEqual(roman(null), null);
-		assert.strictEqual(roman(' '), null);
-		assert.strictEqual(roman(['VI', 'V']), null);
+	});
+
+	QUnit.test('roman выбрасывает ошибку, если передан некорректный тип данных', function (assert) {
+		[true, null, ['VI', 'V'], function() {}].forEach(function(input) {
+			assert.throws(function() {
+				roman(input);
+			}, Error);
+		});
 	});
 });

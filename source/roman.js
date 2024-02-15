@@ -7,7 +7,7 @@
  */
 const preprocessInput = (input) => {
     if (typeof input !== 'number' && typeof input !== 'string' && !(input instanceof String || input instanceof Number)) {
-        return null;
+        throw new Error('Roman only accepts numbers and strings as input.');
     }
     const romanRegexp = /^[IVXLCDM]+$/;
 
