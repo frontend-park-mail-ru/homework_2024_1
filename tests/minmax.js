@@ -23,7 +23,7 @@ QUnit.module('Тестируем функцию minmax', function () {
 	});
 
 	QUnit.test('minmax правильно парсит несколько чисел', function (assert) {
-		var str = new String('1 2 3.5');
+		const str = new String('1 2 3.5');
 		assert.deepEqual(minmax(str), [ 1, 3.5]);
 		assert.deepEqual(minmax('0 0 0 0'), [ 0, 0 ]);
 		assert.deepEqual(minmax('1 1 1 1'), [ 1, 1 ]);
