@@ -65,8 +65,12 @@
 		});
 
 		QUnit.test('roman правильно обрабатывает большие числа', function (assert) {
-			assert.strictEqual(roman(9001), error);
+			assert.throws(
+				function() {roman(9001);},
+				'Число превышает максимально допустимое значение'
+			);
 		});
+
 
 		QUnit.test('roman правильно обрабатывает бесконечность', function (assert) {
 			assert.strictEqual(roman(Infinity), null);
