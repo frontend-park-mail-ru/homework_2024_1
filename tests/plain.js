@@ -37,10 +37,26 @@ QUnit.module('Тестируем функцию plain', function () {
 		assert.deepEqual(plain([ [ 'abcde' ], [ [ 'f' ], [ null, false ], [ NaN, NaN ], NaN ], -Infinity ]), [ 'abcde', 'f', null, false, NaN, NaN, NaN, -Infinity ]);
 	});
 
-	QUnit.test('Написанные тесты для работы с несколькими массивами', function (assert) {
-		assert.deepEqual(plain([ [1], 2, [3, [4,5,6,[7]], 8], 9, [10]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'Работает с пустыми массивами');
-		assert.deepEqual(plain([ 1, [2, 3, 4], [5, 6, 7, [8]], 9, [10]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-		assert.deepEqual(plain([ [1, 2, 3], [[4, 5], [6, 7], [8]], [9], 10]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+	QUnit.test('Работает с вложенными пустыми массивами', function (assert) {
 		assert.deepEqual(plain([ [ [], [ [] ] ], []]), []);
+		assert.deepEqual(plain([ [], [], [], []]), []);
+		assert.deepEqual(plain([ [ [ [ [ [ [ [ [ [] ] ] ] ] ] ] ] ] ]), []);
+		assert.deepEqual(plain([ [ [ [ [ [] ], [] ], [] ], [] ] ]), []);
+		assert.deepEqual(plain([]), []);
+	});
+
+	QUnit.test('Работает с разными типами данных, а также с вложенными массивами', function (assert) {
+		assert.deepEqual(plain([ "a", [ "a", "a"], "a", ["a"]]), [ "a", "a", "a", "a", "a"],);
+		assert.deepEqual(plain([ "a", [1, 2, 3], ["a", "a", ["a"], 4, 5]]), ["a", 1, 2, 3, "a", "a", "a", 4, 5]);
+		assert.deepEqual(plain([ [ "a", "/"], [1, "a", ["/"]], 2, 3, "/" ]), ["a", "/", 1, "a", "/", 2, 3, "/"]);
+		assert.deepEqual(plain([ [1, 2, 3], 4, 5, [6, [7, [8]]], 9]), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
+	});
+
+	QUnit.test('Работает с входными данными не являющимися массивами.', function (assert) {
+		assert.deepEqual(plain(1), [],);
+		assert.deepEqual(plain(1, 2, 3), []);
+		assert.deepEqual(plain(3.2), []);
+		assert.deepEqual(plain("a"), []);
+		assert.deepEqual(plain("/"), []);
 	});
 });

@@ -1,18 +1,18 @@
+"use strict";
+
+// Функция plain принимает на вход массив массивов и создаёт из них один общий массив. Массивы могут быть любой вложенности.
 const plain = (arr) => {
-    const res = []
-    for (const item of arr) {
+    if ( !(Array.isArray(arr) === true) || arr === undefined || arr.length == 0){
+        return []
+    }
+    var result = []
+    arr.forEach((item) => {
         if (Array.isArray(item) === true) {
-            if (item === undefined || item.length == 0) {
-                continue;
-            }
-            const ans = plain(item)
-            for (const it of ans) {
-                res.push(it)
-            }
+            result = result.concat(plain(item))
         }
         else {
-            res.push(item)
+            result = result.concat(item)
         }
-    }
-    return res
+    });
+    return result
 }
