@@ -1,5 +1,9 @@
 'use strict';
-
+/**
+ * Turnes multidimensional array into a single dimension one
+ * @param {Array} array Multidimensional array
+ * @returns {Array} Single dimension array
+ */
  const plain = (array) => {
 	if (!Array.isArray(array)) {
 		return null;
