@@ -9,7 +9,7 @@ const minmax = (numericString) => {
 		return [undefined, undefined];
 	}
 
-	const subStringArray = numericString.split(/[,;:\s]+/).filter(num => num!='');
+	const subStringArray = numericString.split(/[,;:\s]+/).filter(num => num !== '');
 
 	//преобразование подстрок в значение
 	const numArray = subStringArray.map(Number).filter(num => !Number.isNaN(num));
