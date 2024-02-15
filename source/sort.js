@@ -17,10 +17,10 @@ const sortLetters = (word) => {
 /** Сортировка отдельных слов 
  * @param {string} sentence - неотсортированное предложение
  * @throws {TypeError}
- * @returns {{sentence | TypeError}} - отсортированное предложение или null,
+ * @returns {string} - отсортированное предложение или null
 */
-const sort = sentence => {
-    if (typeof (sentence) !== "string") {
+const sort = (sentence) => {
+    if (typeof sentence !== "string") {
         return new TypeError("Необходимо ввести строку");
     }
     return sentence
