@@ -10,7 +10,7 @@ const parsePath = (path) => {
     return path;
   }; 
   if (path.startsWith('.')) {
-    return (path.substring(1)).split('.');
+    return path.substring(1).split('.');
   };
   return path.split('.');
 };
