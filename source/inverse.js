@@ -1,72 +1,33 @@
 "use strict";
 
-// ? Решение 1. Красивое и короткое, но не лучшее,
-// ? т.к. происходит изменение аргумента arr.
 /**
-const inverse = (arr, num = 0) => {
-    const slice = arr.splice(num);
-
-    return num >= 0
-        ? [...arr, ...slice.reverse()]
-        : [...arr.reverse(), ...slice];
-};
+ *
+ * @param {Array} arr - Массив данных
+ * @param {number} num - Число, показывающее какие элементы не нужно переставлять
+ * @returns массив с противоположным порядком
+ * @example
+ * ```
+ * inverse([1, 2, 3]) returns [3, 2, 1];
+ * inverse([1, 2, 3], 1) returns [1, 3, 2];
+ * inverse([1, 2, 3], -1) returns [2, 1, 3];
+ * ```
  */
-
-// ? Решение 2. Самое безопасное. Можно передавать все, что угодно.
-// ? Но это не всегда хорошо, т.к. может быть непонятно, в чем проблема, если она есть
-/**
-const inverse = (arr, num) => {
-    if (!Array.isArray(arr)) {
-        return undefined;
-    }
-
-    if (!num || typeof num !== "number") {
-        return arr.reverse();
-    }
-
-    return num >= 0
-        ? [...arr.slice(0, num), ...arr.slice(num, arr.length).reverse()]
-        : [...arr.slice(0, num).reverse(), ...arr.slice(num, arr.length)];
-};
- */
-
-// ? Решение 3. Самое короткое, но не лучшее,
-// ? т.к. происходит много действий с массивом при отсутствии num.
-/**
-const inverse = (arr, num = 0) =>
-    num >= 0
-        ? [...arr.slice(0, num), ...arr.slice(num, arr.length).reverse()]
-        : [...arr.slice(0, num).reverse(), ...arr.slice(num, arr.length)];
- */
-
-// ? Решение 4. Имеет место быть.
-/**
-const inverse = (arr, num) => {
-    if (!num) {
-        return arr.reverse();
-    }
-
-    return num > 0
-        ? [...arr.slice(0, num), ...arr.slice(num, arr.length).reverse()]
-        : [...arr.slice(0, num).reverse(), ...arr.slice(num, arr.length)];
-};
-*/
-
 // ? Решение 5. 👍
 const inverse = (arr, num) => {
     if (!Array.isArray(arr)) {
         throw new TypeError("Первый аргумент не массив!");
     }
 
-    if (typeof num !== "number") {
-        throw new TypeError('Второй аргумент не типа "number"!');
-    }
-
     if (!num) {
         return arr.reverse();
     }
 
-    return num >= 0
-        ? [...arr.slice(0, num), ...arr.slice(num, arr.length).reverse()]
-        : [...arr.slice(0, num).reverse(), ...arr.slice(num, arr.length)];
+    if (typeof num !== "number") {
+        throw new TypeError('Второй аргумент не типа "number"!');
+    }
+
+    const leftSlice = arr.slice(0, num);
+    const rightSlice = arr.slice(num, arr.length);
+
+    return num >= 0 ? [...leftSlice, ...rightSlice.reverse()] : [...leftSlice.reverse(), ...rightSlice];
 };
