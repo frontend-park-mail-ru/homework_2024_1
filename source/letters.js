@@ -7,7 +7,7 @@
  * @param {string|String} str Входная строка.
  * @returns {string} Та же строка.
  */
-const checkStr = (str) => Object.prototype.toString.call(str) === '[object String]' ? str : (() => {throw new TypeError("Функция работает только со строками");})();
+const checkStr = (str) => str instanceof String || typeof str == "string" ? str : (() => {throw new TypeError("Функция работает только со строками");})();
 
 
 /**
