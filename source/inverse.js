@@ -1,5 +1,8 @@
 "use strict";
 
+const NOT_ARRAY_ERROR = "Первый аргумент не массив!";
+const NOT_A_NUMBER_ERROR = 'Второй аргумент не типа "number"!';
+
 /**
  *
  * @param {Array} arr - Массив данных
@@ -12,18 +15,17 @@
  * inverse([1, 2, 3], -1) returns [2, 1, 3];
  * ```
  */
-// ? Решение 5. 👍
 const inverse = (arr, num) => {
     if (!Array.isArray(arr)) {
-        throw new TypeError("Первый аргумент не массив!");
+        throw new TypeError(NOT_ARRAY_ERROR);
+    }
+
+    if (num !== undefined && typeof num !== "number") {
+        throw new TypeError(NOT_A_NUMBER_ERROR);
     }
 
     if (!num) {
         return arr.reverse();
-    }
-
-    if (typeof num !== "number") {
-        throw new TypeError('Второй аргумент не типа "number"!');
     }
 
     const leftSlice = arr.slice(0, num);

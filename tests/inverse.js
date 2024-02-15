@@ -43,4 +43,19 @@ QUnit.module("Тестируем функцию inverse", function () {
         assert.deepEqual(inverse([1, 2, 3, 4, 5], -5), [1, 2, 3, 4, 5]);
         assert.deepEqual(inverse([1, 2, 3, 4, 5], -15), [1, 2, 3, 4, 5]);
     });
+    QUnit.test("Функция выбрасывает ошибку, если первым аргументом передан не массив", (assert) => {
+        assert.throws(() => inverse(""), new TypeError(NOT_ARRAY_ERROR));
+        assert.throws(() => inverse(), new TypeError(NOT_ARRAY_ERROR));
+        assert.throws(() => inverse(null), new TypeError(NOT_ARRAY_ERROR));
+        assert.throws(() => inverse(0), new TypeError(NOT_ARRAY_ERROR));
+        assert.throws(() => inverse(false), new TypeError(NOT_ARRAY_ERROR));
+        assert.throws(() => inverse(Infinity), new TypeError(NOT_ARRAY_ERROR));
+    });
+    QUnit.test("Функция выбрасывает ошибку, если вторым аргументом передано не число", (assert) => {
+        assert.throws(() => inverse([], ""), new TypeError(NOT_A_NUMBER_ERROR));
+        assert.throws(() => inverse([], {}), new TypeError(NOT_A_NUMBER_ERROR));
+        assert.throws(() => inverse([], null), new TypeError(NOT_A_NUMBER_ERROR));
+        assert.throws(() => inverse([], []), new TypeError(NOT_A_NUMBER_ERROR));
+        assert.throws(() => inverse([], false), new TypeError(NOT_A_NUMBER_ERROR));
+    });
 });
