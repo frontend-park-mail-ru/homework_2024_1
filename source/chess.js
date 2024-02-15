@@ -19,7 +19,7 @@ const chess = (dimension) => {
     }
 
     let lines = ASTRA_SPACE.repeat(dimension / 2);
-    let reversedLine = lines.split('').reverse().join('');
+    const reversedLine = lines.split('').reverse().join('');
     const isOdd = !!(dimension % 2);
 
     if (isOdd) {
