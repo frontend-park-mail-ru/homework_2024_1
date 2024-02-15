@@ -12,8 +12,8 @@ const zip = (...objects) => {
         if (typeof obj !== 'object' || !obj || Array.isArray(obj)) {
             throw new Error('The function only accepts objects');
         }
-        // reverse() в чистом виде теперь нет, так как подаем sources в assign() в таком порядке,
-        // чтобы в конце получить то, что нужно
+        // цитата из условия задания: "...необходимо оставить значение, которое встретилось раньше..."
+        // это достигается за счет порядка передачи аргументов obj и mergedObject в метод Object.assign()
         return Object.assign({}, obj, mergedObject);
     }, {});
 }

@@ -96,7 +96,6 @@ QUnit.module('Тестируем функцию zip', function () {
 				{name: "Anna", weight: 50, height: 165, age: 20}), obj3);
 	});
 
-
 	QUnit.test('Функция работает со свойствами, которые встречаются в нескольких объектах ' +
 		'при наличии объектов без свойств', function (assert) {
 		const obj = {
