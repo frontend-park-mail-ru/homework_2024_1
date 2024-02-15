@@ -17,17 +17,17 @@ const makeHtmlSafe = (unsafeHtmlText) => {
 
 
 function filter(html, allowedTags) {
-    let allowedTagsDict = {};
-    allowedTags.forEach(tag => allowedTagsDict[tag.toLowerCase()] = true);
-
+    const allowedTagsDict = allowedTags.reduce((dict, tag) => {
+        dict[tag.toLowerCase()] = true;
+        return dict;
+    }, {});
     return html.split(/(<\/?[a-z][a-z0-9]*[^>]*>)/gi).map(fragment => {
         const isTag = /^<\/?[a-z][a-z0-9]*\b[^>]*>$/i.test(fragment);
         const tagName = fragment.replace(/^<\/?([a-z][a-z0-9]*)\b[^>]*>$/i, '$1').toLowerCase();
 
         if (isTag && allowedTagsDict[tagName]) {
             return fragment;
-        } else {
-            return makeHtmlSafe(fragment);
         }
+        return makeHtmlSafe(fragment);
     }).join('');
 }
