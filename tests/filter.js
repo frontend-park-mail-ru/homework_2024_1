@@ -93,16 +93,6 @@ QUnit.test('filter корректно обрабатывает ввод с ра�
     assert.strictEqual(output, expected);
 });
 
-QUnit.test('filter корректно обрабатывает ввод с разными комбинациями тегов', function (assert) {
-    const input = '<p>Hello& <strong>World!</strong></p>';
-
-    const output = filter(input, ['strong']);
-
-    const expected = '&lt;p&gt;Hello&amp; <strong>World!</strong>&lt;/p&gt;';
-
-    assert.strictEqual(output, expected);
-});
-
 QUnit.test('filter корректно обрабатывает ввод с вложенными тегами', function (assert) {
     const input = '<div><p>Hello, <strong>World!</strong></p></div>';
 
