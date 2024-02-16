@@ -233,4 +233,10 @@ QUnit.module('Тестируем функцию set', function () {
 
 		assert.deepEqual(set({}, 'deep.nested.field', null), object);
 	});
+
+	QUnit.test('set работает правильно если path - объектная строка и в начале пути нет точки', function (assert) {
+		const object_string = new String('foo');
+		assert.deepEqual(set({ foo: 'bar' }, object_string, 'baz'), {foo: 'baz'});
+		assert.deepEqual(set({ foo: 'bar' }, new String('foo'), 'baz'), {foo: 'baz'});
+	});
 });
