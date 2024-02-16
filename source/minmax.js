@@ -7,7 +7,7 @@
  */
 const minmax = numbersStr => {
 
-    if (!(typeof numbersStr === 'string')) {
+    if (typeof numbersStr !== 'string') {
         throw new TypeError("Входные данные должны быть строкой");
     }
 
