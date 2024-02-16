@@ -22,7 +22,7 @@ QUnit.module('Тестируем функцию get', function () {
 	QUnit.test('get работает правильно c массивами', function (assert) {
 		const object = {
 			foo: 'bar',
-			baz: [ 1, 2, 3, 'undefined' ],
+			baz: [ 1, 2, 3 ],
 			deep: [
 				{foobar: '42'}
 			]
@@ -46,7 +46,6 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.throws(() => get(object, '.foobar'), ReferenceError('foobar property is undefined'),);
 		assert.throws(() => get(object, '.foo.baz'), ReferenceError('baz property is undefined'),);
 		assert.throws(() => get(object, '.baz.0'), ReferenceError('baz property is undefined'),);
-		assert.throws(() => get(object, '.baz.length'), ReferenceError('baz property is undefined'),);
 		assert.throws(() => get(object, '.baz.length'), ReferenceError('baz property is undefined'),);
 		assert.throws(() => get(object, '.0.1.2'), ReferenceError('0 property is undefined'),);
 	});
