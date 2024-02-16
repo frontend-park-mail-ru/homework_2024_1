@@ -141,11 +141,19 @@ QUnit.module('Тестируем функцию set', function () {
 		assert.deepEqual(set(object, '.deep.hested.field', 'bbb'), object3);
 	});
 	QUnit.test('Ошибка при передаче не объекта', function (assert) {
-		assert.strictEqual(set('Hello!', '.deep', 3), 'ERROR: objName must be an object', 'Passed string');
-		assert.strictEqual(set(null, '.deep', 3), 'ERROR: objName must be an object', 'Passed null');
+		assert.throws(function () { 
+			set('Hello!', '.deep', 3) 
+		}, new Error ('ERROR: objName must be an object'), 'Passed string');
+		assert.throws(function () { 
+			set(null, '.deep', 3) 
+		}, new Error ('ERROR: objName must be an object'), 'Passed null');
 	});
 	QUnit.test('Ошибка при передаче неправильного пути', function (assert) {
-		assert.strictEqual(set({}, 42, 3), 'ERROR: path is not correct', 'Passed string');
-		assert.strictEqual(set({}, 'deep', 3), 'ERROR: path is not correct', 'Passed null');
+		assert.throws(function () {
+			set({}, 42, 3)
+		}, new Error ('ERROR: path is not correct'), 'Passed not string');
+		assert.throws(function () {
+			set({}, 'deep', 3)
+		}, new Error ('ERROR: path is not correct'), 'Passed without .');
 	});
 });

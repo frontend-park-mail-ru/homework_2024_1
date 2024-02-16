@@ -1,19 +1,20 @@
 'use strict';
 
 /**
- * Function, that sets value for given attribute. Returns modified object.
+ * @name set
  * @function
  * @param {object} objName - reference to the object we need to modify.
  * @param {string} path - string, that contains path of attributes of the object to the exact attribute we need to change.
  * @param {*} value - value, that we need to set.
  * @returns {object} - returns reference to the modified object.
+ * @description - Function, that sets value for given attribute.
  */
 const set = (objName = {}, path, value) => {
-    if (typeof objName !== 'object' || objName == null) {
-        return 'ERROR: objName must be an object';
+    if (typeof objName !== 'object' || !objName) {
+        throw new Error('ERROR: objName must be an object');
     }
-    if (typeof path !== 'string' || path[0] != '.') {
-        return 'ERROR: path is not correct';
+    if (typeof path !== 'string' || path[0] !== '.') {
+        throw new Error('ERROR: path is not correct');
     }
     let currentPos = objName;
     const currentPath = [];
