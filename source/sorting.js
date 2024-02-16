@@ -40,9 +40,9 @@ function merge(left, right, prop) {
 function mergeSort(array, prop) {
     let result = array;
     if (array.length > 1) {
-        let halfLen = array.length / 2;
-        let leftPart = mergeSort(array.slice(0, halfLen), prop);
-        let rightPart = mergeSort(array.slice(halfLen), prop);
+        const halfLen = array.length / 2;
+        const leftPart = mergeSort(array.slice(0, halfLen), prop);
+        const rightPart = mergeSort(array.slice(halfLen), prop);
         result = merge(leftPart, rightPart, prop);
     }
     return (result) ? result : array;
