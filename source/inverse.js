@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const NOT_ARRAY_ERROR = "Первый аргумент не массив!";
+const NOT_ARRAY_ERROR = 'Первый аргумент не массив!';
 const NOT_A_NUMBER_ERROR = 'Второй аргумент не типа "number"!';
 
 /**
@@ -20,7 +20,7 @@ const inverse = (arr, num) => {
         throw new TypeError(NOT_ARRAY_ERROR);
     }
 
-    if (num !== undefined && typeof num !== "number") {
+    if (num !== undefined && typeof num !== 'number') {
         throw new TypeError(NOT_A_NUMBER_ERROR);
     }
 
