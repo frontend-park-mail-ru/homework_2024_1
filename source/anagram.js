@@ -9,17 +9,17 @@
  */
 const anagram = (words) => {
     if (!Array.isArray(words)) {
-        throw new Error("Input must be an array");
+        throw new TypeError('Input must be an array');
     }
 
-    if (!words.every(word => typeof word === 'string')) {
-        throw new Error("All elements in the input array must be strings");
+    if (!words.every(word => (word instanceof String || typeof word === 'string'))) {
+        throw new TypeError('All elements in the input array must be strings');
     }
 
     let groups = new Map();
 
     words.forEach(word => {
-        let sorted = word.toLowerCase().split("").sort().join("");
+        const sorted = word.toLowerCase().split('').sort().join('');
         if (groups.has(sorted)) {
             groups.get(sorted).push(word);
         } else{

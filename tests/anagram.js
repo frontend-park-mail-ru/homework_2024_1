@@ -38,9 +38,9 @@ QUnit.module('Тестируем функцию anagram', function () {
 	});
 
 	QUnit.test('Функция выбрасывает ошибку, если на входе не массив', function (assert) {
-        assert.throws(() => { anagram(1) }, new Error("Input must be an array"));
-        assert.throws(() => { anagram('string') }, new Error("Input must be an array"));
-        assert.throws(() => { anagram({'кот':  'ток'}) }, new Error("Input must be an array"));
+        assert.throws(() => { anagram(1) }, new TypeError('Input must be an array'));
+        assert.throws(() => { anagram('string') }, new TypeError('Input must be an array'));
+        assert.throws(() => { anagram({'кот':  'ток'}) }, new TypeError('Input must be an array'));
     });
 
 	QUnit.test('Функция выбрасывает ошибку, если элементы входного массива не строки', function (assert) {
@@ -50,6 +50,6 @@ QUnit.module('Тестируем функцию anagram', function () {
 			{'нора': 'рано'}
         ];
 
-        assert.throws(() => { anagram(input) }, new Error("All elements in the input array must be strings"));
+        assert.throws(() => { anagram(input) }, new TypeError('All elements in the input array must be strings'));
     });
 });
