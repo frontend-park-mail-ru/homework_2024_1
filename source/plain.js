@@ -1,17 +1,28 @@
 "use strict";
 
-// Функция plain принимает на вход массив массивов и создаёт из них один общий массив. Массивы могут быть любой вложенности.
+/**
+ * Создаёт общий массив из подмассивов 
+ * @example
+ * // returns [ 42, 0 ]
+ * plain([ [ 42 ], 0 ]);
+ * @example
+ * // returns []
+ * plain([ [], [] ]);
+ */
 const plain = (arr) => {
-    if ( !(Array.isArray(arr) === true) || arr === undefined || arr.length == 0){
+    if (!Array.isArray(arr)){
+        return new Error("The passed argument is not an array!");
+    }
+    if (arr === undefined || arr.length == 0) {
         return []
     }
-    var result = []
+    let result = []
     arr.forEach((item) => {
-        if (Array.isArray(item) === true) {
+        if (Array.isArray(item)) {
             result = result.concat(plain(item))
         }
         else {
-            result = result.concat(item)
+            result.push(item)
         }
     });
     return result
