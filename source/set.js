@@ -25,7 +25,7 @@ const parsePath = (path) => {
  * @throws {TypeError} - Если тип `path` некорректный (не является строкой или массивом строк)
  */
 const set = (object, path, value) => {
-  if (typeof path != 'string' && !Array.isArray(path)) {
+  if (typeof path != 'string' && !Array.isArray(path) && !path instanceof String) {
     throw new TypeError('Invalid path type');
   };
   

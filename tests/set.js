@@ -97,6 +97,12 @@ QUnit.module('Тестируем функцию set', function () {
 	});
 
 	// дополнительные тесты
+    QUnit.test('set работает правильно если path - объектная строка', function (assert) {
+		const object_string = new String('.foo');
+		assert.deepEqual(set({ foo: 'bar' }, object_string, 'baz'), {foo: 'baz'});
+		assert.deepEqual(set({ foo: 'bar' }, new String('.foo'), 'baz'), {foo: 'baz'});
+	});
+
 	QUnit.test('set работает правильно если переданный объект равет null', function (assert) {
 		const object = null;
 		assert.deepEqual(set(object, '.foo', 'baz'), {foo: 'baz'});
