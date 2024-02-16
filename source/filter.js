@@ -17,19 +17,18 @@ const filter = (input, allowedTags) => {
     throw new Error("Invalid input. 'allowedTags' must be an array.");
   }
 
-  const escapedText = escapeHTML(input);
-  let filteredText = escapedText;
+  let escapedText = escapeHTML(input);
 
   allowedTags.forEach((tag) => {
     const openingTagPattern = new RegExp(`&lt;${tag}&gt;`, "g");
     const closingTagPattern = new RegExp(`&lt;/${tag}&gt;`, "g");
 
-    filteredText = filteredText
+    escapedText = escapedText
       .replace(openingTagPattern, `<${tag}>`)
       .replace(closingTagPattern, `</${tag}>`);
   });
 
-  return filteredText;
+  return escapedText;
 };
 
 /**

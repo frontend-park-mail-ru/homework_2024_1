@@ -52,14 +52,10 @@ QUnit.module("Проверка работы функции filter", function () 
     "filter обрабатывает ошибку, где вместо текста передали число",
     function (assert) {
       const input = 1;
-      let output;
-      try {
-        output = filter(input, ["strong", "em"]);
-      } catch (error) {
-        output = error.message;
-      }
       const expected = "Invalid input. 'input' must be a string.";
-      assert.strictEqual(output, expected);
+      assert.throws(() => {
+        filter(input, ["strong", "em"]);
+      }, new Error(expected));
     }
   );
 
@@ -67,14 +63,10 @@ QUnit.module("Проверка работы функции filter", function () 
     "filter обрабатывает ошибку, где вместо массива тэгов передали число",
     function (assert) {
       const input = "<strong><em>Hello!</em></strong>";
-      let output;
-      try {
-        output = filter(input, 1);
-      } catch (error) {
-        output = error.message;
-      }
       const expected = "Invalid input. 'allowedTags' must be an array.";
-      assert.strictEqual(output, expected);
+      assert.throws(() => {
+        filter(input, 1);
+      }, new Error(expected));
     }
   );
 });
