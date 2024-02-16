@@ -11,10 +11,10 @@
  */
 const set = (objName = {}, path, value) => {
     if (typeof objName !== 'object' || !objName) {
-        throw new Error('ERROR: objName must be an object');
+        throw new TypeError('ERROR: objName must be an object');
     }
     if (typeof path !== 'string' || path[0] !== '.') {
-        throw new Error('ERROR: path is not correct');
+        throw new TypeError('ERROR: path is not correct');
     }
     let currentPos = objName;
     const currentPath = [];
@@ -34,3 +34,4 @@ const set = (objName = {}, path, value) => {
     });
     return currentPos;
 }
+

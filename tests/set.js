@@ -143,17 +143,17 @@ QUnit.module('Тестируем функцию set', function () {
 	QUnit.test('Ошибка при передаче не объекта', function (assert) {
 		assert.throws(function () { 
 			set('Hello!', '.deep', 3) 
-		}, new Error ('ERROR: objName must be an object'), 'Passed string');
+		}, new TypeError ('ERROR: objName must be an object'), 'Passed string');
 		assert.throws(function () { 
 			set(null, '.deep', 3) 
-		}, new Error ('ERROR: objName must be an object'), 'Passed null');
+		}, new TypeError ('ERROR: objName must be an object'), 'Passed null');
 	});
 	QUnit.test('Ошибка при передаче неправильного пути', function (assert) {
 		assert.throws(function () {
 			set({}, 42, 3)
-		}, new Error ('ERROR: path is not correct'), 'Passed not string');
+		}, new TypeError ('ERROR: path is not correct'), 'Passed not string');
 		assert.throws(function () {
 			set({}, 'deep', 3)
-		}, new Error ('ERROR: path is not correct'), 'Passed without .');
+		}, new TypeError ('ERROR: path is not correct'), 'Passed without .');
 	});
 });
