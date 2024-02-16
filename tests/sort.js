@@ -40,6 +40,7 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('i love frontend'), 'Defnnort Elov I');
 		assert.strictEqual(sort('hello world'), 'Dlorw Ehllo');
 		assert.strictEqual(sort('Привет привет привет мир'), 'Веипрт Веипрт Веипрт Имр');
+		assert.strictEqual(sort(new String('aaa')), 'Aaa');
 	});
 
 	QUnit.test('Функция работает правильно с разными регистрами', function (assert) {
@@ -56,4 +57,10 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('    '), '');
 		assert.strictEqual(sort(''), '');
 	})
+
+	QUnit.test('Функция работает правильно с непрвильным вводом', function (assert) {
+		assert.throws(sort(123), TypeError);
+		assert.throws(sort([1, 2, 3, 4, 5]), TypeError);
+		assert.throws(sort({ 'name': 'Lionel', 'surname': 'Messi' }), TypeError);
+	});
 });

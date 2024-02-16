@@ -20,8 +20,8 @@ const sortLetters = (word) => {
  * @returns {string} - отсортированное предложение или null
 */
 const sort = (sentence) => {
-    if (typeof sentence !== "string") {
-        return new TypeError("Необходимо ввести строку");
+    if (typeof sentence !== 'string' && !(sentence instanceof String)) {
+        return new TypeError('Необходимо ввести строку');
     }
     return sentence
         .trim()
