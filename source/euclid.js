@@ -8,7 +8,7 @@
  */
 const euclid = (...args) => {
     args.forEach((arg) => {
-        if (typeof arg != 'number' || !isFinite(arg)) {
+        if (typeof arg !== 'number' || !isFinite(arg)) {
             throw new TypeError('Недопустимый аргумент: все аргументы должны быть натуральными конечными числами');
         }
 
