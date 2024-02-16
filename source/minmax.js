@@ -6,6 +6,11 @@
  * @returns {Array} - Array, that contains minimum and maximum numbers. If such numbers are not found, returns [undefined, undefined].
  */
 const minmax = numbersStr => {
+
+    if (!(typeof numbersStr === 'string')) {
+        throw new TypeError("Входные данные должны быть строкой");
+    }
+
     const numbersStrArr = numbersStr.split(' ')
         .filter(Boolean)
         .map(numberStr => {
