@@ -13,7 +13,7 @@ const format = (intArray, columns) => {
     if (!Array.isArray(intArray) ||
         intArray.some(item => !Number.isInteger(item)) ||
         !Number.isInteger(columns)) {
-        throw new TypeError();
+        throw new TypeError('"intArray" - must be an integer array and "columns" - must be integer');
     }
 
     const formatLenArray = [];
