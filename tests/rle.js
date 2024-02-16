@@ -19,9 +19,13 @@ QUnit.module('Тестируем функцию rle', function () {
     });
     // assert.throws проверяет, что функция rle(123) выбрасывает искл.
     QUnit.test('rle корректно обрабатывает не строковые входные данные', function (assert) {
-        assert.throws( function() {
-                rle(123);
-            }, Error, "rle(123) выбрасывает исключение");
+        let f = () => { rle(123);};
+        assert.throws(f, Error, "rle(123) выбрасывает исключение");
     });
+
+    QUnit.test('rle обрабатывает new String', function (assert) {
+        assert.strictEqual(rle(new String('aaa')), 'a3', "rle(new String('aaa') === 'a3'");
+    });
+
 });
 

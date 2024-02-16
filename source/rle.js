@@ -6,9 +6,9 @@
  * @param {string} input - входная строка, которую нужно сжать
  * @returns {string} - сжатая строка
  */
-
-function rle(input){
-    if (typeof input !== 'string') {
+let rle = (input) => {
+    let objToStr = Object.prototype.toString;
+    if (objToStr.call(input) !== "[object String]") {
         throw new Error("На вход должна подаваться строка");
     }
     let counter = 1;
@@ -26,7 +26,7 @@ function rle(input){
         prev = currentValue;
         return accumulator;
     }, []);
-    if(prev !== undefined){
+    if(prev){
         resultArray.push(prev + (counter > 1 ? counter : ''));
     }
     return resultArray.join('');
@@ -34,6 +34,9 @@ function rle(input){
 
 
 /*
+
+Код без slice(1) и join('')
+
 function rle(input){
     if (typeof input !== 'string'){
         throw new Error("На вход должна подаваться строка");
