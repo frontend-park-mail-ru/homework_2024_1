@@ -13,7 +13,7 @@ const plain = (arr) => {
     if (!Array.isArray(arr)){
         return new Error("The passed argument is not an array!");
     }
-    if (arr === undefined || arr.length == 0) {
+    if (arr.length == 0) {
         return []
     }
     let result = []
