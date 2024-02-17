@@ -4,6 +4,19 @@ const NOT_ARRAY_ERROR = 'Первый аргумент не массив!';
 const NOT_A_NUMBER_ERROR = 'Второй аргумент не типа "number"!';
 
 /**
+ * Проверяет является ли значение числом
+ * @param {any} value - Любые входные данные
+ * @returns {boolean} `true` or `false`
+ * @example
+ * ```
+ * isNumber(1) returns true;
+ * isNumber(new Number(1)) true;
+ * isNumber('') returns false;
+ * ```
+ */
+const isNumber = (value) => typeof value === 'number' || typeof value === 'bigint' || value instanceof Number;
+
+/**
  *
  * @param {Array} arr - Массив данных
  * @param {number} num - Число, показывающее какие элементы не нужно переставлять
@@ -20,7 +33,7 @@ const inverse = (arr, num) => {
         throw new TypeError(NOT_ARRAY_ERROR);
     }
 
-    if (num !== undefined && typeof num !== 'number' && !(num instanceof Number)) {
+    if (num !== undefined && !isNumber(num)) {
         throw new TypeError(NOT_A_NUMBER_ERROR);
     }
 
