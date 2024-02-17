@@ -14,7 +14,7 @@ const NOT_A_NUMBER_ERROR = 'Второй аргумент не типа "number"
  * isNumber('') returns false;
  * ```
  */
-const isNumber = (value) => typeof value === 'number' || typeof value === 'bigint' || value instanceof Number;
+const isNumber = (value) => typeof value === 'number' || value instanceof Number;
 
 /**
  *
