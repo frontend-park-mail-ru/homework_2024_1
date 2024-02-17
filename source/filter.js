@@ -34,21 +34,21 @@ const saveText = (text, allowedTags, tagIndexes) => {
  * @param {string} tagName - Имя тега для поиска закрывающих тегов.
  * @returns {Array<number>} - Массив индексов закрывающих тегов.
  */
-const findClosingTag = (text, tagName) => {
+function findClosingTag(text, tagName) {
     const openingTagRegex = new RegExp(`<${tagName}\\b[^>]*>`, 'g');
     const closingTagRegex = new RegExp(`</${tagName}>`, 'g');
 
+    const stack = [];
     const openingTags = Array.from(text.matchAll(openingTagRegex), m => m.index);
     const closingTags = Array.from(text.matchAll(closingTagRegex), m => m.index + tagName.length + 3);
 
-    const tagsIndex = openingTags.reduce((acc, openingTagIndex) => {
+    openingTags.forEach(openingTagIndex => {
         const closingTagIndex = closingTags.find(closingTagIndex => closingTagIndex > openingTagIndex) || text.length;
-        acc.push(openingTagIndex, closingTagIndex);
-        return acc;
-    }, []);
+        stack.push(openingTagIndex, closingTagIndex);
+    });
 
-    return tagsIndex;
-};
+    return stack;
+}
 
 /**
  * Фильтрует небезопасные HTML-теги из входного текста, оставляя разрешенные теги.
