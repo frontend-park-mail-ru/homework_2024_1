@@ -37,31 +37,16 @@ const saveText = (text, allowedTags, tagIndexes) => {
 const findClosingTag = (text, tagName) => {
     const openingTagRegex = new RegExp(`<${tagName}\\b[^>]*>`, 'g');
     const closingTagRegex = new RegExp(`</${tagName}>`, 'g');
-    const openingTags = [];
-    let match;
-    while ((match = openingTagRegex.exec(text)) !== null) {
-        openingTags.push(match.index);
-    }
-    const closingTags = [];
-    while ((match = closingTagRegex.exec(text)) !== null) {
-        closingTags.push(match.index + tagName.length + 3); // Добавляем длину '</tagName>'.
-    }
-    const tagsIndex = [];
-    for (let i = 0; i < openingTags.length; i++) {
-        let openingTagIndex = openingTags[i];
-        let flag = false;
-        for (let j = 0; j < closingTags.length; j++) {
-            let closingTagIndex = closingTags[j];
-            if (closingTagIndex > openingTagIndex) {
-                tagsIndex.push(openingTagIndex, closingTagIndex);
-                flag = true;
-                break;
-            }
-        }
-        if (!flag) {
-            tagsIndex.push(openingTagIndex, text.length);
-        }
-    }
+
+    const openingTags = Array.from(text.matchAll(openingTagRegex), m => m.index);
+    const closingTags = Array.from(text.matchAll(closingTagRegex), m => m.index + tagName.length + 3);
+
+    const tagsIndex = openingTags.reduce((acc, openingTagIndex) => {
+        const closingTagIndex = closingTags.find(closingTagIndex => closingTagIndex > openingTagIndex) || text.length;
+        acc.push(openingTagIndex, closingTagIndex);
+        return acc;
+    }, []);
+
     return tagsIndex;
 };
 
@@ -73,13 +58,8 @@ const findClosingTag = (text, tagName) => {
  */
 const filter = (input, allowedTags) => {
     const tagRegExp = /<\/?([a-zA-Z0-9]+)[^>]*>/g;
-    const tagsMas = [];
-    let match;
-    while ((match = tagRegExp.exec(input)) !== null) {
-        const tagName = match[1];
-        if (allowedTags.includes(tagName)) {
-            tagsMas.push(findClosingTag(input, tagName));
-        }
-    }
+    const tagsMas = Array.from(input.matchAll(tagRegExp), match => match[1])
+                          .filter(tagName => allowedTags.includes(tagName))
+                          .map(tagName => findClosingTag(input, tagName));
     return saveText(input, allowedTags, tagsMas);
 };
