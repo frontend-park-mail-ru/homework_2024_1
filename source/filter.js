@@ -36,10 +36,6 @@ const saveText = (text, allowedTags, tagIndexes) => {
  * @returns {Array<number>} - Массив индексов закрывающих тегов.
  */
 function findClosingTag(text, tagName, allowedTags) {
-    if (!Array.isArray(allowedTags)) {
-        allowedTags = [allowedTags];
-    }
-
     const openingTagRegex = new RegExp(`<${tagName}\\b[^>]*>`, 'g');
     const closingTagRegex = new RegExp(`</${tagName}>`, 'g');
 
@@ -59,9 +55,12 @@ function findClosingTag(text, tagName, allowedTags) {
  * Фильтрует небезопасные HTML-теги из входного текста, оставляя разрешенные теги.
  * @param {string} input - Входной HTML-текст.
  * @param {string[]} allowedTags - Массив разрешенных HTML-тегов.
- * @returns {string} - Очищенный HTML-текст.
+ * @returns {string} - Очищенный HTML-текст или null, если allowedTags - не массив
  */
 const filter = (input, allowedTags) => {
+    if (!Array.isArray(allowedTags)) {
+        return null;
+    }
     const tagRegExp = /<\/?([a-zA-Z0-9]+)[^>]*>/g;
     const tagsMas = Array.from(input.matchAll(tagRegExp), match => match[1])
                           .filter(tagName => allowedTags.includes(tagName))
