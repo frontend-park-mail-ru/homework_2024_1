@@ -1,10 +1,8 @@
-function isCorrect(input){
-    return typeof input === 'string' && input !== '';
-}
+`use strict`;
 
 const rle = (input) => {
-    if(!isCorrect(input))
-        throw new Error("input parameter must be non empty string")
+    if(!(typeof input === 'string' && input))
+        throw new TypeError("input parameter must be non empty string")
 
     let res = '';
     let counterNow = 1;
@@ -13,7 +11,7 @@ const rle = (input) => {
             counterNow++;
         } else{
             res += input[i - 1];
-            res = (counterNow > 1) ? (res + counterNow) : res;
+            res += (counterNow > 1) ? counterNow : '';
             counterNow = 1;
         }
     }
