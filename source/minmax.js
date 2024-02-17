@@ -1,3 +1,4 @@
+"use strict"
 /**
  * Find minimum and maximum numeric value in string
  * @param {string} numericString - Строка, из которой нужно вернуть минимальное и максимальное значение
