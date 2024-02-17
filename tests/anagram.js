@@ -54,8 +54,8 @@ QUnit.module('Тестируем функцию anagram', function () {
 	QUnit.test('Функция работает правильно с различным case\'ом', function (assert) {
 		const input = [
 			'ginger', '-_-', 'MeAt',
-			'TeAm', 'mEta', 'mediCal',
-			'deciMal', 'grim', 'reaper'
+			'TeAm', new String('mEta'), 'mediCal',
+			'deciMal', new String('grim'), 'reaper'
 		];
 
 		const output = [
@@ -83,8 +83,7 @@ QUnit.module('Тестируем функцию anagram', function () {
 	});
 
 	QUnit.test('Функция работает правильно с заведомо некорректными входными данными.', function (assert) {
-		let foo = ['мир', 'рим']; foo = undefined;
-		const input = foo;
+		const input = undefined;
 		const output = [];
 
 		assert.deepEqual(anagram(input), output);
@@ -93,6 +92,12 @@ QUnit.module('Тестируем функцию anagram', function () {
 	QUnit.test('Функция работает правильно с заведомо некорректными входными данными(2).', function (assert) {
 		const input = 'hello';
 		const output = [];
+		assert.deepEqual(anagram(input), output);
+	});
+
+	QUnit.test('Функция работает правильно с заведомо некорректными входными данными(3).', function (assert) {
+		const input = [[new String('ok'), new Object('let\'s go'), 'hehe'], 1, 23, 'mir', 'rim'];
+		const output = [['mir', 'rim']];
 		assert.deepEqual(anagram(input), output);
 	});
 });

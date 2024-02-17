@@ -1,12 +1,19 @@
 // Долматов Фёдор WEB-21
-'use strict';
 
-function anagram (words) {
+'use strict';
+/**
+ * Returns groups of anagrams found within input data.
+ * @author roflanpotsan
+ * @function
+ * @param {string[]} words - input data consisting of any number of words
+ * @returns {string[][]}  - output data consisting of identified groups of anagrams
+ */
+const anagram = (words) => {
     if (!Array.isArray(words)) {
         return [];
     }
     return Object.values(words.reduce((anagramDictionary, word) => {
-        if (typeof word !== 'string'){
+        if (typeof word !== 'string' && !(word instanceof String)){
             return anagramDictionary;
         }
         const wordKey = word.toLowerCase().split('').sort().join('');
