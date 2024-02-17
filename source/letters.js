@@ -11,15 +11,11 @@ const CHAR_AMOUNT_IN_STRING = 2;
  */
 const getStringWithSingleOccuranceOfRepeatedChars = (initialString, shouldLeaveFirstChar) => {
     
-    const setWithUniqueStringChars = new Set();
+    let setWithUniqueStringChars = new Set();
     if (!shouldLeaveFirstChar) {
-        for (let i = initialString.length - 1; i >= 0; i--) {
-            setWithUniqueStringChars.add(initialString.at(i));
-        }
+        setWithUniqueStringChars = initialString.split('').reduceRight((set, char) => {set.add(char); return set}, new Set());
     } else {
-        for (let i = 0; i < initialString.length; i++) {
-            setWithUniqueStringChars.add(initialString.at(i));
-        }
+        initialString.split('').forEach((char) => setWithUniqueStringChars.add(char));
     }
 
     return shouldLeaveFirstChar ? Array.from(setWithUniqueStringChars).join('')
