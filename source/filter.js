@@ -22,6 +22,7 @@ const saveText = (text, allowedTags, tagIndexes) => {
         '"': '&quot;',
         "'": '&#39;',
     };
+    
     return text.replace(/[&<>"'\s]/g, (match, index) => {
         const replacement = map[match];
         return checkIndex(index, tagIndexes) ? match : replacement || match;
@@ -61,5 +62,6 @@ const filter = (input, allowedTags) => {
     const tagsMas = Array.from(input.matchAll(tagRegExp), match => match[1])
                           .filter(tagName => allowedTags.includes(tagName))
                           .map(tagName => findClosingTag(input, tagName));
+    
     return saveText(input, allowedTags, tagsMas);
 };
