@@ -22,7 +22,6 @@ const saveText = (text, allowedTags, tagIndexes) => {
         '"': '&quot;',
         "'": '&#39;',
     };
-    
     return text.replace(/[&<>"'\s]/g, (match, index) => {
         const replacement = map[match];
         return checkIndex(index, tagIndexes) ? match : replacement || match;
@@ -33,9 +32,14 @@ const saveText = (text, allowedTags, tagIndexes) => {
  * Находит индексы закрывающих тегов для указанного открывающего тега в тексте.
  * @param {string} text - Исходный текст.
  * @param {string} tagName - Имя тега для поиска закрывающих тегов.
+ * @param allowedTags
  * @returns {Array<number>} - Массив индексов закрывающих тегов.
  */
-function findClosingTag(text, tagName) {
+function findClosingTag(text, tagName, allowedTags) {
+    if (!Array.isArray(allowedTags)) {
+        allowedTags = [allowedTags];
+    }
+
     const openingTagRegex = new RegExp(`<${tagName}\\b[^>]*>`, 'g');
     const closingTagRegex = new RegExp(`</${tagName}>`, 'g');
 
@@ -62,6 +66,5 @@ const filter = (input, allowedTags) => {
     const tagsMas = Array.from(input.matchAll(tagRegExp), match => match[1])
                           .filter(tagName => allowedTags.includes(tagName))
                           .map(tagName => findClosingTag(input, tagName));
-    
     return saveText(input, allowedTags, tagsMas);
 };
