@@ -1,14 +1,13 @@
-"use strict";
+'use strict';
 
 /**
- * Создаёт общий массив из подмассивов 
- * @example
- * // returns [ 42, 0 ]
- * plain([ [ 42 ], 0 ]);
- * @example
- * // returns []
- * plain([ [], [] ]);
+ * Accepts an array of arrays as input and creates one common array from them.
+ * 
+ * @param {array} arr - array of arrays
+ * @returns {array} - the final array
+ * @throws {Error} - If the function argument arr is not an array
  */
+
 const plain = (arr) => {
     if (!Array.isArray(arr)){
         return new Error("The passed argument is not an array!");
