@@ -51,6 +51,10 @@ QUnit.module('Тестируем функцию inverse', function () {
         assert.throws(() => inverse(false), new TypeError(NOT_ARRAY_ERROR));
         assert.throws(() => inverse(Infinity), new TypeError(NOT_ARRAY_ERROR));
     });
+    QUnit.test('Функция работает с "new Number"', (assert) => {
+        assert.deepEqual(inverse([1, 2, 3, 4, 5], new Number(2)), [1, 2, 5, 4, 3]);
+        assert.deepEqual(inverse([1, 2, 3, 4, 5], new Number(-2)), [3, 2, 1, 4, 5]);
+    });
     QUnit.test('Функция выбрасывает ошибку, если вторым аргументом передано не число', (assert) => {
         assert.throws(() => inverse([], ''), new TypeError(NOT_A_NUMBER_ERROR));
         assert.throws(() => inverse([], {}), new TypeError(NOT_A_NUMBER_ERROR));

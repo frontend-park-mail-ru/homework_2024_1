@@ -20,7 +20,7 @@ const inverse = (arr, num) => {
         throw new TypeError(NOT_ARRAY_ERROR);
     }
 
-    if (num !== undefined && typeof num !== 'number') {
+    if (num !== undefined && typeof num !== 'number' && !(num instanceof Number)) {
         throw new TypeError(NOT_A_NUMBER_ERROR);
     }
 
