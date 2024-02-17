@@ -6,7 +6,7 @@
  * @param {number, string} b 
  * @returns {number} Если a > b возвращает положительное число, если a === b, то 0, иначе отрицательное число
  */
-function comparator(a, b){
+const comparator = (a, b) => {
     const instanceCheck = ((a instanceof String) && (b instanceof String));
     if ((typeof a === 'string' && typeof b === 'string') || instanceCheck) {
         return a.localeCompare(b);
