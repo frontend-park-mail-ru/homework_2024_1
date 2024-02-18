@@ -1,6 +1,8 @@
 `use strict`;
 
 /** Returns new string that represents RLE compression
+ * @function
+ * @name rle
  * @param {string} input - input string to compress
  * @returns {string} res - compressed string
  * */
