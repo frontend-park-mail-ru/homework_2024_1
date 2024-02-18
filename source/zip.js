@@ -6,7 +6,7 @@
  * @returns {object}
  */
 const zip = (...objects) => {
-    let resultObj = {};
+    const resultObj = {};
 
     for (const object of objects) {
         // не обрабатывает если передано что-то кроме объекта

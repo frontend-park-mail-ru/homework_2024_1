@@ -89,4 +89,10 @@ QUnit.module('Тестируем функцию zip', function () {
 		assert.deepEqual(zip([3, 4, 5]), {0:3, 1:4, 2:5}, 'Распаковывает по индексам как свойства объекта');
 		assert.deepEqual(zip('sf', [3, 4, 5], [10, 11, 12, 'aaa']), {0:3, 1:4, 2:5, 3:'aaa'});
 	});
+
+	QUnit.test('Работа функции при некорректном вводе', function (assert) {
+		assert.deepEqual(zip(new Number(1), new Function(), new Object({a:1, b:2})), {a:1, b:2}, 'Не обрабатывает функции конструкторы');
+		assert.deepEqual(zip(null), {}, 'Не обрабатывает null');
+		assert.deepEqual(zip(() => {}), {}, 'Не обрабатывает функции');
+	});
 });
