@@ -21,6 +21,8 @@ const isNumber = (value) => typeof value === 'number' || value instanceof Number
  * @param {Array} arr - Массив данных
  * @param {number} num - Число, показывающее какие элементы не нужно переставлять
  * @returns массив с противоположным порядком
+ * @throws {TypeError} Аргумент arr должен быть массивом.
+ * @throws {TypeError} Argument num должен быть числом.
  * @example
  * ```
  * inverse([1, 2, 3]) returns [3, 2, 1];
