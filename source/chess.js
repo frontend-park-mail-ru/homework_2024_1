@@ -1,26 +1,21 @@
 "use strict";
 
 const chess = (n) => {
-  if (n < 2 || isNaN(n) || n === Infinity ) {
+  if (n < 2 || isNaN(n) || n === Infinity) {
     return null;
   }
 
-  let oddRow = '';
-  let evenRow = '';
-  let matrix = '';
+  const oddRow = Array.from({ length: n }, (_, index) =>
+    index % 2 === 0 ? "*" : " "
+  ).join("");
+  const evenRow = Array.from({ length: n }, (_, index) =>
+    index % 2 === 0 ? " " : "*"
+  ).join("");
 
-  for (let i = 0; i < n; i++) {
-    oddRow += i % 2 === 0 ? '*' : ' ';
-    evenRow += i % 2 === 0 ? ' ' : '*';
-  }
-
-  oddRow += '\n';
-  evenRow += '\n';
-  
-  for (let i = 0; i < n; i++) {
-    matrix += i % 2 === 0 ? oddRow : evenRow;
-  }
+  const matrixArray = Array.from({ length: n }, (_, index) =>
+    index % 2 === 0 ? oddRow : evenRow
+  );
+  const matrix = matrixArray.join("\n") + "\n";
 
   return matrix;
-}
-
+};
