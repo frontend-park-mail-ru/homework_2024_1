@@ -13,7 +13,7 @@ const comparator = (a, b) => {
     } else {
         return a - b;
     }
-}
+};
 
 /**
  * Сортирует массив по убыванию
