@@ -1,6 +1,6 @@
 'use strict';
 const tree = (number) => {
-    if (number<3 || number!=Math. trunc(number) || number.isNaN){
+    if (number<3 || number!=Math. trunc(number) || !isFinite(number)){
         return null;
     }
 
