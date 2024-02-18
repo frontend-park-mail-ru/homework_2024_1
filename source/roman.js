@@ -14,45 +14,48 @@ const roman = (roman) => {
         {num: 9, ch: 'IX'}, {num: 10, ch: 'X'}, {num: 40, ch: 'XL'},
         {num: 50, ch: 'L'}, {num: 90, ch: 'XC'}, {num: 100, ch: 'C'},
         {num: 400, ch: 'CD'}, {num: 500, ch: 'D'}, {num: 900, ch: 'CM'},
-        {num: 1000, ch: 'M'}, {num: 4000, ch: 'MIƆƆƆ'}, {num: 5000, ch: 'IƆƆƆ'},
+        {num: 1000, ch: 'M'},
     ];
 
-    if (typeof(roman) === 'string' || typeof(roman.valueOf()) === 'string') {
+    if (typeof (roman) === 'string' || typeof (roman.valueOf()) === 'string') {
         roman = roman.replace(' ', '').replace('.', '')
     }
 
     if (/^[IVXLCDMivxlcdm]+$/i.test(roman)) {
-        roman = roman.toUpperCase();
-        let idx = 14;
-        let pointer = 0;
-        let result = 0;
-        while (pointer < roman.length && idx >= 0) {
-            while (!roman.startsWith(romanNumbers[idx].ch, pointer)) {
-                idx--;
-                if (idx < 0) break;
+        roman = roman.toUpperCase().split('').reverse()
+        let result = 0
+        for (let idx = 0; idx < roman.length; idx++) {
+            let curr = roman[idx]
+            let currentPair = curr + (idx + 1 < roman.length ? roman[idx + 1] : '');
+            let romanNumber = romanNumbers.find(pair =>
+                pair.ch === currentPair.split("").reverse().join("") || pair.ch === curr.split("").reverse().join(""));
+
+            if (currentPair.split("").reverse().join("") === romanNumber.ch) {
+                idx += 1
+            } else if (curr.split("").reverse().join("") === romanNumber.ch) {
+                idx += 0
             }
-            result += romanNumbers[idx].num;
-            pointer += romanNumbers[idx].ch.length;
+            result += romanNumber.num;
         }
-        return result;
+        return result
     }
 
-    if (!isNaN(parseInt(roman))) {
+    if (!Number.isNaN(parseInt(roman))) {
         roman = parseInt(roman);
-        if (roman > 8999) {
+        if (roman > 3999) {
             throw new RangeError('Число превышает максимально допустимое значение');
         }
 
-        let pointer = 14;
+        let pointer = 12;
         let result = '';
         let numLeft;
-        if (typeof (roman) === 'string') {
+        if (typeof roman === 'string' || typeof roman.valueOf() === 'string') {
             numLeft = roman.replace(' ', '').replace('.', '');
         } else {
             numLeft = roman;
         }
-        while (subSum > 0) {
-            while (romanNumbers[pointer].num > subSum) {
+        while (numLeft > 0) {
+            while (romanNumbers[pointer].num > numLeft) {
                 pointer -= 1;
             }
             result += romanNumbers[pointer].ch;
@@ -62,5 +65,4 @@ const roman = (roman) => {
     }
     return null;
 }
-
 
