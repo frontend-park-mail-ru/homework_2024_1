@@ -1,5 +1,9 @@
 `use strict`;
 
+/** Returns new string that represents RLE compression
+ * @param {string} input - input string to compress
+ * @returns {string} res - compressed string
+ * */
 const rle = (input) => {
     if(!(typeof input === 'string' && input))
         throw new TypeError("input parameter must be non empty string")
