@@ -16,7 +16,7 @@ const anagram = (words) => {
         throw new TypeError('All elements in the input array must be strings');
     }
 
-    let groups = new Map();
+    const groups = new Map();
 
     words.forEach(word => {
         const sorted = word.toLowerCase().split('').sort().join('');
