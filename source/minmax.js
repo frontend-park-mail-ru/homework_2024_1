@@ -7,8 +7,8 @@
  */
 const minmax = numbersStr => {
 
-    if (typeof numbersStr !== 'string') {
-        throw new TypeError("Входные данные должны быть строкой");
+    if (typeof numbersStr !== 'string' && !(typeof numbersStr === 'object' && numbersStr instanceof String)) {
+        throw new TypeError('Входные данные должны быть строкой');
     }
 
     const numbersStrArr = numbersStr.split(' ')
