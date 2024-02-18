@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Проверяет, попадает ли указанный индекс в любой из диапазонов, указанных в indexMas.
  * @param {number} index - Индекс для проверки.
@@ -32,10 +34,9 @@ const saveText = (text, allowedTags, tagIndexes) => {
  * Находит индексы закрывающих тегов для указанного открывающего тега в тексте.
  * @param {string} text - Исходный текст.
  * @param {string} tagName - Имя тега для поиска закрывающих тегов.
- * @param allowedTags
  * @returns {Array<number>} - Массив индексов закрывающих тегов.
  */
-function findClosingTag(text, tagName, allowedTags) {
+const findClosingTag = (text, tagName) => {
     const openingTagRegex = new RegExp(`<${tagName}\\b[^>]*>`, 'g');
     const closingTagRegex = new RegExp(`</${tagName}>`, 'g');
 
