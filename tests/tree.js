@@ -9,6 +9,25 @@ QUnit.module('Тестируем функцию tree', function () {
 		assert.strictEqual(tree('1'), null);
 		assert.strictEqual(tree('2'), null);
 	});
+	
+	QUnit.test('Елочка не может принимать не число', function (assert) {
+  		assert.strictEqual(tree([1, 2, 3 ,4]), null);
+  		assert.strictEqual(tree('Text on English'), null);
+  		assert.strictEqual(tree('Текст на русском'), null);
+  		assert.strictEqual(tree('Не переводимый диалект испанского'), null);
+  		assert.strictEqual(tree(['Вася', 'Петя', 'Маша']), null);
+  		assert.strictEqual(tree([{id: 1, name: "Вася"}, {id: 2, name: "Петя"}, {id: 3, name: "Маша"}]), null);
+ 	});
+
+ 	QUnit.test('Елочка бывает только натуральной высоты', function (assert) {
+  		assert.strictEqual(tree(4.1), null);
+  		assert.strictEqual(tree(6.5), null);
+  		assert.strictEqual(tree(8.6), null);
+  		assert.strictEqual(tree('4.1'), null);
+  		assert.strictEqual(tree('6.5'), null);
+  		assert.strictEqual(tree('8.6'), null);
+ 	});
+
 
 	QUnit.test('Ёлочка высотой 3', function (assert) {
 		const expected =
@@ -53,4 +72,36 @@ QUnit.module('Тестируем функцию tree', function () {
 		assert.strictEqual(tree(8), expected);
 		assert.strictEqual(tree('8'), expected);
 	});
+	
+	QUnit.test('Ёлочка высотой 9', function (assert) {
+  		const expected =
+         		'       *       \n' +
+         		'      ***      \n' +
+         		'     *****     \n' +
+         		'    *******    \n' +
+         		'   *********   \n' +
+         		'  ***********  \n' +
+         		' ************* \n' +
+         		'***************\n' +
+         		'       |       \n';
+  		assert.strictEqual(tree(9), expected);
+  		assert.strictEqual(tree('9'), expected);
+ 	});
+ 	
+ 	QUnit.test('Ёлочка высотой 10', function (assert) {
+  		const expected =
+        		'        *        \n' +
+        		'       ***       \n' +
+        		'      *****      \n' +
+        		'     *******     \n' +
+        		'    *********    \n' +
+        		'   ***********   \n' +
+        		'  *************  \n' +
+        		' *************** \n' +
+        		'*****************\n' +
+        		'        |        \n';
+  		assert.strictEqual(tree(10), expected);
+  		assert.strictEqual(tree('10'), expected);
+ 	});
+ 	
 });
