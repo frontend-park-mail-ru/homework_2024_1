@@ -2,13 +2,13 @@
 
 QUnit.module('Проверка работы функции filter', function () {
         QUnit.test('filter экранирует символы в обычном тексте', function (assert) {
-            const input = '- "42!", сказала Машина. Это и был главный ответ на Вопрос жизни, вселенной & всего такого...';
+				const input = '- "42!", сказала Машина. Это и был главный ответ на Вопрос жизни, вселенной & всего такого...';
 
-            const output = filter(input, [ 'strong', 'em' ]);
+				const output = filter(input, [ 'strong', 'em' ]);
 
-            const expected = '- &quot;42!&quot;, сказала Машина. Это и был главный ответ на Вопрос жизни, вселенной &amp; всего такого...';
+				const expected = '- &quot;42!&quot;, сказала Машина. Это и был главный ответ на Вопрос жизни, вселенной &amp; всего такого...';
 
-			assert.strictEqual(output, expected);
+                assert.strictEqual(output, expected);
         });
 
         QUnit.test('filter не экранирует валидные html-тэги', function (assert) {
