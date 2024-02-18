@@ -22,7 +22,12 @@ const makeHtmlSafe = (unsafeHtmlText) => {
  * @param {string[]} allowedTags - Массив строк, содержащий теги, которые разрешено использовать.
  * @returns {string} Фильтрованный HTML-текст, где все неразрешенные теги заменены на их экранированные аналоги.
  */
-function filter(html, allowedTags) {
+const filter = (html, allowedTags) => {
+
+     if (!Array.isArray(allowedTags)) {
+        throw new TypeError('allowedTags должен быть массивом');
+    }
+
     const allowedTagsDict = allowedTags.reduce((dict, tag) => {
         dict[tag.toLowerCase()] = true;
 

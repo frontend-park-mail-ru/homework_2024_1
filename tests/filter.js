@@ -1,6 +1,6 @@
-    'use strict';
+'use strict';
 
-    QUnit.module('Проверка работы функции filter', function () {
+QUnit.module('Проверка работы функции filter', function () {
         QUnit.test('filter экранирует символы в обычном тексте', function (assert) {
             const input = '- "42!", сказала Машина. Это и был главный ответ на Вопрос жизни, вселенной & всего такого...';
 
@@ -8,7 +8,7 @@
 
             const expected = '- &quot;42!&quot;, сказала Машина. Это и был главный ответ на Вопрос жизни, вселенной &amp; всего такого...';
 
-            assert.strictEqual(output, expected);
+			assert.strictEqual(output, expected);
         });
 
         QUnit.test('filter не экранирует валидные html-тэги', function (assert) {
@@ -46,4 +46,23 @@
             assert.strictEqual(output, expected);
         });
 
+        QUnit.test('filter выбрасывает исключение, если allowedTags не массив', function (assert) {
+            const input = 'Простой текст с <b>тегом</b>';
+
+            assert.throws(
+                () => {
+                    filter(input, 'not an array');
+                },
+                TypeError,
+                'Должно выбросить TypeError, если allowedTags не массив'
+            );
+
+            assert.throws(
+                () => {
+                    filter(input, { tag: 'strong' });
+                },
+                TypeError,
+                'Должно выбросить TypeError, если allowedTags не массив'
+            );
+        });
     });
