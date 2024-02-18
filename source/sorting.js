@@ -7,7 +7,7 @@
  * @param {string} prop - свойство, по которому происходит сортировка и сравнение
  * @returns {array} result - полученный отсортированный массив
  */
-function merge(left, right, prop) {
+const merge = (left, right, prop) => {
     let result = [];
     let i = 0;
     let j = 0;
@@ -29,7 +29,7 @@ function merge(left, right, prop) {
         result = result.concat(right.slice(j));
     }
     return result;
-}
+};
 
 /**
  * Алгоритм сортировки слиянием.
@@ -37,7 +37,7 @@ function merge(left, right, prop) {
  * @param {string} prop - свойство, по которому происходит сортировка
  * @returns {Array} - отсортированный массив
  */
-function mergeSort(array, prop) {
+const mergeSort = (array, prop) => {
     let result = array;
     if (array.length > 1) {
         const halfLen = array.length / 2;
@@ -46,7 +46,7 @@ function mergeSort(array, prop) {
         result = merge(leftPart, rightPart, prop);
     }
     return (result) ? result : array;
-}
+};
 
 /**
  * Принимает на вход массив plain-объектов и массив имён свойств,
