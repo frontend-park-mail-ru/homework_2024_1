@@ -1,4 +1,4 @@
-`use strict`;
+'use strict';
 
 /** Returns new string that represents RLE compression
  * @function
@@ -7,8 +7,9 @@
  * @returns {string} res - compressed string
  * */
 const rle = (input) => {
-    if(!(typeof input === 'string' && input))
-        throw new TypeError("input parameter must be non empty string")
+    if(!((typeof input === 'string' || input instanceof String) && input)){
+        throw new TypeError('input parameter must be non empty string')
+    }
 
     let res = '';
     let counterNow = 1;
