@@ -12,7 +12,8 @@ const merge = (left, right, prop) => {
     let i = 0;
     let j = 0;
     while (i < left.length && j < right.length) {
-        if (!left[i] || !right[i] || typeof left[i] === Object && !(prop in left[i]) || typeof right[j] === Object && !(prop in right[j])) {
+        // if (!left[i] || !right[i] || typeof left[i] === Object && !(prop in left[i]) || typeof right[j] === Object && !(prop in right[j])) {
+        if (!left[i] || !right[i] || !left[i].hasOwnProperty(prop) || !right[j].hasOwnProperty(prop)) {
             return null;
         }
         if (left[i][prop] > right[j][prop]) {
