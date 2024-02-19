@@ -71,5 +71,5 @@ QUnit.module('Тестируем функцию roman', function () {
 
         QUnit.test('roman правильно обрабатывает NaN', function (assert) {
                 assert.strictEqual(roman(NaN), null);
-    });
+        });
 });
