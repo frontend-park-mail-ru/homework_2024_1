@@ -2,8 +2,8 @@
 
 /**
  * Функция строит ёлочку
- * @param {number} height высота ёлочки
- * @return {string, null} построенная ёлочка, если height <= 2, возарвщает null
+ * @param {number|string} height высота ёлочки (число или строка)
+ * @return {string|null} построенная ёлочка, если height <= 2, возарвщает null
  */
 const tree = (height) => {
   if (height <= 2) {
