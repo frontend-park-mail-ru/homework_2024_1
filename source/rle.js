@@ -21,7 +21,7 @@ const rle = (input) => {
 	if (input[i] === input[i - 1]) {
 	    count++;
 	} else {
-	    result += input[i-1];
+	    result += input[i - 1];
 	    if (count > 1) {
 		result += count;
 	    }
