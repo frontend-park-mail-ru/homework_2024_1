@@ -1,21 +1,23 @@
 'use strict';
+/** комментарий в формате JSdoc*/
+let anagram = words => {
+  if (!Array.isArray(words)) {
+    throw new Error("Input should be an array!!!")
+  }
 
-const anagram = function (words) {
-    const groupsOfWords = {};
-    words.forEach(word => {
-        const wordAfterSortChars = word.split('').sort().join('');
+  let groupsOfWords = {};
 
-        if (!groupsOfWords[wordAfterSortChars]) {
-            groupsOfWords[wordAfterSortChars] = [];
-        }
+  groupsOfWords = words.reduce((accumulator, word) => {
+    let wordSorted = word.split('').sort().join('');
+    accumulator[wordSorted] = (accumulator[wordSorted] || []).concat(word);
 
-        groupsOfWords[wordAfterSortChars].push(word);
-    });
+    return accumulator;
+  }, {});
 
-    const filteredGroups = Object.values(groupsOfWords).filter(group => group.length > 1);
+  let filteredGroups = Object.values(groupsOfWords).filter(group => group.length > 1);
+  filteredGroups.forEach(group => group.sort());
+  filteredGroups.sort((a, b) => a[0].localeCompare(b[0]));
 
-    filteredGroups.forEach(group => group.sort());
-    filteredGroups.sort((a, b) => a[0].localeCompare(b[0]));
+  return filteredGroups;
 
-    return filteredGroups;
-}
+};
