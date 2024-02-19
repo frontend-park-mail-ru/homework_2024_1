@@ -110,11 +110,11 @@ QUnit.module('Тестируем функцию zip', function () {
 	});
 
 	QUnit.test('Функция умеет работать с невалидными данными', function (assert) {
-		assert.throws(() => zip([1, 2, 3]), Error);
-		assert.throws(() => zip(true, false), Error);
-		assert.throws(() => zip('jjj'), Error);
-		assert.throws(() => zip(1, 'jjj', [1, 2, 3]), Error);
-		assert.throws(() => zip(null), Error);
-		assert.throws(() => zip({1: 2}, {2: 3}, 'a'), Error);
+		assert.throws(() => zip([1, 2, 3]), TypeError);
+		assert.throws(() => zip(true, false), TypeError);
+		assert.throws(() => zip('jjj'), TypeError);
+		assert.throws(() => zip(1, 'jjj', [1, 2, 3]), TypeError);
+		assert.throws(() => zip(null), TypeError);
+		assert.throws(() => zip({1: 2}, {2: 3}, 'a'), TypeError);
 	});
 });

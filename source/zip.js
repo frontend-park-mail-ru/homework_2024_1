@@ -10,7 +10,7 @@
 const zip = (...objects) => {
     return objects.reduce((mergedObject, obj) => {
         if (typeof obj !== 'object' || !obj || Array.isArray(obj)) {
-            throw new Error('The function only accepts objects');
+            throw new TypeError('The function only accepts array of objects');
         }
         // цитата из условия задания: "...необходимо оставить значение, которое встретилось раньше..."
         // это достигается за счет порядка передачи аргументов obj и mergedObject в метод Object.assign()
