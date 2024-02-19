@@ -19,15 +19,16 @@ QUnit.module('Тестируем функцию tree', function () {
   		assert.strictEqual(tree([{id: 1, name: "Вася"}, {id: 2, name: "Петя"}, {id: 3, name: "Маша"}]), null);
  	});
 
- 	QUnit.test('Елочка бывает только натуральной высоты', function (assert) {
+ 	QUnit.test('Елочка бывает только натуральной высоты и не может расти бесконечно', function (assert) {
   		assert.strictEqual(tree(4.1), null);
   		assert.strictEqual(tree(6.5), null);
   		assert.strictEqual(tree(8.6), null);
   		assert.strictEqual(tree('4.1'), null);
   		assert.strictEqual(tree('6.5'), null);
   		assert.strictEqual(tree('8.6'), null);
+  		assert.strictEqual(tree(Infinity), null);
+  		assert.strictEqual(tree(-Infinity), null);
  	});
-
 
 	QUnit.test('Ёлочка высотой 3', function (assert) {
 		const expected =
