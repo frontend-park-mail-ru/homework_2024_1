@@ -37,11 +37,10 @@ const filter = (input, allowedTags) => {
  * @param {string} text - The input text to escape HTML characters from.
  * @returns {string} The text with escaped HTML characters.
  */
-function escapeHTML(text) {
-  return text
+const escapeHTML = (text) =>
+  text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
-}
