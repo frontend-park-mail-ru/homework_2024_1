@@ -10,19 +10,19 @@
 
 const plain = (arr) => {
     if (!Array.isArray(arr)){
-        return new Error("The passed argument is not an array!");
+        return new TypeError("The passed argument is not an array!");
     }
     if (arr.length === 0) {
-        return []
+        return [];
     }
-    let result = []
+    let result = [];
     arr.forEach((item) => {
         if (Array.isArray(item)) {
-            result = result.concat(plain(item))
+            result = result.concat(plain(item));
         }
         else {
-            result.push(item)
+            result.push(item);
         }
     });
-    return result
+    return result;
 }

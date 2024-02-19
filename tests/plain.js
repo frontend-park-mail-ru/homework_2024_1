@@ -53,7 +53,7 @@ QUnit.module('Тестируем функцию plain', function () {
 	});
 
 	QUnit.test('Работает с входными данными не являющимися массивами.', function (assert) {
-		const error = new Error("The passed argument is not an array!");
+		const error = new TypeError("The passed argument is not an array!");
 		assert.deepEqual(plain(1), error);
 		assert.deepEqual(plain(1, 2, 3), error);
 		assert.deepEqual(plain(3.2), error);
