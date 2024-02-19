@@ -1,6 +1,12 @@
 'use strict';
 
 const sort = function (sentence) {
+    //Проверка на валидность введенных данных
+    if (typeof(sentence) != 'string') {
+        console.log('На вход должна подаваться строка');
+        return null;
+    }
+
     //Получаем массив слов из предложения
     let words = sentence.toLowerCase().split(' ');
     

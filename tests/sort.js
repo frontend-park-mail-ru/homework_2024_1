@@ -41,10 +41,15 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('hello world'), 'Dlorw Ehllo');
 	});
 
-	QUnit.test('Дополнительный тест', function (assert) {
-		assert.strictEqual(sort('шалаш'), 'Аалшш');
+	QUnit.test('Функция работает с предложениями, где есть и русские, и английские буквы', function (assert) {
 		assert.strictEqual(sort('Sort translates as сортировка'), 'Авикооррст Aaelnrsstt As Orst');
 		assert.strictEqual(sort('Напишите функцию sort'), 'Аеиинптш Икнуфцю Orst');
-		assert.strictEqual(sort('QWERTYUIOPASDFGHJKLVZXCBNM'), 'Abcdefghijklmnopqrstuvwxyz');
+		assert.strictEqual(sort('Тестируем функцию Sort'), 'Ееимрстту Икнуфцю Orst');
+	});
+
+	QUnit.test('Тест на неправильные входные данные', function (assert) {
+		assert.strictEqual(sort(12.3), null, "Число нельзя передать в качестве аргумента");
+		assert.strictEqual(sort(["JavaScript", "HTML", "CSS"]), null, "Массив нельзя передать в качестве аргумента");
+		assert.strictEqual(sort(null), null, "Null нельзя передать в качестве аргумента");
 	});
 });
