@@ -31,6 +31,9 @@ QUnit.module('Тестируем функцию tree', function () {
   		assert.strictEqual(tree(1+Infinity), null); 
   		assert.strictEqual(tree(Math.pow(10, 1000)), null); 
   		assert.strictEqual(tree(Math.log(0)), null);
+  		assert.strictEqual(tree(-Math.log(0)), null);
+  		assert.strictEqual(tree(-Math.pow(10, 1000)), null); 
+  		assert.strictEqual(tree(Infinity+Infinity), null); 
  	});
 
 	QUnit.test('Ёлочка высотой 3', function (assert) {
