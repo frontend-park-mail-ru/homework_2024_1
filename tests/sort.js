@@ -5,7 +5,8 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('яяя'), 'Яяя', 'Работает с русским алфавитом');
 		assert.strictEqual(sort('Бббббб'), 'Бббббб');
 		assert.strictEqual(sort('zzzzzz'), 'Zzzzzz', 'Работает с английским алфавитом');
-		assert.strictEqual(sort('Rrrrrrrr'), 'rrrrrrrr');
+		assert.strictEqual(sort('rrrrrrrr'), 'Rrrrrrrr');
+		//Исправил последний тест, поменяв местами Rrrrrrrr и rrrrrrrr, так как в исходном виде он не удовлетворяет условию
 	});
 
 	QUnit.test('Функция делает все буквы, кроме первой, строчными', function (assert) {
@@ -34,8 +35,21 @@ QUnit.module('Тестируем функцию sort', function () {
 
 	QUnit.test('Функция работает правильно', function (assert) {
 		assert.strictEqual(sort('мама мыла раму'), 'Аамм Алмы Амру');
-		assert.strictEqual(sort('космический корабль летит на марс'), 'Абклорь Амрс Aн Еиийккмоссч Еилтт');
+		assert.strictEqual(sort('космический корабль летит на марс'), 'Абклорь Амрс Ан Еиийккмоссч Еилтт');
+		//Исправил тест, поменяв латинскую букву А в слове Ан на русскую
 		assert.strictEqual(sort('i love frontend'), 'Defnnort Elov I');
 		assert.strictEqual(sort('hello world'), 'Dlorw Ehllo');
+	});
+
+	QUnit.test('Функция работает с предложениями, где есть и русские, и английские буквы', function (assert) {
+		assert.strictEqual(sort('Sort translates as сортировка'), 'Авикооррст Aaelnrsstt As Orst');
+		assert.strictEqual(sort('Напишите функцию sort'), 'Аеиинптш Икнуфцю Orst');
+		assert.strictEqual(sort('Тестируем функцию Sort'), 'Ееимрстту Икнуфцю Orst');
+	});
+
+	QUnit.test('Тест на неправильные входные данные', function (assert) {
+		assert.strictEqual(sort(12.3), null, "Число нельзя передать в качестве аргумента");
+		assert.strictEqual(sort(["JavaScript", "HTML", "CSS"]), null, "Массив нельзя передать в качестве аргумента");
+		assert.strictEqual(sort(null), null, "Null нельзя передать в качестве аргумента");
 	});
 });
