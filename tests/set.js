@@ -93,7 +93,7 @@ QUnit.module('Тестируем функцию set', function () {
 			}
 		};
 
-		assert.deepEqual(set({}, '.deep.nested.field', null), object);
+		assert.deepEqual(set({}, '.deep.hested.field', null), object);
 		assert.deepEqual(set({}, '.deep.hested.field', null), object);
 	});
 
@@ -177,4 +177,3 @@ QUnit.module('Тестируем функцию set', function () {
 		}, new TypeError ('path is incorrect'), 'Passed without .');
 	});
 });
->>>>>>> Stashed changes
