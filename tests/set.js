@@ -133,6 +133,24 @@ QUnit.module('Тестируем функцию set', function () {
 		assert.deepEqual(set(object3, '.deep.hested.field', null), object1);
 	});
 
+	QUnit.test('set работает правильно c числовыми полями и массивами', function (assert) {
+		const object1 = {
+			1: [ 1, 2, 3 ],
+			bar: [
+				{foobar: '42'}
+			]
+		};
+
+		const new1 = {
+			1: [ 42, 2, 3 ],
+			bar: [
+				{foobar: '42'}
+			]
+		};
+
+		assert.deepEqual(set(object1, '.1.0', 42), new1);
+	});
+
 	QUnit.test('set правильно изменяет одно и то же свойство несколько раз', function (assert) {
 		const object = {
 			deep: {
