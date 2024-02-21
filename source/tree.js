@@ -6,9 +6,11 @@
  * @return {string|null} построенная ёлочка, если height <= 2, возарвщает null
  */
 const tree = (height) => {
-  if (height <= 2) {
+  if (height <= 2 || height === Infinity || isNaN(height)) {
     return null;
   }
+
+  height = Math.round(height); //округление при вводе нецелочисленного значения
 
   const result = [];
   let stars = 1; //количество зёзд в строке

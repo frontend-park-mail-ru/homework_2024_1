@@ -10,6 +10,20 @@ QUnit.module('Тестируем функцию tree', function () {
 		assert.strictEqual(tree('2'), null);
 	});
 
+	QUnit.test('Ёлочки с бесконечной высотой', function (assert) {
+		assert.strictEqual(tree(1/0), null);
+		assert.strictEqual(tree('1'/0), null);
+		assert.strictEqual(tree(Infinity), null);
+	});
+
+	QUnit.test('Ёлочки с непонятной высотой', function (assert) {
+		assert.strictEqual(tree('aboba'), null);
+		assert.strictEqual(tree('aboba'/2), null);
+		assert.strictEqual(tree(undefined), null);
+		assert.strictEqual(tree(true), null);
+		assert.strictEqual(tree(null), null);
+	});
+
 	QUnit.test('Ёлочка высотой 3', function (assert) {
 		const expected =
 			' * \n' +
@@ -94,5 +108,20 @@ QUnit.module('Тестируем функцию tree', function () {
 			'              |              \n';
 		assert.strictEqual(tree(16), expected);
 		assert.strictEqual(tree('16'), expected);
+	});
+
+	QUnit.test('Елочка с нецелочисленной высотой', function (assert) {
+		const expectedThree =
+			' * \n' +
+			'***\n' +
+			' | \n';
+
+		const expectedFour =
+			'  *  \n' +
+			' *** \n' +
+			'*****\n' +
+			'  |  \n';
+		assert.strictEqual(tree(3.14169), expectedThree);
+		assert.strictEqual(tree(3.54169), expectedFour);
 	});
 });
