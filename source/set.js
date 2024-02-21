@@ -43,26 +43,17 @@ const set = (objName = {}, path, value) => {
         throw new TypeError('path is incorrect');
     }
     let currentObj = objName;
-    //let finalObj = currentObj;
+    let finalObj = currentObj;
     const finalPath = [];
     const attributes = path.slice(1).split('.');
-    attributes.forEach((attribute,  pos) => {
+    for (let attribute of attributes){
         if (!(attribute in currentObj)){
             currentObj[attribute] = {};
         }
-        finalPath[pos] = currentObj;
+        if (attribute === attributes[attributes.length-1]){
+            currentObj[attribute] = value;
+        }
         currentObj = currentObj[attribute];
-    });
-    currentObj = value;
-
-    attributes.reverse();
-    finalPath.reverse().forEach((pathElement, pos) => {
-        pathElement[attributes[pos]] = currentObj;
-        currentObj = pathElement;
-    });
-
-    //изначально я пытался сделать без строчек 53, 58-62, аналогично работе с указателями, но возвращался неизмененный объект
-    //Тогда пришлось добавить эти циклы, чтобы сначала дойти до нужного поля, а потом вернутся обратно.
-    //return finalObj;
-    return currentObj;
+    }
+    return finalObj;
 };
