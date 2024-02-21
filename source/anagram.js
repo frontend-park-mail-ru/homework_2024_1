@@ -1,20 +1,23 @@
 'use strict';
-/** комментарий в формате JSdoc*/
-let anagram = words => {
+/**
+ * Группирует слова по анаграммам из массива слов.
+ *
+ * @param {string[]} words Массив слов для группировки по анаграммам.
+ * @return {string[][]} Выходной массив слов-анаграмм.
+ */
+const anagram = (words) => {
   if (!Array.isArray(words)) {
     throw new Error("Input should be an array!!!")
   }
 
-  let groupsOfWords = {};
+  const groupsOfWords = words.reduce((groups, word) => {
+    const wordSorted = word.split('').sort().join('');
+    groups[wordSorted] = (groups[wordSorted] || []).concat(word);
 
-  groupsOfWords = words.reduce((accumulator, word) => {
-    let wordSorted = word.split('').sort().join('');
-    accumulator[wordSorted] = (accumulator[wordSorted] || []).concat(word);
-
-    return accumulator;
+    return groups;
   }, {});
 
-  let filteredGroups = Object.values(groupsOfWords).filter(group => group.length > 1);
+  const filteredGroups = Object.values(groupsOfWords).filter(group => group.length > 1);
   filteredGroups.forEach(group => group.sort());
   filteredGroups.sort((a, b) => a[0].localeCompare(b[0]));
 
