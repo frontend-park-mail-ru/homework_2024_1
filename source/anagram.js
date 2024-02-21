@@ -12,7 +12,7 @@ const anagram = (words) => {
 
   const groupsOfWords = words.reduce((groups, word) => {
     const wordSorted = word.split('').sort().join('');
-    groups[wordSorted] = (groups[wordSorted] || []).concat(word);
+    groups[wordSorted] = [...(groups[wordSorted] || []), word];
 
     return groups;
   }, {});
