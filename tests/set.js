@@ -87,12 +87,102 @@ QUnit.module('Тестируем функцию set', function () {
 	QUnit.test('set работает правильно c объектами без свойств', function (assert) {
 		const object = {
 			deep: {
+<<<<<<< Updated upstream
 				nested: {
+=======
+				hested: {
+>>>>>>> Stashed changes
 					field: null
 				}
 			}
 		};
 
+<<<<<<< Updated upstream
 		assert.deepEqual(set({}, '.deep.nested.field', null), object);
 	});
 });
+=======
+		assert.deepEqual(set({}, '.deep.hested.field', null), object);
+	});
+
+	QUnit.test('set работает правильно c объектами с неполным/неверным путем', function (assert) {
+		const object = {
+			deep: {
+				hested: {
+					field: null
+				}
+			}
+		};
+
+		const object1 = {
+			deep: {
+				fake: {
+					field: null
+				},
+				hested: {
+					field: null
+				}
+			}
+		};
+
+		const object2 = {
+			deep: {}
+		};
+
+		const object3 = {
+			deep:{
+				fake: {
+					field:null
+				}
+			}
+		}
+
+		assert.deepEqual(set(object2, '.deep.hested.field', null), object);
+		assert.deepEqual(set(object3, '.deep.hested.field', null), object1);
+	});
+
+	QUnit.test('set правильно изменяет одно и то же свойство несколько раз', function (assert) {
+		const object = {
+			deep: {
+				hested: {
+					field: 'baz'
+				}
+			}
+		};
+
+		const object2 = {
+			deep: {
+				hested: {
+					field: 42
+				}
+			}
+		};
+
+		const object3 = {
+			deep: {
+				hested: {
+					field: 'bar'
+				}
+			}
+		};
+
+		assert.deepEqual(set(object, '.deep.hested.field', 42), object2);
+		assert.deepEqual(set(object, '.deep.hested.field', 'bar'), object3);
+	});
+
+	QUnit.test('Выдается ошибка, если передается некорректный объект', function (assert) {
+		assert.throws(() => {set('object', '.foo', "incorrect")
+		}, new TypeError ('objName must be an object type'), 'Passed string');
+		assert.throws(() => {set(null, '.foo', "incorrect")
+		}, new TypeError ('objName must be an object type'), 'Passed null');
+	});
+	QUnit.test('Выдается ошибка, если путь передан неверно', function (assert) {
+		assert.throws(() => {set({}, true, "incorrect")
+		}, new TypeError ('path is incorrect'), 'Passed not string');
+		assert.throws(() => {set({}, '.', "incorrect")
+		}, new TypeError ('path is incorrect'), 'Passed without actual path');
+		assert.throws(() => {set({}, 'foo', "incorrect")
+		}, new TypeError ('path is incorrect'), 'Passed without .');
+	});
+});
+>>>>>>> Stashed changes
