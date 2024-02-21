@@ -87,21 +87,13 @@ QUnit.module('Тестируем функцию set', function () {
 	QUnit.test('set работает правильно c объектами без свойств', function (assert) {
 		const object = {
 			deep: {
-<<<<<<< Updated upstream
-				nested: {
-=======
 				hested: {
->>>>>>> Stashed changes
 					field: null
 				}
 			}
 		};
 
-<<<<<<< Updated upstream
 		assert.deepEqual(set({}, '.deep.nested.field', null), object);
-	});
-});
-=======
 		assert.deepEqual(set({}, '.deep.hested.field', null), object);
 	});
 
