@@ -7,10 +7,7 @@
  * @returns {boolean} - returns true if name is valid.
  */
 const objValidation = (objName) => {
-    if (typeof objName !== 'object' || !objName) {
-        return false
-    }
-    return true
+    return typeof objName === 'object' && objName
 };
 
 /**
@@ -20,10 +17,7 @@ const objValidation = (objName) => {
  * @returns {boolean} - returns true if path is valid.
  */
 const pathValidation = (path) => {
-    if (typeof path !== 'string' || path.length === 1 || path[0] !== '.') {
-        return false
-    }
-    return true
+    return typeof path === 'string' && path.length !== 1 && path[0] === '.'
 };
 
 /**
@@ -39,21 +33,25 @@ const set = (objName = {}, path, value) => {
     if (!objValidation(objName)) {
         throw new TypeError('objName must be an object type');
     }
+
     if (!pathValidation(path)) {
         throw new TypeError('path is incorrect');
     }
+
     let currentObj = objName;
     let finalObj = currentObj;
-    const finalPath = [];
     const attributes = path.slice(1).split('.');
-    for (let attribute of attributes){
-        if (!(attribute in currentObj)){
+    attributes.forEach((attribute) => {
+        if (!(attribute in currentObj)) {
             currentObj[attribute] = {};
         }
-        if (attribute === attributes[attributes.length-1]){
+
+        if (attribute === attributes[attributes.length - 1]) {
             currentObj[attribute] = value;
         }
+
         currentObj = currentObj[attribute];
-    }
+    });
+
     return finalObj;
 };

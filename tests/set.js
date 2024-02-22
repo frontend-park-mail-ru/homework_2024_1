@@ -87,14 +87,14 @@ QUnit.module('Тестируем функцию set', function () {
 	QUnit.test('set работает правильно c объектами без свойств', function (assert) {
 		const object = {
 			deep: {
-				hested: {
+				nested: {
 					field: null
 				}
 			}
 		};
 
-		assert.deepEqual(set({}, '.deep.hested.field', null), object);
-		assert.deepEqual(set({}, '.deep.hested.field', null), object);
+		assert.deepEqual(set({}, '.deep.nested.field', null), object);
+		assert.deepEqual(set({}, '.deep.nested.field', null), object);
 	});
 
 	QUnit.test('set работает правильно c объектами с неполным/неверным путем', function (assert) {
@@ -124,7 +124,7 @@ QUnit.module('Тестируем функцию set', function () {
 		const object3 = {
 			deep:{
 				fake: {
-					field:null
+					field: null
 				}
 			}
 		}
