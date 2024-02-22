@@ -48,8 +48,8 @@ QUnit.module('Тестируем функцию sort', function () {
 	});
 
 	QUnit.test('Тест на неправильные входные данные', function (assert) {
-		assert.strictEqual(sort(12.3), null, "Число нельзя передать в качестве аргумента");
-		assert.strictEqual(sort(["JavaScript", "HTML", "CSS"]), null, "Массив нельзя передать в качестве аргумента");
-		assert.strictEqual(sort(null), null, "Null нельзя передать в качестве аргумента");
+		assert.throws(() => sort(12.3), TypeError('На вход должна подаваться строка'), 'Число нельзя передать в качестве аргумента');
+		assert.throws(() => sort(['JavaScript', 'HTML', 'CSS']), TypeError('На вход должна подаваться строка'), 'Массив нельзя передать в качестве аргумента');
+		assert.throws(() => sort(null), TypeError('На вход должна подаваться строка'), 'Null нельзя передать в качестве аргумента');
 	});
 });
