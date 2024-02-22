@@ -6,7 +6,7 @@
  * @return {string|null} построенная ёлочка, если height <= 2, возарвщает null
  */
 const tree = (height) => {
-  if (height <= 2 || height === Infinity || isNaN(height)) {
+  if (height <= 2 || !isFinite(height) || isNaN(height)) {
     return null;
   }
 
