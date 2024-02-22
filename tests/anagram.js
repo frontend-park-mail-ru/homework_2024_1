@@ -61,23 +61,23 @@ QUnit.module('Тестируем функцию anagram', function () {
 
 
   QUnit.test('Функция выбрасывает ошибку при передаче null', function (assert) {
-    assert.throws(() => anagram(null), new Error('Input should be an array!!!'));
+    assert.throws(() => anagram(null), new TypeError('words is null'));
   });
 
   QUnit.test('Функция выбрасывает ошибку при передаче undefined', function (assert) {
-    assert.throws(() => anagram(undefined), new Error('Input should be an array!!!'));
+    assert.throws(() => anagram(undefined), new TypeError('words is undefined'));
   });
 
   QUnit.test('Функция выбрасывает ошибку при передаче строки', function (assert) {
-    assert.throws(() => anagram('not an array'), new Error('Input should be an array!!!'));
+    assert.throws(() => anagram('not an array'), new TypeError('words.reduce is not a function'));
   });
 
   QUnit.test('Функция выбрасывает ошибку при передаче числа', function (assert) {
-    assert.throws(() => anagram(123456), new Error('Input should be an array!!!'));
+    assert.throws(() => anagram(123456), new TypeError('words.reduce is not a function'));
   });
 
   QUnit.test('Функция выбрасывает ошибку при передаче объекта', function (assert) {
-    assert.throws(() => anagram({}), new Error('Input should be an array!!!'));
+    assert.throws(() => anagram({}), new TypeError('words.reduce is not a function'));
   });
 
 });
