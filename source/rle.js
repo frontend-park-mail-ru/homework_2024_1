@@ -10,7 +10,7 @@ const isString = (obj) => {
 
 /**
  * Applies RLE data compression algorithm to argument and returns resulting string.
- * Throw TypeError if argument is not a string or missing.
+ * Throws TypeError if argument is not a string or missing.
  * @param {string} input - string to be compressed.
  */
 const rle = (input) => {
