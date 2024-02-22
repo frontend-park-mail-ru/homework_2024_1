@@ -43,6 +43,23 @@ QUnit.module('Тестируем функцию anagram', function () {
     assert.deepEqual(anagram(input), output);
   });
 
+  QUnit.test('Функция корректно обрабатывает массив разных типов данных', function (assert) {
+    const input = [
+      undefined, 'кот', 1, 'пила', null, 'барокко',
+      'стоп', 'ток', 'кошка', 'липа', {}, 'коробка', 'пост'
+    ];
+
+    const output = [
+      ['барокко', 'коробка'],
+      ['кот', 'ток'],
+      ['липа', 'пила'],
+      ['пост', 'стоп']
+    ];
+
+    assert.deepEqual(anagram(input), output);
+  });
+
+
   QUnit.test('Функция выбрасывает ошибку при передаче null', function (assert) {
     assert.throws(() => anagram(null), new Error('Input should be an array!!!'));
   });

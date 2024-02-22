@@ -11,6 +11,10 @@ const anagram = (words) => {
   }
 
   const groupsOfWords = words.reduce((groups, word) => {
+    if (typeof word !== 'string') {
+      return groups;
+    }
+
     const wordSorted = word.split('').sort().join('');
     groups[wordSorted] = [...(groups[wordSorted] || []), word];
 
