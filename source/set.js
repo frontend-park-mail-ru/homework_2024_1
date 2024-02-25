@@ -6,9 +6,8 @@
  * @param {object} objName - reference to the object we need to modify.
  * @returns {boolean} - returns true if name is valid.
  */
-const objValidation = (objName) => {
-    return typeof objName === 'object' && objName
-};
+const objValidation = (objName) => typeof objName === 'object' && objName
+;
 
 /**
  * Validates path of object
@@ -16,9 +15,7 @@ const objValidation = (objName) => {
  * @param {string} objName - reference to the path we need to go through.
  * @returns {boolean} - returns true if path is valid.
  */
-const pathValidation = (path) => {
-    return typeof path === 'string' && path.length !== 1 && path[0] === '.'
-};
+const pathValidation = (path) => typeof path === 'string' && path.length !== 1 && path[0] === '.';
 
 /**
  * @name set
@@ -41,17 +38,18 @@ const set = (objName = {}, path, value) => {
     let currentObj = objName;
     let finalObj = currentObj;
     const attributes = path.slice(1).split('.');
-    attributes.forEach((attribute) => {
-        if (!(attribute in currentObj)) {
+    attributes.reduce((currentObj, attribute) => {
+        if (!(attribute in currentObj)){
             currentObj[attribute] = {};
         }
 
-        if (attribute === attributes[attributes.length - 1]) {
+        if (attribute === attributes[attributes.length-1]){
             currentObj[attribute] = value;
+            return currentObj;
         }
 
-        currentObj = currentObj[attribute];
-    });
+        return currentObj[attribute];
+    }, currentObj);
 
     return finalObj;
 };
