@@ -46,7 +46,7 @@ QUnit.module('Тестируем функцию anagram', function () {
   QUnit.test('Функция корректно обрабатывает массив разных типов данных', function (assert) {
     const input = [
       undefined, 'кот', 1, 'пила', null, 'барокко',
-      'стоп', 'ток', 'кошка', 'липа', {}, 'коробка', 'пост'
+      'стоп', 'ток', 'кошка', 'липа', {}, 'коробка', new String('пост')
     ];
 
     const output = [
@@ -61,23 +61,23 @@ QUnit.module('Тестируем функцию anagram', function () {
 
 
   QUnit.test('Функция выбрасывает ошибку при передаче null', function (assert) {
-    assert.throws(() => anagram(null), new TypeError('words is null'));
+    assert.throws(() => anagram(null), new TypeError('Input should be an array!!!'));
   });
 
   QUnit.test('Функция выбрасывает ошибку при передаче undefined', function (assert) {
-    assert.throws(() => anagram(undefined), new TypeError('words is undefined'));
+    assert.throws(() => anagram(undefined), new TypeError('Input should be an array!!!'));
   });
 
   QUnit.test('Функция выбрасывает ошибку при передаче строки', function (assert) {
-    assert.throws(() => anagram('not an array'), new TypeError('words.reduce is not a function'));
+    assert.throws(() => anagram('not an array'), new TypeError('Input should be an array!!!'));
   });
 
   QUnit.test('Функция выбрасывает ошибку при передаче числа', function (assert) {
-    assert.throws(() => anagram(123456), new TypeError('words.reduce is not a function'));
+    assert.throws(() => anagram(123456), new TypeError('Input should be an array!!!'));
   });
 
   QUnit.test('Функция выбрасывает ошибку при передаче объекта', function (assert) {
-    assert.throws(() => anagram({}), new TypeError('words.reduce is not a function'));
+    assert.throws(() => anagram({}), new TypeError('Input should be an array!!!'));
   });
 
 });

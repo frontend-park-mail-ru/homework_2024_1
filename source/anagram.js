@@ -7,14 +7,7 @@
  */
 const anagram = (words) => {
   if (!Array.isArray(words)) {
-    try {
-      throw new TypeError('Input should be an array!!!');
-    } catch (e) {
-      console.log(e instanceof TypeError); // true
-      console.log(e.message); // "Привет"
-      console.log(e.name); // "TypeError"
-      console.log(e.stack); // Стек ошибок
-    }
+    throw new TypeError('Input should be an array!!!');
   }
 
   const groupsOfWords = words.reduce((groups, word) => {
