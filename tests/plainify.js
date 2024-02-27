@@ -71,5 +71,41 @@ QUnit.module('Тестируем функцию plainify', function() {
         };
 
         assert.deepEqual(plainify(nested3), plain3);
+
+        const nested4 = {
+            boo: true,
+            deep: {
+                foobar: 0,
+                nested: {
+                    object1: [1, 'apple', true, { name: 'John' },
+                        [5, 6, 7]
+                    ],
+                    object2: {
+                        fields: {
+                            foo: null,
+                            bar: Symbol('word'),
+                            baz: 42
+                        }
+                    }
+                }
+            }
+        };
+
+        const plain4 = {
+            'boo': true,
+            'deep.foobar': 0,
+            'deep.nested.object1[0]': 1,
+            'deep.nested.object1[1]': "apple",
+            'deep.nested.object1[2]': true,
+            'deep.nested.object1[3].name': "John",
+            'deep.nested.object1[4][0]': 5,
+            'deep.nested.object1[4][1]': 6,
+            'deep.nested.object1[4][2]': 7,
+            'deep.nested.object2.fields.foo': null,
+            'deep.nested.object2.fields.bar': 'word',
+            'deep.nested.object2.fields.baz': 42
+        };
+
+        assert.deepEqual(plainify(nested4), plain4);
     });
 });

@@ -1,11 +1,27 @@
 'use strict';
 
+/**
+ * Converts nested objects into a flat object.
+ * @param {Object|Array} obj - The source object.
+ * @param {string} [parentKey=''] - The parent key..
+ * @param {Object} [result={}] - The resulting object.
+ * @returns {Object} - The result of the transformation..
+ */
 const plainify = (obj, parentKey = '', result = {}) => {
-    for (const key in obj) {
-        if (typeof obj[key] === 'object' && obj[key] !== null) {
-            plainify(obj[key], parentKey + key + '.', result);
-        } else {
-            result[parentKey + key] = obj[key];
+    if (Array.isArray(obj)) {
+        obj.forEach((item, index) => {
+            plainify(item, parentKey + `[${index}]`, result);
+        });
+    } else if (typeof obj === 'object' && obj !== null) {
+        for (let key in obj) {
+            plainify(obj[key], parentKey ? parentKey + '.' + key : key, result);
+        }
+    } else {
+        if (typeof obj === 'symbol') {
+            obj = obj.toString().replace(/^Symbol\((.*)\)$/, '$1');
+        }
+        if (parentKey) {
+            result[parentKey] = obj;
         }
     }
     return result;
