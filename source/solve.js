@@ -14,14 +14,18 @@ function solve(expression, x) {
         '(', ')', '-', '*', '/', '+', ' ', 'x'])
 
     try {
+        if (typeof expression !== 'string'){
+            throw new Error('ErrNotString')
+        }
+        if (typeof x !== 'number') {
+            throw new Error('ErrNotNum');
+        }
         for (const symbol of expression){
             if (!safeSymbols.has(String(symbol))){
                 throw new Error('ErrWrongSymbolsInExpression')
             }
         }
-        if (typeof x !== 'number') {
-            throw new Error('ErrNotNum');
-        }
+
 
         if (expression.trim() === '') {
             throw new Error('ErrEmptyExpression');

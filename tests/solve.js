@@ -15,6 +15,7 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.strictEqual(solve('2 + x - 1', ''), 'ErrNotNum');
 		assert.strictEqual(solve('hi', 5), 'ErrWrongSymbolsInExpression');
 		assert.strictEqual(solve('', 5), 'ErrEmptyExpression');
+		assert.strictEqual(solve(123, 3), 'ErrNotString');
 		assert.strictEqual(solve('alert("aa") || 1 + x', 5), 'ErrWrongSymbolsInExpression');
 	});
 });
