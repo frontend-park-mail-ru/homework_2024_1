@@ -9,7 +9,7 @@ const format = (numbers, columns) => {
         return null;
     }
     for (let j = 0; j < numbers.length; j++) {
-        if (typeof numbers[j] !== 'number') {
+        if (typeof numbers[j] !== 'number' || numbers[j] === Infinity) {
             return null;
         }
     }
