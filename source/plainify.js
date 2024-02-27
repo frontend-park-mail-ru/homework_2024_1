@@ -8,21 +8,14 @@
  * @returns {Object} - The result of the transformation..
  */
 const plainify = (obj, parentKey = '', result = {}) => {
-    if (Array.isArray(obj)) {
-        obj.forEach((item, index) => {
-            plainify(item, parentKey + `[${index}]`, result);
-        });
-    } else if (typeof obj === 'object' && obj !== null) {
-        for (let key in obj) {
+    if (typeof obj === 'object' && obj !== null && !Array.isArray(obj)) {
+        for (const key in obj) {
             plainify(obj[key], parentKey ? parentKey + '.' + key : key, result);
         }
+    } else if (typeof obj === 'symbol') {
+        obj = obj.toString().replace(/^Symbol\((.*)\)$/, '$1');
     } else {
-        if (typeof obj === 'symbol') {
-            obj = obj.toString().replace(/^Symbol\((.*)\)$/, '$1');
-        }
-        if (parentKey) {
-            result[parentKey] = obj;
-        }
+        result[parentKey] = obj;
     }
     return result;
 }
