@@ -1,12 +1,12 @@
 /**
  * форматирует массив чисел в строку состоющую из столбцов чисел, выравненных по правому краю
- * @param {Array<Number>} numbers - массив чисел
+ * @param {Array.<Number>} numbers - массив чисел
  * @param {Number} columns - количество стобцов, на которое надо разделить массив
- * @returns {string, null} - строка содержащая столбцы чисел, возвращает null, если
+ * @returns {string|null} - строка содержащая столбцы чисел, возвращает null, если
  */
 let format = (numbers, columns) => {
     for (let j = 0; j < numbers.length; j++) {
-        if (typeof numbers[j] !== 'number') {
+        if (typeof numbers[j] !== 'number' || typeof columns !== 'number' || columns <= 0) {
             return null;
         }
     }
@@ -17,9 +17,9 @@ let format = (numbers, columns) => {
         const numberWidth = numbers[i].toString().length;
         maxWidths[columnIndex] = Math.max(maxWidths[columnIndex], numberWidth)
     }
-    let result = [];
+    result = [];
     for (let row = 0; row < rows; row++) {
-        let line = [];
+        line = [];
         for (let col = 0; col < columns; col++) {
             const index = row * columns + col;
             if (index < numbers.length) {

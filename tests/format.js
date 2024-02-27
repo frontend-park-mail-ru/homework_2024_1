@@ -80,16 +80,14 @@ QUnit.module('Тестируем функцию format', function () {
 
 	QUnit.test('format работает правильно c ошибками1', function (assert) {
 		const input = [ 203, 1, "ab", -10, -100, -12300, 640, 1, -3 ];
-
-		const expected2 = null
-
-		assert.strictEqual(format(input, 2), expected2);
+		assert.strictEqual(format(input, 2), null);
 	});
 	QUnit.test('format работает правильно c ошибками2', function (assert) {
 		const input = [ 203, 1, "10", -10, -100, -12300, 640, 1, -3 ];
-
-		const expected2 = null
-
-		assert.strictEqual(format(input, 4), expected2);
+		assert.strictEqual(format(input, 4), null);
+	});
+	QUnit.test('format работает правильно c отрицательным columns', function (assert) {
+		const input = [ 203, 1, 2, -10, -100, -12300, 640, 1, -3 ];
+		assert.strictEqual(format(input, -2), null);
 	});
 });
