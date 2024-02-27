@@ -99,4 +99,13 @@ QUnit.module('Тестируем функцию format', function () {
 		const input = [2, 5, 8];
 		assert.strictEqual(format(input, 2.4), null);
 	});
+	QUnit.test('format работает правильно c бесконечным  columns', function (assert) {
+		const input = [2, 5, 8, 353];
+		assert.strictEqual(format(input, NaN), null);
+	});
+	QUnit.test('format работает правильно c не тем типом  columns', function (assert) {
+		const input = [2, 5, 8, 228];
+		assert.strictEqual(format(input, null), null);
+		assert.strictEqual(format(input, undefined), null);
+	});
 });

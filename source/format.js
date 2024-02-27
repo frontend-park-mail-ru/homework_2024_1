@@ -1,11 +1,11 @@
 /**
  * форматирует массив чисел в строку состоющую из столбцов чисел, выравненных по правому краю
- * @param {Array.<Number>} numbers - массив чисел
- * @param {Number} columns - количество стобцов, на которое надо разделить массив
+ * @param {Array.<number>} numbers - массив чисел
+ * @param {number} columns - количество стобцов, на которое надо разделить массив
  * @returns {string|null} - строка содержащая столбцы чисел, возвращает null, если
  */
-let format = (numbers, columns) => {
-    if (typeof columns !== 'number' || columns <= 0 ||  !Number.isFinite(columns) ||  !Number.isInteger(columns)) {
+const format = (numbers, columns) => {
+    if (typeof columns !== 'number' || columns <= 0 || !Number.isFinite(columns) || !Number.isInteger(columns)) {
         return null;
     }
     for (let j = 0; j < numbers.length; j++) {
