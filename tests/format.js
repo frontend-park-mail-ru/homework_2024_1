@@ -114,6 +114,8 @@ QUnit.module('Тестируем функцию format', function () {
 	});
 	QUnit.test('format работает правильно c типом  infinity', function (assert) {
 		const input = [2, 5, 8, Infinity, 10];
-		assert.strictEqual(format(input, 2), null);
+		assert.strictEqual(format(input, 2), " 2        5\n" +
+													 " 8 Infinity\n" +
+													 "10");
 	});
 });
