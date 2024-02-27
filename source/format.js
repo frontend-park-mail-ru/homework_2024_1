@@ -5,8 +5,11 @@
  * @returns {string|null} - строка содержащая столбцы чисел, возвращает null, если
  */
 let format = (numbers, columns) => {
+    if (typeof columns !== 'number' || columns <= 0 ||  !Number.isFinite(columns) ||  !Number.isInteger(columns)) {
+        return null;
+    }
     for (let j = 0; j < numbers.length; j++) {
-        if (typeof numbers[j] !== 'number' || typeof columns !== 'number' || columns <= 0) {
+        if (typeof numbers[j] !== 'number') {
             return null;
         }
     }
@@ -17,9 +20,9 @@ let format = (numbers, columns) => {
         const numberWidth = numbers[i].toString().length;
         maxWidths[columnIndex] = Math.max(maxWidths[columnIndex], numberWidth)
     }
-    result = [];
+    const result = [];
     for (let row = 0; row < rows; row++) {
-        line = [];
+        const line = [];
         for (let col = 0; col < columns; col++) {
             const index = row * columns + col;
             if (index < numbers.length) {
