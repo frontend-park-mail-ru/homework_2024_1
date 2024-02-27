@@ -12,7 +12,9 @@ QUnit.module('Тестируем функцию solve', function () {
 	QUnit.test('solve работает правильно с точки зрения обработки некорректно введенных данных', function (assert) {
 		assert.strictEqual(solve('x + 1', ), 'ErrNotNum');
 		assert.strictEqual(solve('2 + x - 1', 'tik'), 'ErrNotNum');
-		assert.strictEqual(solve('hi', 5), 'ErrExpression');
+		assert.strictEqual(solve('2 + x - 1', ''), 'ErrNotNum');
+		assert.strictEqual(solve('hi', 5), 'ErrWrongSymbolsInExpression');
 		assert.strictEqual(solve('', 5), 'ErrEmptyExpression');
+		assert.strictEqual(solve('alert("aa") || 1 + x', 5), 'ErrWrongSymbolsInExpression');
 	});
 });
