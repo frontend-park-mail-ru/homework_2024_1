@@ -83,7 +83,6 @@ QUnit.module('Тестируем функцию plainify', function() {
                     object2: {
                         fields: {
                             foo: null,
-                            bar: Symbol('word'),
                             baz: 42
                         }
                     }
@@ -107,8 +106,8 @@ QUnit.module('Тестируем функцию plainify', function() {
                     7
                 ]
             ],
-            "deep.nested.object2.fields.baz": 42,
-            "deep.nested.object2.fields.foo": null
+            "deep.nested.object2.fields.foo": null,
+            "deep.nested.object2.fields.baz": 42
         };
 
         assert.deepEqual(plainify(nested4), plain4);

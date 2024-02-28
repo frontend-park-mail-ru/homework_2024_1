@@ -12,8 +12,6 @@ const plainify = (obj, parentKey = '', result = {}) => {
         for (const key in obj) {
             plainify(obj[key], parentKey ? parentKey + '.' + key : key, result);
         }
-    } else if (typeof obj === 'symbol') {
-        obj = obj.toString().replace(/^Symbol\((.*)\)$/, '$1');
     } else {
         result[parentKey] = obj;
     }
