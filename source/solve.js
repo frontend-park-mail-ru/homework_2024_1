@@ -17,7 +17,7 @@
 function solve(expression, x) {
 
     const safeSymbols = new Set(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 
-        '(', ')', '-', '*', '/', '+', ' ', 'x', '.', ',']);
+        '(', ')', '-', '*', '/', '+', ' ', 'x', '.']);
 
         if (typeof expression !== 'string') {
             throw new Error('ErrNotString');
@@ -26,7 +26,7 @@ function solve(expression, x) {
             throw new Error('ErrNotNum');
         }
 
-        if (Array.from(expression).some(symbol => !safeSymbols.has(String(symbol)))){
+        if (Array.from(expression).some(symbol => !safeSymbols.has(symbol))){
             throw new Error('ErrWrongSymbolsInExpression');
         }
 
