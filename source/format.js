@@ -22,6 +22,15 @@ const format = (numbers, columns) => {
     });
 
     const result = [];
+    const rowGenerator = generateRows(numbers, columns, maxWidths);
+    for (let row of rowGenerator) {
+        result.push(row);
+    }
+    return result.join('\n');
+}
+
+function* generateRows(numbers, columns, maxWidths) {
+    const rows = Math.ceil(numbers.length / columns);
     for (let row = 0; row < rows; row++) {
         const line = [];
         for (let col = 0; col < columns; col++) {
@@ -32,7 +41,6 @@ const format = (numbers, columns) => {
                 line.push(paddedNum);
             }
         }
-        result.push(line.join(' '));
+        yield line.join(' ');
     }
-    return result.join('\n');
 }
