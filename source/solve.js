@@ -14,23 +14,23 @@
  * @throws {ErrEmptyExpression} Throw an error if expression doesn't contain any meaningful symbols.
  */
 
-function solve(expression, x) {
+const solve = (expression, x) => {
 
     const safeSymbols = new Set(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 
         '(', ')', '-', '*', '/', '+', ' ', 'x', '.']);
 
-        if (typeof expression !== 'string') {
-            throw new Error('ErrNotString');
+        if (typeof expression !== 'string' && !(expression instanceof String)) {
+            throw new TypeError('ErrNotString');
         }
-        if (typeof x !== 'number' || isNaN(x)) {
-            throw new Error('ErrNotNum');
+        if ((typeof x !== 'number' || isNaN(x)) && !(x instanceof Number)) {
+            throw new TypeError('ErrNotNum');
         }
 
         if (Array.from(expression).some(symbol => !safeSymbols.has(symbol))){
             throw new Error('ErrWrongSymbolsInExpression');
         }
 
-        if (expression.trim() === '') {
+        if (!expression) {
             throw new Error('ErrEmptyExpression');
         }
 
