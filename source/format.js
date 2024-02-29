@@ -6,20 +6,21 @@
  */
 const format = (numbers, columns) => {
     if (typeof columns !== 'number' || columns <= 0 || !Number.isFinite(columns) || !Number.isInteger(columns)) {
-        return null;
+        throw "format params error"
     }
-    for (let j = 0; j < numbers.length; j++) {
-        if (typeof numbers[j] !== 'number') {
-            return null;
+        numbers.forEach(function(item,j, numbers) {
+        if (typeof item !== 'number') {
+            throw "format numbers is not type number"
         }
-    }
+    });
     const rows = Math.ceil(numbers.length / columns);
     const maxWidths = new Array(columns).fill(0);
-    for (let i = 0; i < numbers.length; i++) {
+    numbers.forEach(function(item,i, numbers) {
         const columnIndex = i % columns;
-        const numberWidth = numbers[i].toString().length;
+        const numberWidth = item.toString().length;
         maxWidths[columnIndex] = Math.max(maxWidths[columnIndex], numberWidth)
-    }
+    });
+
     const result = [];
     for (let row = 0; row < rows; row++) {
         const line = [];
