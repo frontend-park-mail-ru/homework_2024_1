@@ -1,15 +1,9 @@
 'use strict';
 
 QUnit.module('Тестируем функцию plainify', function() {
-    QUnit.test('plainify работает правильно с пустым объектом', function(assert) {
-        assert.deepEqual(plainify({}), {});
-    })
-
-    QUnit.test('plainify работает правильно с глубиной 1', function(assert) {
+    QUnit.test('plainify работает правильно', function(assert) {
         assert.deepEqual(plainify({ foo: 'bar', baz: 42 }), { 'foo': 'bar', 'baz': 42 });
-    })
 
-    QUnit.test('plainify работает правильно с глубиной 2', function(assert) {
         const nested1 = {
             deep: {
                 foo: 'bar',
@@ -23,7 +17,7 @@ QUnit.module('Тестируем функцию plainify', function() {
         };
 
         assert.deepEqual(plainify(nested1), plain1);
-    })
+    });
 
     QUnit.test('plainify работает правильно с глубиной 3, 4', function(assert) {
         const nested2 = {
@@ -49,7 +43,7 @@ QUnit.module('Тестируем функцию plainify', function() {
         };
 
         assert.deepEqual(plainify(nested2), plain2);
-    })
+    });
 
     QUnit.test('plainify работает правильно с глубиной 3, 4', function(assert) {
         const nested3 = {
@@ -79,7 +73,7 @@ QUnit.module('Тестируем функцию plainify', function() {
         };
 
         assert.deepEqual(plainify(nested3), plain3);
-    })
+    });
 
     QUnit.test('plainify работает правильно с null и array', function(assert) {
         const nested4 = {
@@ -121,5 +115,9 @@ QUnit.module('Тестируем функцию plainify', function() {
         };
 
         assert.deepEqual(plainify(nested4), plain4);
+    });
+
+    QUnit.test('plainify работает правильно с пустым объектом', function(assert) {
+        assert.deepEqual(plainify({}), {});
     });
 });
