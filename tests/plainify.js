@@ -120,4 +120,12 @@ QUnit.module('Тестируем функцию plainify', function() {
     QUnit.test('plainify работает правильно с пустым объектом', function(assert) {
         assert.deepEqual(plainify({}), {});
     });
+
+    QUnit.test('plainify корректно обрабатывает не объекты', function(assert) {
+        assert.throws(() => plainify(154), new TypeError('Not an object!'));
+        assert.throws(() => plainify(true), new TypeError('Not an object!'));
+        assert.throws(() => plainify('aaaa'), new TypeError('Not an object!'));
+        assert.throws(() => plainify([1, 2]), new TypeError('It is an array!'));
+        assert.throws(() => plainify([1, [5, 56]]), new TypeError('It is an array!'));
+    });
 });

@@ -2,18 +2,29 @@
 
 /**
  * Converts nested objects into a flat object.
- * @param {Object|Array} obj - The source object.
- * @param {string} [parentKey=''] - The parent key..
- * @param {Object} [result={}] - The resulting object.
+ * @param {Object} srcObj - The source object.
  * @returns {Object} - The result of the transformation..
  */
-const plainify = (obj, parentKey = '', result = {}) => {
-    if (typeof obj === 'object' && obj !== null && !Array.isArray(obj)) {
-        for (const key in obj) {
-            plainify(obj[key], parentKey ? parentKey + '.' + key : key, result);
+const plainify = (srcObj) => {
+    const result = {};
+
+    const helpFunc = (obj, parentKey) => {
+        if (typeof obj === 'object' && obj !== null && !Array.isArray(obj)) {
+            for (const key in obj) {
+                helpFunc(obj[key], parentKey ? parentKey + '.' + key : key);
+            }
+        } else {
+            result[parentKey] = obj;
         }
-    } else {
-        result[parentKey] = obj;
     }
+
+    if (typeof srcObj !== 'object') {
+        throw new TypeError('Not an object!')
+    } else if (Array.isArray(srcObj)) {
+        throw new TypeError('It is an array!')
+    }
+
+    helpFunc(srcObj, '');
+
     return result;
 }
