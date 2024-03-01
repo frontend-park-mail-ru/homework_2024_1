@@ -1,22 +1,22 @@
 'use strict';
 
-QUnit.module('Тестируем функцию plainify', function() {
-    QUnit.test('plainify работает правильно', function(assert) {
-        assert.deepEqual(plainify({ foo: 'bar', baz: 42 }), { 'foo': 'bar', 'baz': 42 });
+QUnit.module('Тестируем функцию plainify', function () {
+	QUnit.test('plainify работает правильно', function (assert) {
+		assert.deepEqual(plainify({foo: 'bar', baz: 42}), {'foo': 'bar', 'baz': 42});
 
-        const nested1 = {
-            deep: {
-                foo: 'bar',
-                baz: 42
-            }
-        };
+		const nested1 = {
+			deep: {
+				foo: 'bar',
+				baz: 42
+			}
+		};
 
-        const plain1 = {
-            'deep.foo': 'bar',
-            'deep.baz': 42
-        };
+		const plain1 = {
+			'deep.foo': 'bar',
+			'deep.baz': 42
+		};
 
-        assert.deepEqual(plainify(nested1), plain1);
+		assert.deepEqual(plainify(nested1), plain1);
     });
 
     QUnit.test('plainify работает правильно с глубиной 3, 4', function(assert) {
