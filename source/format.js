@@ -6,13 +6,12 @@
  */
 const format = (numbers, columns) => {
     if (typeof columns !== 'number' || columns <= 0 || !Number.isFinite(columns) || !Number.isInteger(columns)) {
-        throw "format params error"
+        throw Error("format params error")
     }
-        numbers.forEach(function(item,j, numbers) {
-        if (typeof item !== 'number') {
-            throw "format numbers is not type number"
-        }
-    });
+
+    if (!numbers.every((item) => typeof item === 'number')) {
+        throw Error("format numbers is not type number");
+    }
     const rows = Math.ceil(numbers.length / columns);
     const maxWidths = new Array(columns).fill(0);
     numbers.forEach(function(item,i, numbers) {
@@ -21,26 +20,15 @@ const format = (numbers, columns) => {
         maxWidths[columnIndex] = Math.max(maxWidths[columnIndex], numberWidth)
     });
 
-    const result = [];
-    const rowGenerator = generateRows(numbers, columns, maxWidths);
-    for (let row of rowGenerator) {
-        result.push(row);
-    }
-    return result.join('\n');
-}
+    const lines = Array.from({ length: rows }, (_, rowIndex) =>
+        numbers.slice(rowIndex * columns, (rowIndex + 1) * columns)
+    );
 
-function* generateRows(numbers, columns, maxWidths) {
-    const rows = Math.ceil(numbers.length / columns);
-    for (let row = 0; row < rows; row++) {
-        const line = [];
-        for (let col = 0; col < columns; col++) {
-            const index = row * columns + col;
-            if (index < numbers.length) {
-                const num = numbers[index].toString();
-                const paddedNum = num.padStart(maxWidths[col], ' ');
-                line.push(paddedNum);
-            }
-        }
-        yield line.join(' ');
-    }
+    const formattedLines = lines.map((line) =>
+        line
+            .map((num, index) => num.toString().padStart(maxWidths[index], ' '))
+            .join(' ')
+    );
+
+    return formattedLines.join('\n');
 }
