@@ -3,6 +3,7 @@
 /**
  * Converts nested objects into a flat object.
  * @param {Object} srcObj - The source object.
+ * @throws {TypeError} - If the input is not an object.
  * @returns {Object} - The result of the transformation..
  */
 const plainify = (srcObj) => {
