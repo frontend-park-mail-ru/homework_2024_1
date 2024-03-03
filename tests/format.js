@@ -80,8 +80,8 @@ QUnit.module('Тестируем функцию format', function () {
 	});
 
 	QUnit.test('format работает правильно c ошибками1', function (assert) {
-		const input1 = [ 203, 1, "ab", -10, -100, -12300, 640, 1, -3 ];
-		const input2 = [ 203, 1, "10", -10, -100, -12300, 640, 1, -3 ];
+		const input1 = [ 203, 1, 'ab', -10, -100, -12300, 640, 1, -3 ];
+		const input2 = [ 203, 1, '10', -10, -100, -12300, 640, 1, -3 ];
 		const input3 = [ 203, 1, 2, -10, -100, -12300, 640, 1, -3 ];
 		const input4 = [2, 5, 8];
 		const input5 = [2, 5, 8, 353];
@@ -101,12 +101,12 @@ QUnit.module('Тестируем функцию format', function () {
 	});
 	QUnit.test('format работает правильно c пустым numbers', function (assert) {
 		const input = [];
-		assert.strictEqual(format(input, 2), "");
+		assert.strictEqual(format(input, 2), '');
 	});
 	QUnit.test('format работает правильно c типом  infinity', function (assert) {
 		const input = [2, 5, 8, Infinity, 10];
-		assert.strictEqual(format(input, 2), " 2        5\n" +
-													 " 8 Infinity\n" +
-													 "10");
+		assert.strictEqual(format(input, 2), ' 2        5\n' +
+													 ' 8 Infinity\n' +
+													 '10');
 	});
 });
